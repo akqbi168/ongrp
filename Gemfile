@@ -63,3 +63,6 @@ gem 'devise'
 group :production do
   gem 'pg'
 end
+
+# for scss
+# gem 'sprockets', '~> 3.7.2'

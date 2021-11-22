@@ -1,4 +1,17 @@
-TOP!
+<div class="wrapper">
+  <div class="container">
+    <h1>OniGOレポ</h1>
 
-<p>ログアウトは<%= link_to 'こちら', destroy_user_session_path, method: :delete %>
 
+    <%= link_to '新規報告', root_path, class: 'top-button fs20' %>
+    <p class="top-button-description">1日の報告書を作成してください。</p>
+
+    <%= link_to '編　　集', root_path, class: 'top-button fs20 bg-g' %>
+    <p class="top-button-description">一時保存した報告書を編集できます。</p>
+
+    <%= link_to '報告一覧', root_path, class: 'top-button fs20 bg-g' %>
+    <p class="top-button-description">今まで提出した報告書を確認できます。</p>
+
+    <p class="top-button-description">ログアウトは<%= link_to 'こちら', destroy_user_session_path, method: :delete %></p>
+  </div>
+</div>
