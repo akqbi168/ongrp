@@ -1,3 +1,64 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+h1 {
+  font-size: 32px;
+  margin: 40px 0;
+}
+
+.top-button {
+  display: block;
+  // width: 100%;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: #ee772f;
+  border-radius: 6px;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+
+  text-align: center;
+  padding: 15px 0;
+  margin: 16px auto 8px;
+
+  transition: 0.1s;
+
+  &:first-child {
+    margin: 200px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:hover {
+    // background-color: #ee772f;
+    opacity: 0.8;
+  }
+
+  &:active {
+    box-shadow: inset 0 0 3px rgba(128, 128, 128, 0.1);
+    transform: translateY(3px);
+    transition: 0;
+  }
+}
+
+.top-button-description {
+  // width: 100%;
+  margin: 0 auto 30px;
+  font-size: 14px;
+}
+
+.fs20 {
+  font-size: 24px;
+}
+
+.bg-g {
+  background-color: #888888;
+}
+
+// スマホ用
+@media screen and (max-width:500px){
+  /* * {font-size: 16px; }*/
+}
