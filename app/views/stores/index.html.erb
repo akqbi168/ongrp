@@ -1,0 +1,16 @@
+<h1>催事場所一覧</h1>
+
+<div>
+  <% @stores.each do |s| %>
+    <div class="store-row">
+      <span class="store-id"><%= s.id %>.</span>
+      <span class="store-name"><%= s.name %></span>
+      <span class="store-button"><%= link_to '変更', edit_store_path(s), class: "store-button-deco" %></span>
+    </div>
+  <% end %>
+      <span class="store-id"></span>
+      <span class="store-name">（新規作成は右のボタンを選択）</span>
+      <span class="store-button"><%= link_to '新規作成', new_store_path, class: "store-button-deco bg-orange" %></span>
+</div>
+
+<p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

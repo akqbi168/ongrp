@@ -1,0 +1,9 @@
+<h1>店舗追加</h1>
+
+<%= form_with model: @store do |f| %>
+  <%= f.label :name, '催事場所の名称' %>
+  <%= f.text_field :name, class: "" %>
+  <%= f.submit '追加' %>
+<% end %>
+
+<p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>
