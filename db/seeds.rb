@@ -8,5 +8,20 @@
 
 User.create(
   user_id: 'master',
-  password: '0987654321'
+  password: '0987654321',
+  name: 'master'
 )
+User.create(
+  user_id: 'test',
+  password: 'test11',
+  name: 'テストくん'
+)
+
+
+Store.create(name: '店舗１')
+Store.create(name: 'お店２２２２')
+Store.create(name: '鬼ゴーストア北店')
+
+Staff.create(name: '田中　太郎', rank: 'Staff_C')
+Staff.create(name: 'ドリンドルレナ', rank: 'Staff_A')
+Staff.create(name: 'ヴエンヅエイジ', rank: 'Lead_B')

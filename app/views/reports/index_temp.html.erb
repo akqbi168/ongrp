@@ -1,0 +1,15 @@
+<h1>未提出の報告書</h1>
+
+<p class="page-desription">報告を完了するには提出ボックスにチェックを入れて再度更新してください。</p>
+
+<div>
+  <% @reports.each do |r| %>
+    <div class="store-row">
+      <span class="store-name"><%= r.date %></span>
+      <span class="store-name"><%= Store.find(r.store_id).name %></span>
+      <span class="store-button"><%= link_to '変更', edit_report_path(r), class: "store-button-deco" %></span>
+    </div>
+  <% end %>
+</div>
+
+<p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

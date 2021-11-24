@@ -66,3 +66,11 @@ end
 
 # for scss
 # gem 'sprockets', '~> 3.7.2'
+
+# for nested forms
+gem 'cocoon'
+
+# for debug
+gem 'pry-rails'
+gem 'better_errors'
+gem 'binding_of_caller'

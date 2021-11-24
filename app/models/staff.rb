@@ -1,7 +1,9 @@
 class Staff < ApplicationRecord
 
+  has_many :cases
+
   enum rank: {
-    TBD: 0,
+    '未設定': 0,
     Staff_C: 1,
     Staff_B: 2,
     Staff_A: 3,

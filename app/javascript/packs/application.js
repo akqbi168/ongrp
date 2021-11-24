@@ -9,5 +9,7 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
 Rails.start()
+require('jquery')
+require("@nathanvda/cocoon")
 Turbolinks.start()
 ActiveStorage.start()
