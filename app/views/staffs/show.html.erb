@@ -1,0 +1,59 @@
+<h1>スタッフ獲得件数</h1>
+
+<p><%= @staff.name %>　さん</p>
+
+  <%# @staffs.each do |s| %>
+  <% while @date_indicator.month == 11 do %>
+    <div class="staff-row">
+      <% if @date_indicator.wday == 6 %><span style="color: blue;"><% end %>
+      <% if @date_indicator.wday == 0 || @date_indicator == Date.new(2021,11,3) || @date_indicator == Date.new(2021,11,23) %>
+        <span style="color: red;">
+      <% end %>
+      <span class="staff-id"><%= @date_indicator.month %>/<%= @date_indicator.day %></span>
+      <span class="staff-name"><%= Store.find(1).name %></span>
+      <span class="staff-name"><%= @staff.rank %></span>
+      <span class="staff-rank">
+        <% rp = Report.where(store_id: 1, date: @date_indicator) %>
+          <%# Case.where(report_id: rp, staff_id: @staff.id).each do |c| %>
+            <%# array = [] %>  <!-- 空の配列を用意 -->
+            <%# array << c.point %>  <!-- caseテーブルのレコードを１件ずつ取り出し、pointカラムのデータを配列に入れる -->
+          <%# end %>
+        <%# array.sum %>
+        <%= Case.where(report_id: rp, staff_id: @staff.id).sum(:point) %>
+      </span>
+      <% @date_indicator += 1 %>
+
+      <span class="staff-button"><%#= link_to '獲得数', staff_path(s), class: "staff-button-deco bg-pink" %></span>
+      <span class="staff-button"><%#= link_to 'シフト', staff_path(s), class: "staff-button-deco bg-white" %></span>
+      <span class="staff-button"><%#= link_to '変更', edit_staff_path(s), class: "staff-button-deco" %></span>
+
+      <% if @date_indicator.wday == 6 || 0 %></span><% end %>
+    </div>
+  <% end %>
+
+
+
+<%= form_with model: @staff do |f| %>
+  <div class="field">
+    <%= f.label :name, '氏名' %><br>
+    <%= f.text_field :name, class: "" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :rank, 'ランク' %><br>
+    <%= f.select :rank, Staff.ranks.keys, {class: ""} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :memo, '備考' %><br>
+    <%= f.text_area :memo, class: "" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit '修正' %>
+    <%= f.submit '削除' %>
+  </div>
+
+<% end %>
+
+<p class="back-to-top"><%= link_to '一覧に戻る', staffs_path %></p>

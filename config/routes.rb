@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :reports, only: [:index, :show, :new, :edit, :create, :update]
   get 'reports_temp', to: 'reports#index_temp'
   resources :cases
+  resources :jobs
 
   root 'homes#top'
 

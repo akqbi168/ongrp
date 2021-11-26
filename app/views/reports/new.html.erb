@@ -7,12 +7,12 @@
 
 <%= form_with model: @report do |f| %>
   <div class="field">
-    <%= f.label :date, '日付' %><br>
+    <%= f.label :date, '日付' %>　
     <%= f.date_field :date %>
   </div>
 
   <div class="field">
-    <%= f.label :store_id, '実施場所' %><br>
+    <%= f.label :store_id, '実施場所' %>
     <%= f.select :store_id, Store.all.map { |store| [store.name, store.id] } %>
     <%#= f.select :name, Human.all.map { |human| [human.name, human.id] } %>
     <!-- .select(メソッド名, 要素(配列 or ハッシュ) [, オプション or HTML属性 or イベント属性]) -->
@@ -22,8 +22,39 @@
   </div>
 
   <div class="field">
-    <%= f.label :target, '目標件数' %><br>
-    <%= f.number_field :target, class: "" %>
+    <%= f.label :target, '目標件数' %>
+    <%= f.number_field :target, class: "" %>　件
+  </div>
+  <br>
+
+  <div class="field">
+    <%= f.label :action_approached, 'お声かけ' %>
+    <%= f.number_field :action_approached, class: "" %>　件
+  </div>
+
+  <div class="field">
+    <%= f.label :action_discussed, 'お話ができた' %>
+    <%= f.number_field :action_discussed, class: "" %>　件
+  </div>
+
+  <div class="field">
+    <%= f.label :done_purchased, '購入いただけた' %>
+    <%= f.number_field :done_purchased, class: "" %>　件
+  </div>
+
+  <div class="field">
+    <%= f.label :done_downloaded_only, 'ダウンロードのみ' %>
+    <%= f.number_field :done_downloaded_only, class: "" %>　件
+  </div>
+
+  <div class="field">
+    <%= f.label :done_discussed_only, 'お話だけだった' %>
+    <%= f.number_field :done_discussed_only, class: "" %>　件
+  </div>
+
+  <div class="field">
+    <%= f.label :done_promotion, 'キャンペーン済み' %>
+    <%= f.number_field :done_promotion, class: "" %>　件
   </div>
 
   <p>========================</p>

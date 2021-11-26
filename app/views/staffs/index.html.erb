@@ -1,16 +1,30 @@
 <h1>スタッフ情報一覧</h1>
 
 <div>
+  <div class="staff-row">
+    <span class="staff-id">No.</span>
+    <span class="staff-name">氏名</span>
+    <span class="staff-rank">ランク</span>
+    <span class="staff-button">獲得数</span>
+    <span class="staff-button">シフト</span>
+    <span class="staff-button">変更</span>
+  </div>
   <% @staffs.each do |s| %>
-    <div class="store-row">
-      <span class="store-id"><%= s.id %>.</span>
-      <span class="store-name"><%= s.name %></span>
-      <span class="store-button"><%= link_to '変更', edit_staff_path(s), class: "store-button-deco" %></span>
+    <div class="staff-row">
+      <span class="staff-id"><%= s.id %>.</span>
+      <span class="staff-name"><%= s.name %></span>
+      <span class="staff-rank"><%= s.rank %></span>
+      <span class="staff-button"><%= link_to '獲得数', staff_path(s), class: "staff-button-deco bg-pink" %></span>
+      <span class="staff-button"><%= link_to 'シフト', staffs_path, class: "staff-button-deco bg-white" %></span>
+      <span class="staff-button"><%= link_to '変更', edit_staff_path(s), class: "staff-button-deco" %></span>
     </div>
   <% end %>
-      <span class="store-id"></span>
-      <span class="store-name"></span>
-      <span class="store-button"><%= link_to '新規作成', new_staff_path, class: "store-button-deco bg-orange" %></span>
+    <span class="staff-id"></span>
+    <span class="staff-name"></span>
+    <span class="staff-rank"></span>
+    <span class="staff-button"></span>
+    <span class="staff-button"></span>
+    <span class="staff-button"><%= link_to '新規作成', new_staff_path, class: "staff-button-deco bg-orange" %></span>
 </div>
 
 <p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

@@ -71,8 +71,17 @@ a {
   background-color: #ee772f;
 }
 
+.bg-light-orange {
+  background-color: #ffaa55;
+}
+
 .bg-white {
   background-color: #eeeeee;
+  color: #111111;
+}
+
+.bg-pink {
+  background-color: #ff8888;
   color: #111111;
 }
 
@@ -88,7 +97,7 @@ a {
 /* スマホ用 */
 @media screen and (max-width:500px){
   .wrapper {
-    padding: 30px 3%;
+    padding: 50px 2%;
   }
   .container {
     /*width: 96%;*/

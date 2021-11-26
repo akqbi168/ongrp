@@ -1,7 +1,13 @@
 class Case < ApplicationRecord
 
+  with_options presence: true do
+    validates :point
+    validates :timeframe
+  end
+
   belongs_to :report
   belongs_to :staff
+  # belongs_to :payment
 
   enum timeframe: {
     '--------': 0,
@@ -18,5 +24,13 @@ class Case < ApplicationRecord
     '19:00-19:59': 11,
     '20:00-20:59': 12
   }
+
+#booksテーブルのpriceカラムの合計値を求めたい場合
+array = [] #空の配列を用意し、
+  Case.all.each do |c|
+    array << c.point
+    #bookテーブルのレコードを１件ずつ取り出し、priceカラムのデータを配列に入れる
+  end
+array.sum
 
 end

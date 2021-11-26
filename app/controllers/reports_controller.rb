@@ -17,6 +17,7 @@ class ReportsController < ApplicationController
     @user = current_user
     @stores = Store.all.order("name")
     @staffs = Staff.all.order("name")
+    @report_today = Report.where(user_id: @user, date: Date.current)
   end
 
   def edit
@@ -32,9 +33,23 @@ class ReportsController < ApplicationController
     @report.user_id = current_user.id
     # binding.pry
     if @report.save
+      # binding.pry
       if @report.is_submitted == false
         redirect_to root_path, flash: { notice: '報告を一時保存しました。提出を完了するにはチェックを入れて更新してください。' }
       else
+        # binding.pry
+        # @cases = Case.all.where(report_id: @report.id)
+        # @cases.each do |c|
+        #   payment = Payment.new
+        #   payment.staff_id = c.staff_id
+        #   payment.date = @report.date
+        #   payment.rank = c.staff_id
+        #   binding.pry
+        #   payment.daily_result = c.point
+        #   # payment.working_hours
+        #   payment.save
+        #   binding.pry
+        # end
         redirect_to root_path, flash: { notice: '報告を提出しました。本日も一日お疲れさまでした。' }
       end
     else

@@ -1,3 +1,10 @@
+<br>
+
+<div class="field">
+  <%= f.hidden_field :date, :value => @report.date if controller_name == "reports" %>
+  <%= f.hidden_field :date, :value => Date.current if controller_name == "cases" %>
+</div>
+
 <div class="field">
   <%= f.label :timeframe, '獲得時間' %>
   <%= f.select :timeframe, Case.timeframes.keys, {class: ""} %>

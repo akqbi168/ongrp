@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_23_162810) do
+ActiveRecord::Schema.define(version: 2021_11_26_054702) do
 
   create_table "cases", force: :cascade do |t|
     t.date "date"
@@ -18,6 +18,28 @@ ActiveRecord::Schema.define(version: 2021_11_23_162810) do
     t.integer "staff_id", null: false
     t.integer "point", null: false
     t.integer "timeframe", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.integer "staff_id"
+    t.date "date", null: false
+    t.time "time_start"
+    t.time "time_end"
+    t.integer "time_break"
+    t.integer "store_id"
+    t.integer "rank"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "staff_id", null: false
+    t.date "date", null: false
+    t.integer "rank", null: false
+    t.integer "daily_result", default: 0, null: false
+    t.integer "working_hours"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -30,6 +52,13 @@ ActiveRecord::Schema.define(version: 2021_11_23_162810) do
     t.boolean "is_submitted", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "comment"
+    t.integer "action_approached"
+    t.integer "action_discussed"
+    t.integer "done_purchased"
+    t.integer "done_downloaded_only"
+    t.integer "done_discussed_only"
+    t.integer "done_promotion"
   end
 
   create_table "staffs", force: :cascade do |t|

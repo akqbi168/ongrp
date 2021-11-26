@@ -1,8 +1,19 @@
 <h1>OniGOレポ</h1>
 
 
-<%= link_to '新規報告', new_report_path, class: 'top-button fs20 bg-orange' %>
-<p class="top-button-description">1日の報告書を作成してください。</p>
+<% if @report_today.exists? %>
+  <%= link_to '獲得速報', new_case_path, class: 'top-button fs20 bg-orange' %>
+<% else %>
+  <%= link_to '獲得速報', new_case_path, class: 'top-button fs20 bg-orange' %>
+<% end %>
+<p class="top-button-description">契約が決まったら1件ごとに獲得報告をしてください。（当日のみ報告可）</p>
+
+<%# if @report_today.exists? %>
+  <%#= link_to '実施報告', edit_report_path(@report_today), class: 'top-button fs20 bg-light-orange' %>
+<%# else %>
+  <%= link_to '実施報告', new_report_path, class: 'top-button fs20 bg-light-orange' %>
+<%# end %>
+<p class="top-button-description">1日の催事が終わったら実施報告をお願いします。（一時保存可。実施日のもののみ報告可）</p>
 
 <%= link_to '編　　集', reports_temp_path, class: 'top-button fs20' %>
 <p class="top-button-description">一時保存した報告書を編集できます。</p>
@@ -17,5 +28,11 @@
 
 <%= link_to 'スタッフ管理', staffs_path, class: 'top-button fs20 bg-white' %>
 <p class="top-button-description">スタッフの追加、編集を行います。</p>
+
+<%= link_to 'シフト入力', root_path, class: 'top-button fs20 bg-white' %>
+<p class="top-button-description">シフトの追加、編集を行います。</p>
+
+<%= link_to '人件費管理', root_path, class: 'top-button fs20 bg-pink' %>
+<p class="top-button-description">日当や加算給など、支払い額を確認します。</p>
 
 <p class="top-button-description">ログアウトは<%= link_to 'こちら', destroy_user_session_path, method: :delete %></p>

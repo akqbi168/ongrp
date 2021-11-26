@@ -1,12 +1,20 @@
-<h1>提出済み報告書一覧</h1>
+<h1>過去の報告一覧</h1>
 
 <p class="page-desription">今まで報告完了したものの一覧です。実施日の翌日まで修正が可能です。</p>
 
 <div>
+    <div class="store-row">
+      <span class="store-button">報告日時</span>
+      <span class="store-button">実施日</span>
+      <span class="store-button">店舗</span>
+      <span class="store-button"></span>
+    </div>
+
   <% @reports.each do |r| %>
     <div class="store-row">
-      <span class="store-name"><%= r.date %></span>
-      <span class="store-name"><%= Store.find(r.store_id).name %></span>
+      <span class="store-button"><%= r.updated_at %></span>
+      <span class="store-button"><%= r.date %></span>
+      <span class="store-button"><%= Store.find(r.store_id).name %></span>
       <span class="store-button">
         <% if (Date.current - r.date).to_i <= 1 %>
           <%= link_to '変更', edit_report_path(r), class: "store-button-deco" %>
