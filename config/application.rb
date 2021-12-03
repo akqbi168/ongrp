@@ -25,5 +25,8 @@ module Ongrp
     # config.i18n.default_locale = :ja
     #
     # config.eager_load_paths << Rails.root.join("extras")
+    # 
+    # precompile on heroku
+    config.assets.initialize_on_precompile = false
   end
 end
