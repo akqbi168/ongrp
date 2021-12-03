@@ -53,9 +53,9 @@
 <% if controller_name == "cases" %>
   <div class="field cf">
     <%= f.label :timeframe, '獲得時間', style: "float: left;" %>
-    <span style="float: right;">
+    <!-- <span style="float: right;"> -->
       <%= f.select :timeframe, Case.timeframes.keys, {class: "", prompt:"時間帯を選択"} %>
-    </span>
+    <!-- </span> -->
   </div>
 
   <div class="field">
