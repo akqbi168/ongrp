@@ -1,7 +1,7 @@
 class StaffsController < ApplicationController
 
   def index
-    @staffs = Staff.all
+    @staffs = Staff.all.order("id")
   end
 
   def show
@@ -11,10 +11,12 @@ class StaffsController < ApplicationController
 
   def new
     @staff = Staff.new
+    @ranks = Rank.all.order("per_hour")
   end
 
   def edit
     @staff = Staff.find(params[:id])
+    @ranks = Rank.all.order("per_hour")
   end
 
   def create
@@ -38,7 +40,7 @@ class StaffsController < ApplicationController
   private
 
   def staff_params
-    params.require(:staff).permit(:name, :rank, :memo)
+    params.require(:staff).permit(:name, :rank_id, :memo)
   end
 
 end

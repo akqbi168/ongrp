@@ -7,8 +7,9 @@
   </div>
 
   <div class="field">
-    <%= f.label :rank, 'ランク' %><br>
-    <%= f.select :rank, Staff.ranks.keys, {class: ""} %>
+    <%= f.label :rank_id, '役職' %><br>
+    <%#= f.select :rank, Staff.ranks.keys, {class: ""} %>
+    <%= f.select :rank_id, Rank.all.order("per_hour").map { |rank| [rank.name, rank.id] }, prompt:"＊役職を選択" %>
   </div>
 
   <div class="field">

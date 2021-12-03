@@ -1,13 +1,12 @@
 class CasesController < ApplicationController
 
-  def show
+  def index
   end
 
   def new
-    @user = current_user
-    @report_today = Report.where(user_id: @user, date: Date.current)
+    user = current_user
+    @report_today = Report.where(user_id: user, date: Date.current)
     @case = Case.new
-    # @report = Report.where(user_id: @user, date: Date.current)
   end
 
   def edit
@@ -16,35 +15,25 @@ class CasesController < ApplicationController
   def create
     @case = Case.new(case_params)
 
-    @user = current_user
-    @report_today = Report.where(user_id: @user, date: Date.current)
+    user = current_user
+    @report_today = Report.where(user_id: user, date: Date.current)
     if @report_today.exists?
-      # @report = Report.find(18)
-      @report = Report.where(user_id: @user, date: Date.current)
-      # binding.pry
-      # @case.report_id = Report.where(user_id: @user, date: Date.current).id
-      @case.report_id = 3
-      # binding.pry
+      @report = Report.find_by(user_id: user, date: Date.current)
     else
-      # binding.pry
       @report = Report.new
       @report.date = Date.current
       @report.store_id = 1
-      @report.user_id = @user.id
+      @report.user_id = user.id
       @report.is_submitted = false
       @report.save
-      @case.report_id = @report.id
     end
 
-    # @case.report_id = @report.id
+    @case.report_id = @report.id
 
-    # binding.pry
     if @case.save
-      # binding.pry
       redirect_to root_path, flash: { notice: '速報を報告しました。' }
     else
-      # binding.pry
-      render 'new'
+      render 'new', flash: { notice: '報告できませんでした。' }
     end
   end
 
@@ -52,6 +41,13 @@ class CasesController < ApplicationController
     @case = Case.find(params[:id])
     @case.update(case_params)
     redirect_to root_path, flash: { notice: 'スタッフ情報を更新しました。' }
+  end
+
+  def destroy
+    @case = Case.find(params[:id])
+    @report = Report.find(@case.report_id)
+    @case.destroy
+    redirect_to edit_report_path(@report), flash: { notice: '速報を削除しました。' }
   end
 
   private

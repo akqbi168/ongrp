@@ -3,6 +3,6 @@
 <%= form_with model: @case do |c| %>
 
   <%= render 'reports/case_fields', f: c %>
-  <%= c.submit "送信", class:"btn btn-lg btn-success", style:"" %>
+  <%= c.submit "送信", data: { confirm: "速報を報告します。よろしいですか？" }, class:"btn btn-lg btn-success", style:"" %>
 
 <% end %>

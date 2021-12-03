@@ -1,7 +1,9 @@
 class Staff < ApplicationRecord
 
+  belongs_to :rank
   has_many :cases
-  # has_many :payments
+  has_many :jobs
+  has_many :payments
 
   enum rank: {
     '未設定': 0,

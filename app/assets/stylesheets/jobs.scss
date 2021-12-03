@@ -1,3 +1,89 @@
 // Place all the styles related to the jobs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.test0 {
+  // width: 4000px;
+  width: 8000px;
+  // background-color: skyblue;
+}
+
+.test1 {
+  display: inline-block;
+  overflow: hidden;
+  width: 120px;
+  min-height: 60px;
+  border: 1px solid #333;
+  border-radius: 2px;
+  margin: 1px 0;
+  padding: 2px;
+  text-align: center;
+  vertical-align: middle;
+
+  p {
+    // font-size: 12px;
+    line-height: 14px;
+    vertical-align: middle;
+  }
+}
+
+.btn-job-name {
+  display: inline-block;
+  // width: 100%;
+  // color: #ffffff;
+  color: black;
+  // font-size: 12px;
+  // font-weight: 500;
+  // background-color: #888888;
+  border-radius: 3px;
+  // box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+
+  text-align: center;
+  padding: 0px 0px;
+  margin: 0 auto;
+
+  transition: 0.1s;
+
+  &:hover {
+    // background-color: #ffaa55;
+    opacity: 0.7;
+  }
+
+  &:active {
+    // box-shadow: inset 0 0 3px rgba(128, 128, 128, 0.1);
+    transform: translateY(2px);
+    transition: 0;
+  }
+}
+
+.btn-job-spot {
+  display: inline-block;
+  // width: 100%;
+  // color: #ffffff;
+  color: black;
+  // font-size: 12px;
+  // font-weight: 500;
+  // background-color: #888888;
+  border-radius: 3px;
+  // box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+
+  text-align: center;
+  padding: 0px 0px;
+  margin: 0 auto;
+
+  transition: 0.1s;
+
+  &:hover {
+    background-color: #ffaa55;
+    opacity: 0.7;
+  }
+
+  &:active {
+    // box-shadow: inset 0 0 3px rgba(128, 128, 128, 0.1);
+    transform: translateY(2px);
+    transition: 0;
+  }
+}
+
+

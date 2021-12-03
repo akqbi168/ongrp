@@ -1,0 +1,28 @@
+<h1>役職修正</h1>
+
+<%= form_with model: @rank do |f| %>
+
+  <div class="field">
+    <%= f.label :name, '役職名' %><br>
+    <%= f.text_field :name, class: "" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :per_hour, '時給' %><br>
+    <%= f.number_field :per_hour, class: "" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :requirements, '昇級条件' %><br>
+    <%= f.text_area :requirements, class: "" %>
+  </div>
+
+  <% if action_name == "new" %>
+    <%= f.submit '追加', class: "" %>
+  <% elsif action_name == "edit" %>
+    <%= f.submit '修正', class: "" %>
+  <% end %>
+
+<% end %>
+
+<p class="back-to-top"><%= link_to '役職一覧に戻る', ranks_path %></p>

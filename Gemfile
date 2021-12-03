@@ -70,6 +70,12 @@ end
 # for nested forms
 gem 'cocoon'
 
+# for soft deletes '論理削除'
+gem 'discard'
+
+# for search
+gem 'ransack'
+
 # for debug
 gem 'pry-rails'
 gem 'better_errors'

@@ -1,0 +1,78 @@
+<h1>シフト管理</h1>
+
+<p class="page-desription">シフト一覧です。遅くとも当日朝までには入力してください。（時間と役職は後からでも修正できます）
+</p>
+
+<div class="test0">
+
+    <span class="test1">
+    </span>
+
+  <% d = @date_origin %>
+  <% while d <= Date.new(2021,12,31) %>
+    <span class="test1">
+      <%= d.strftime("%m/%d(#{@wd[d.wday]})") %>
+    </span>
+    <% d += 1 %>
+  <% end %>
+</div>
+
+  <% i = 0 %>
+  <% while i < @staffs.count %>
+    <% i += 1 %>
+
+    <div class="test0">
+          <%= link_to(edit_staff_path(i), class: "btn-job-name fs12") do %>
+            <span class="test1">
+                <p class="fs16">
+                  <%= @staffs.find(i).name %>
+                </p>
+            </span>
+          <% end %>
+
+      <% d = @date_origin %>
+      <%# while d < Date.new(2021,12,1) %>
+      <% for d in @date_origin..Date.new(2021,12,31) do %>
+
+        <% job_spot = @jobs.find_by(staff_id: i, date: d) %>
+
+        <% if job_spot.nil? %>
+          <%= link_to(new_job_path(staff_id: i, date: d), class: "btn-job-spot fs12") do %>
+            <span class="test1">
+              <p>
+                (追加)
+              </p>
+            </span>
+          <% end %>
+        <% else %>
+          <%= link_to(edit_job_path(job_spot.id), class: "btn-job-spot fs12 bg-light-orange") do %>
+            <span class="test1">
+                <p class="fs14">
+                  <%= job_spot.time_start.strftime("%H:%M") %>-<%= job_spot.time_end.strftime("%H:%M") %>
+                </p>
+                <p class="fs12">　
+                  <% unless job_spot.time_break == 0 || job_spot.time_break == nil %>
+                    (休憩 <%= job_spot.time_break %>分)
+                  <% end %>　
+                </p>
+                <p class="fs12">
+                  <%# unless @stores.find(job_spot.store_id).nil? %>
+                  <% unless job_spot.store_id.nil? %>
+                    @<%= @stores.find(job_spot.store_id).name %>
+                  <% end %>
+                </p>
+                <p class="fs12">
+                  <% unless job_spot.rank_id.nil? %>
+                    rank: <%= Rank.find(job_spot.rank_id).name %>
+                  <% end %>
+                </p>
+            </span>
+          <% end %>
+        <% end %>
+      </span>
+    <% d += 1 %>
+    <% end %>
+  </div>
+<% end %>
+
+<p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

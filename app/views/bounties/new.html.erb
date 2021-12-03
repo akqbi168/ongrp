@@ -1,0 +1,19 @@
+<h1>インセンティブ作成</h1>
+
+
+<%= form_with model: @bounty do |f| %>
+
+Staff(C): <%= f.number_field :staff_c, max: 99999, min: 0 %><br>
+Staff(B): <%= f.number_field :staff_b, max: 99999, min: 0 %><br>
+Staff(A): <%= f.number_field :staff_a, max: 99999, min: 0 %><br>
+Lead(B): <%= f.number_field :lead_b, max: 99999, min: 0 %><br>
+Lead(A): <%= f.number_field :lead_a, max: 99999, min: 0 %><br>
+Director: <%= f.number_field :director, max: 99999, min: 0 %><br>
+チーム獲得件数係数: <%= f.number_field :ratio, max: 99, min: 0, step: "0.1" %><br>
+
+<%= f.submit '追加' %>
+
+<% end %>
+
+
+<p class="back-to-top"><%= link_to '一覧に戻る', bounties_path %></p>

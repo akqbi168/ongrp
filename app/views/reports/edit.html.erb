@@ -7,36 +7,72 @@
 
 <%= form_with model: @report do |f| %>
   <div class="field">
-    <%= f.label :date, '日付' %><br>
+    <%= f.label :date, '日付' %>　
     <%= f.date_field :date %>
   </div>
 
   <div class="field">
-    <%= f.label :store_id, '実施場所' %><br>
+    <%= f.label :store_id, '実施場所' %>
     <%= f.select :store_id, Store.all.map { |store| [store.name, store.id] } %>
     <%#= f.select :name, Human.all.map { |human| [human.name, human.id] } %>
     <!-- .select(メソッド名, 要素(配列 or ハッシュ) [, オプション or HTML属性 or イベント属性]) -->
     <%#= f.select :store_id, @stores.ids, {prompt: '選択してください'} %>
     <%#= f.collection_select :store_id, @stores, :id, :name, { prompt: '選択してください' }, { class: 'form-control' } %>
-
   </div>
 
   <div class="field">
-    <%= f.label :target, '目標件数' %><br>
-    <%= f.number_field :target, class: "" %>
+    <%= f.label :target, '目標件数' %>
+    <%= f.number_field :target, class: "" %>　件
+  </div>
+  <br>
+
+  <div class="field">
+    <%= f.label :action_approached, 'お声かけ' %>
+    <%= f.number_field :action_approached, class: "" %>　件
+  </div>
+
+  <div class="field">
+    <%= f.label :action_discussed, 'お話ができた' %>
+    <%= f.number_field :action_discussed, class: "" %>　件
+  </div>
+
+  <div class="field">
+    <%= f.label :action_purchased, '購入いただけた' %>
+    <%= f.number_field :action_purchased, class: "" %>　件
+  </div>
+
+  <div class="field">
+    <%= f.label :action_downloaded_only, 'ダウンロードのみ' %>
+    <%= f.number_field :action_downloaded_only, class: "" %>　件
+  </div>
+
+  <div class="field">
+    <%= f.label :action_discussed_only, 'お話だけだった' %>
+    <%= f.number_field :action_discussed_only, class: "" %>　件
+  </div>
+
+  <div class="field">
+    <%= f.label :action_promotion_done, 'キャンペーン済み' %>
+    <%= f.number_field :action_promotion_done, class: "" %>　件
   </div>
 
   <p>========================</p>
+  <p style="font-size: 12px;">
+    獲得の時間帯と獲得者を選んでください。1件を複数人で分配する場合は人数分作成し、その合計が1.0点になるように入力してください。<br>
+    (例)1件をAさんとBさんに半分ずつ分配：2件作成し、Aさん0.5点、Bさん0.5点と入力
+  </p>
 
-  <%= f.fields_for :cases do |c| %>
-    <%= render 'case_fields', f: c %>
+
+  <%#= f.fields_for :cases do |cc| %>
+  <%= f.fields_for :cases, @report.cases.sort_by(&:timeframe) do |cc| %>
+    <%= render 'case_fields', f: cc %>
   <% end %>
 
-  <div style="margin:20px">
-    <%= link_to_add_association '実績の追加', f, :cases, { class: "btn btn-primary", style:"" } %>
+  <div style="margin: 20px;">
+    <%#= link_to_add_association '実績の追加', f, :cases, { class: "btn btn-primary", style: "" } %>
   </div>
 
-    <p style="font-size: 12px;"><%= f.check_box :is_submitted %>  実績報告を<B>提出</B>する場合はチェックを入れてください（チェックをつけずに更新ボタンを押すと一時保存ができます）</p>
+  <p style="font-size: 12px;"><%= f.check_box :is_submitted %>  実績報告を<B>提出</B>する場合はチェックを入れてください（チェックをつけずに更新ボタンを押すと一時保存ができます）</p>
 
   <div>
     <% if action_name == "new" %>
@@ -46,5 +82,7 @@
     <% end %>
   </div>
 
-
 <% end %>
+
+
+<p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

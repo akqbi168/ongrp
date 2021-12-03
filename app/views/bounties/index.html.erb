@@ -1,0 +1,69 @@
+<h1>インセンティブ表</h1>
+
+
+<p>獲得件数加算級</p>
+
+<div class="test10">
+  <span class="test11">獲得件数</span>
+  <span class="test11">Staff(C)</span>
+  <span class="test11">Staff(B)</span>
+  <span class="test11">Staff(A)</span>
+  <span class="test11">Lead(B)</span>
+  <span class="test11">Lead(A)</span>
+  <span class="test11"></span>
+</div>
+
+<% @bounties.each do |b| %>
+  <div class="test10">
+    <span class="test11"><%= b.id %></span>
+    <span class="test11">
+      <%= number_to_currency(b.staff_c, unit: "¥", format: "%u %n", precision: 0) %>
+    </span>
+    <span class="test11">
+      <%= number_to_currency(b.staff_b, unit: "¥", format: "%u %n", precision: 0) %>
+    </span>
+    <span class="test11">
+      <%= number_to_currency(b.staff_a, unit: "¥", format: "%u %n", precision: 0) %>
+    </span>
+    <span class="test11">
+      <%= number_to_currency(b.lead_b, unit: "¥", format: "%u %n", precision: 0) %>
+    </span>
+    <span class="test11">
+      <%= number_to_currency(b.lead_a, unit: "¥", format: "%u %n", precision: 0) %>
+    </span>
+    <span class="test11">
+      <%= link_to '修正', edit_bounty_path(b.id) %>
+    </span>
+  </div>
+
+  <%# if @b.id > 20 %>
+    <%# break %>
+  <%# end %>
+<% end %>
+
+<br>
+<br>
+<p>チーム獲得件数</p>
+
+<div class="test10">
+  <span class="test11">件数</span>
+  <span class="test11">係数</span>
+  <span class="test11"></span>
+</div>
+
+<% @bounties.each do |b| %>
+  <div class="test10">
+    <span class="test11"><%= b.id %></span>
+    <span class="test11">
+      <%= b.ratio %>
+    </span>
+    <span class="test11">
+      <%= link_to '修正', edit_bounty_path(b.id) %>
+    </span>
+  </div>
+<% end %>
+
+
+<p class="back-to-top"><%= link_to '新規作成', new_bounty_path %></p>
+
+<p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

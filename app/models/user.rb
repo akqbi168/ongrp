@@ -19,4 +19,15 @@ class User < ApplicationRecord
     false
   end
 
+  # account_security_level の設定
+  enum account_level: {
+    undefined: 0,
+    director: 1,
+    client: 2,
+    headquarter: 3,
+    headquarter_admin: 4,
+    manager: 5,
+    admin: 6
+  }
+
 end

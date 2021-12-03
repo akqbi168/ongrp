@@ -11,10 +11,14 @@ Rails.application.routes.draw do
   resources :users
   resources :stores, only: [:index, :new, :edit, :create, :update]
   resources :staffs, only: [:index, :show, :new, :edit, :create, :update]
-  resources :reports, only: [:index, :show, :new, :edit, :create, :update]
+  resources :reports
   get 'reports_temp', to: 'reports#index_temp'
-  resources :cases
+  resources :cases, only: [:index, :new, :edit, :create, :update, :destroy]
   resources :jobs
+  resources :payments, only: [:index, :create, :update]
+  resources :ranks, only: [:index, :new, :edit, :create, :update]
+  resources :bounties, only: [:index, :new, :edit, :create, :update]
+  # resources :achievements
 
   root 'homes#top'
 

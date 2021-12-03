@@ -5,7 +5,7 @@ class CreateStaffs < ActiveRecord::Migration[6.1]
       t.string :name, null: false
       t.string :memo
 
-      t.integer :rank, default: 0, null: false
+      t.integer :rank_id, null: false
 
       t.timestamps
     end

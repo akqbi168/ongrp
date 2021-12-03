@@ -1,0 +1,6 @@
+ja:
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      l_date: "%m/%d(%a)"
+      l_time: "%H:%M"

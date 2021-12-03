@@ -1,0 +1,53 @@
+<!-- これはただのデータ入力用 -->
+
+<%= form_with model: @job do |f| %>
+
+  <div class="field">
+    <%= f.label :staff_id, '名前' %>
+    <% if params[:staff_id] %>
+      <% binding.pry %>
+      <%= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, value: params[:staff_id] %>
+    <% else %>
+      <%= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, prompt:"＊名前を選択" %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date, '日付' %>
+    <% if params[:date] %>
+      <%= f.date_field :date, value: params[:date] %>
+    <% else %>
+      <%= f.date_field :date %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time_start, '開始' %>　
+    <%= f.time_field :time_start %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time_end, '終了' %>　
+    <%= f.time_field :time_end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time_break, '休憩' %>　
+    <%= f.number_field :time_break %> 分
+  </div>
+
+  <div class="field">
+    <%= f.label :store_id, '店舗' %>
+    <%= f.select :store_id, Store.all.map { |store| [store.name, store.id] }, prompt:"＊店舗を選択" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :rank_id, '役職' %>
+    <%#= f.select :rank, Staff.ranks.keys, {class: "", prompt: "＊ランクを選択"} %>
+    <%= f.select :rank_id, Rank.all.map { |rank| [rank.name, rank.id] }, prompt: "＊役職を選択" %>
+  </div>
+
+  <br>
+  <%= f.submit '修正' %>
+
+<% end %>

@@ -1,6 +1,9 @@
 class Payment < ApplicationRecord
 
-  # belongs_to :staff
-  # has_many :cases
+  with_options optional: true do
+    belongs_to :job
+    belongs_to :staff
+    belongs_to :report
+  end
 
 end

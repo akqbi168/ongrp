@@ -21,6 +21,8 @@ module Ongrp
     config.time_zone = 'Tokyo'
     # DBに記録されている時間を読み込むタイムゾーンの設定
     config.active_record.default_timezone = :local
+    # デフォルトのロケールを日本（ja）に設定
+    # config.i18n.default_locale = :ja
     #
     # config.eager_load_paths << Rails.root.join("extras")
   end

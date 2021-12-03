@@ -11,7 +11,7 @@
       <% end %>
       <span class="staff-id"><%= @date_indicator.month %>/<%= @date_indicator.day %></span>
       <span class="staff-name"><%= Store.find(1).name %></span>
-      <span class="staff-name"><%= @staff.rank %></span>
+      <span class="staff-name"><%= Rank.find(@staff.rank_id).name %></span>
       <span class="staff-rank">
         <% rp = Report.where(store_id: 1, date: @date_indicator) %>
           <%# Case.where(report_id: rp, staff_id: @staff.id).each do |c| %>
@@ -31,29 +31,5 @@
     </div>
   <% end %>
 
-
-
-<%= form_with model: @staff do |f| %>
-  <div class="field">
-    <%= f.label :name, '氏名' %><br>
-    <%= f.text_field :name, class: "" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :rank, 'ランク' %><br>
-    <%= f.select :rank, Staff.ranks.keys, {class: ""} %>
-  </div>
-
-  <div class="field">
-    <%= f.label :memo, '備考' %><br>
-    <%= f.text_area :memo, class: "" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit '修正' %>
-    <%= f.submit '削除' %>
-  </div>
-
-<% end %>
 
 <p class="back-to-top"><%= link_to '一覧に戻る', staffs_path %></p>
