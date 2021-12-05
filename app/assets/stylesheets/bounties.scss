@@ -3,18 +3,47 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
-.test10 {
+.bounty-row {
+  display: block;
+  margin: 0 auto 18px;
   border-bottom: 1px dotted #999;
+
+  &:last-child {
+    margin-bottom: 30px;
+  }
 }
 
-.test11 {
-  display: inline-block;
-  width: 80px;
-  height: 24px;
-  line-height: 24px;
+.bounty-col {
+  margin-right: 8px;
   text-align: right;
+  vertical-align: middle;
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
-.test12 {
+.bounty-col-middle {
+  width: 98px;
+  height: 24px;
+}
 
+.bounty-button {
+  width: 15%;
+  max-width: 120px;
+  margin: 0 0 0 12px;
+
+  .bg-orange {
+    margin-top: 18px;
+  }
+}
+
+.store-button {
+  width: 15%;
+  max-width: 120px;
+  margin: 0 0 0 12px;
+
+  .bg-orange {
+    margin-top: 18px;
+  }
 }

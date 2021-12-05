@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'reports_temp', to: 'reports#index_temp'
   resources :cases, only: [:index, :new, :edit, :create, :update, :destroy]
   resources :jobs
-  resources :payments, only: [:index, :create, :update] do
+  resources :payments, only: [:index, :edit, :create, :update] do
     collection do
       get 'search'
     end

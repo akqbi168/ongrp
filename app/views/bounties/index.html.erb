@@ -1,24 +1,24 @@
 <h1>インセンティブ表</h1>
 
 
-<p>獲得件数加算給料</p>
+<p class="page-desription"><b>獲得件数加算給料</b></p>
 
-<div class="test10">
-  <span class="test11">獲得件数</span>
-  <span class="test11">Staff(C)</span>
-  <span class="test11">Staff(B)</span>
-  <span class="test11">Staff(A)</span>
-  <span class="test11">Lead(B)</span>
-  <span class="test11">Lead(A)</span>
-  <span class="test11"></span>
+<div class="bounty-row">
+  <span class="col-common bounty-col bounty-col-middle">獲得件数</span>
+  <span class="col-common bounty-col bounty-col-middle">Staff(C)</span>
+  <span class="col-common bounty-col bounty-col-middle">Staff(B)</span>
+  <span class="col-common bounty-col bounty-col-middle">Staff(A)</span>
+  <span class="col-common bounty-col bounty-col-middle">Lead(B)</span>
+  <span class="col-common bounty-col bounty-col-middle">Lead(A)</span>
+  <span class="col-common bounty-col bounty-col-middle"></span>
 </div>
 
 <% @bounties.each do |b| %>
   <% unless b.staff_c == 0 && b.staff_b == 0 && b.staff_a == 0 && b.lead_b == 0 && b.lead_a == 0 %>
-    <div class="test10">
+    <div class="bounty-row">
       <%= render 'index_row', b: b %>
-      <span class="test11">
-        <%= link_to '修正', edit_bounty_path(b.id) %>
+      <span class="col-common bounty-col bounty-button">
+        <%= link_to '修正', edit_bounty_path(b.id), class: "store-button-deco" %>
       </span>
     </div>
   <% end %>
@@ -26,22 +26,30 @@
 
 <br>
 <br>
-<p>チーム獲得件数</p>
+<p class="page-desription"><b>チーム獲得件数</b></p>
 
-<div class="test10">
-  <span class="test11">件数</span>
-  <span class="test11">係数</span>
-  <span class="test11"></span>
+<div class="bounty-row">
+  <span class="col-common bounty-col bounty-col-middle">
+    件数
+  </span>
+  <span class="col-common bounty-col bounty-col-middle">
+    係数
+  </span>
+  <span class="col-common bounty-col bounty-col-middle">
+    
+  </span>
 </div>
 
 <% @bounties.each do |b| %>
-  <div class="test10">
-    <span class="test11"><%= b.id %></span>
-    <span class="test11">
+  <div class="bounty-row">
+    <span class="col-common bounty-col bounty-col-middle">
+      <%= b.id %>
+    </span>
+    <span class="col-common bounty-col bounty-col-middle">
       <%= b.ratio %>
     </span>
-    <span class="test11">
-      <%= link_to '修正', edit_bounty_path(b.id) %>
+    <span class="col-common bounty-col bounty-col-middle">
+      <%= link_to '修正', edit_bounty_path(b.id), class: "store-button-deco" %>
     </span>
   </div>
 <% end %>

@@ -1,6 +1,10 @@
 class JobsController < ApplicationController
 
   def index
+    @q = Job.ransack(params[:q])
+    # @results = @q.result.includes(:date).order("date")
+    @results = @q.result.order("date")
+
     @date_origin = Date.new(2021,11,1)
     @wd = ["日", "月", "火", "水", "木", "金", "土"]
     @staffs = Staff.all

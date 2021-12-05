@@ -1,16 +1,35 @@
 <h1>催事場所一覧</h1>
 
 <div>
+    <div class="store-row">
+      <span class="col-common store-col store-id">
+        No.
+      </span>
+      <span class="col-common store-col store-name">
+        場所名
+      </span>
+      <span class="col-common store-col store-button">
+        変更
+      </span>
+    </div>
   <% @stores.each do |s| %>
     <div class="store-row">
-      <span class="store-id"><%= s.id %>.</span>
-      <span class="store-name"><%= s.name %></span>
-      <span class="store-button"><%= link_to '変更', edit_store_path(s), class: "store-button-deco" %></span>
+      <span class="col-common store-col store-id">
+        <%= s.id %>.
+      </span>
+      <span class="col-common store-col store-name">
+        <%= s.name %>
+      </span>
+      <span class="col-common store-col store-button">
+        <%= link_to '変更', edit_store_path(s), class: "store-button-deco" %>
+      </span>
     </div>
   <% end %>
-      <span class="store-id"></span>
-      <span class="store-name"></span>
-      <span class="store-button"><%= link_to '新規作成', new_store_path, class: "store-button-deco bg-orange" %></span>
+      <span class="col-common store-col store-id"></span>
+      <span class="col-common store-col store-name"></span>
+      <span class="col-common store-col store-button">
+        <%= link_to '新規作成', new_store_path, class: "store-button-deco bg-orange" %>
+      </span>
 </div>
 
 <p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

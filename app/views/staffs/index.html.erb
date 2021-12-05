@@ -18,8 +18,8 @@
           <%= Rank.find(s.rank_id).name %>
         <% end %>
       </span>
-      <span class="staff-button"><%= link_to '獲得数', staff_path(s), class: "staff-button-deco bg-pink" %></span>
-      <span class="staff-button"><%= link_to 'シフト', staffs_path, class: "staff-button-deco bg-white" %></span>
+      <span class="staff-button"><%#= link_to '獲得数', staff_path(s), class: "staff-button-deco bg-pink" %></span>
+      <span class="staff-button"><%= link_to 'シフト', jobs_path, class: "staff-button-deco bg-white" %></span>
       <span class="staff-button"><%= link_to '変更', edit_staff_path(s), class: "staff-button-deco" %></span>
     </div>
   <% end %>

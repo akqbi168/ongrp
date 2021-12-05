@@ -3,6 +3,41 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
+.rank-row {
+  display: block;
+  margin: 0 auto 18px;
+  border-bottom: 1px dotted #999;
+
+  &:last-child {
+    margin-bottom: 30px;
+  }
+}
+
+.rank-col {
+  margin-right: 8px;
+  // text-align: center;
+  vertical-align: middle;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.rank-name {
+  width: 104px;
+  text-align: center;
+}
+
+.rank-per_hour {
+  width: 104px;
+  text-align: center;
+}
+
+.rank-req {
+  width: 400px;
+  text-align: left;
+}
+
 .rank-button {
   display: inline-block;
   width: 15%;

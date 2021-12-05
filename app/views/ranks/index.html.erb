@@ -3,29 +3,39 @@
 <p class="page-desription">役職の確認と修正ができます。</p>
 
 <div>
-    <div class="store-row">
-      <span class="payment-col">役職名</span>
-      <span class="payment-col">時給</span>
-      <span class="store-name" style="width: 400px">昇級条件</span>
+    <div class="rank-row">
+      <span class="col-common rank-col rank-name">役職名</span>
+      <span class="col-common rank-col rank-per_hour">時給</span>
+      <span class="col-common rank-col rank-req">昇級条件</span>
       <span class="rank-button"></span>
     </div>
 
   <% @ranks.each do |r| %>
-    <div class="store-row">
-      <span class="payment-col"><%= r.name %></span>
-      <span class="payment-col">
+    <div class="rank-row">
+      <span class="col-common rank-col rank-name">
+        <%= r.name %>
+      </span>
+      <span class="col-common rank-col rank-per_hour">
         <%#= r.per_hour %>
         <%= number_to_currency(r.per_hour, unit: "¥", format: "%u %n", precision: 0) %>
       </span>
-      <span class="store-name" style="width: 400px"><%= safe_join(r.requirements.split("\n"),tag(:br)) %></span>
-      <span class="rank-button"><%= link_to '変更', edit_rank_path(r.id), class: "store-button-deco" %></span>
+      <span class="col-common rank-col rank-req">
+        <%= safe_join(r.requirements.split("\n"),tag(:br)) %>
+      </span>
+      <span class="col-common rank-col rank-button">
+        <%= link_to '変更', edit_rank_path(r.id), class: "store-button-deco" %>
+      </span>
     </div>
   <% end %>
 
-      <span class="payment-col"></span>
-      <span class="payment-col"></span>
-      <span class="store-name" style="width: 400px"></span>
-      <span class="rank-button"><%= link_to '新規作成', new_rank_path, class: "store-button-deco bg-orange" %></span>
+    <div class="rank-row">
+      <span class="col-common rank-col rank-name"></span>
+      <span class="col-common rank-col rank-per_hour"></span>
+      <span class="col-common rank-col rank-req"></span>
+      <span class="col-common rank-col rank-button">
+        <%= link_to '新規作成', new_rank_path, class: "store-button-deco bg-orange" %>
+      </span>
+    <div class="rank-row">
 
 </div>
 
