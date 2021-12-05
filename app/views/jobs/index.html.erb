@@ -23,8 +23,8 @@
 
     <div class="test0">
           <%= link_to(edit_staff_path(i), class: "btn-job-name fs12") do %>
-            <span class="test1">
-                <p class="fs16">
+            <span class="test1" style="height: 55px;">
+                <p class="fs16" style="vertical-align: middle;">
                   <%= @staffs.find(i).name %>
                 </p>
             </span>
@@ -39,7 +39,7 @@
         <% if job_spot.nil? %>
           <%= link_to(new_job_path(staff_id: i, date: d), class: "btn-job-spot fs12") do %>
             <span class="test1">
-              <p>
+              <p style="line-height: 55px;">
                 (追加)
               </p>
             </span>

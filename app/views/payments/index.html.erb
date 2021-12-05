@@ -1,7 +1,10 @@
 <h1>報酬明細</h1>
 
 
-<%= Staff.find(Payment.find(1).staff_id).name %> さん<br><br>
+<div class="search-form">
+  <%= render 'search', q: @q, url: payments_path %>
+</div>
+
 
 <div>
   <div class="payment-row fs14">
@@ -16,15 +19,14 @@
     <span class="payment-col">日当合計</span>
     <span class="payment-button">変更</span>
   </div>
-  <%# if @payments %>
-    <%# @payments.each do |p| %>
 
-        <% @payments.where(staff_id: 1).each do |p| %>
-      <div class="payment-row fs14">
+
+  <% @results.each do |p| %>
+    <div class="payment-row fs14">
+
           <% unless Job.find(p.job_id).nil? %>
             <% job = Job.find_by(staff_id: p.staff_id, date: p.date) %>
 
-            <%# binding.pry %>
             <span class="payment-col"><%= p.date .strftime("%m/%d(#{@wd[p.date.wday]})") %></span>
             <span class="payment-col">店舗XXXX</span>
             <span class="payment-col">
@@ -81,9 +83,8 @@
               <%# end %>
           <% end %>
       </div>
-        <% end %>
     <%# end %>
-  <%# end %>
+  <% end %>
     <span class="payment-id"></span>
     <span class="payment-name"></span>
     <span class="payment-rank"></span>

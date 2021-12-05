@@ -1,6 +1,6 @@
 <h1>店舗追加</h1>
 
-<%= form_with model: @store do |f| %>
+<%= form_with(model: @stroe, local: true) do |f| %>
   <%= f.label :name, '催事場所の名称' %>
   <%= f.text_field :name, class: "" %>
   <%= f.submit '追加' %>

@@ -14,11 +14,6 @@
       <span class="staff-name"><%= Rank.find(@staff.rank_id).name %></span>
       <span class="staff-rank">
         <% rp = Report.where(store_id: 1, date: @date_indicator) %>
-          <%# Case.where(report_id: rp, staff_id: @staff.id).each do |c| %>
-            <%# array = [] %>  <!-- 空の配列を用意 -->
-            <%# array << c.point %>  <!-- caseテーブルのレコードを１件ずつ取り出し、pointカラムのデータを配列に入れる -->
-          <%# end %>
-        <%# array.sum %>
         <%= Case.where(report_id: rp, staff_id: @staff.id).sum(:point) %>
       </span>
       <% @date_indicator += 1 %>

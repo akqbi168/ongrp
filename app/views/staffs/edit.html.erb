@@ -1,6 +1,6 @@
 <h1>スタッフ情報修正／削除</h1>
 
-<%= form_with model: @staff do |f| %>
+<%= form_with(model: @staff, local: true) do |f| %>
   <div class="field">
     <%= f.label :name, '氏名' %><br>
     <%= f.text_field :name, class: "" %>

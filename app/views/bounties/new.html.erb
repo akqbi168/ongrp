@@ -1,7 +1,7 @@
 <h1>インセンティブ作成</h1>
 
 
-<%= form_with model: @bounty do |f| %>
+<%= form_with(model: @bounty, local: true) do |f| %>
 
 Staff(C): <%= f.number_field :staff_c, max: 99999, min: 0 %><br>
 Staff(B): <%= f.number_field :staff_b, max: 99999, min: 0 %><br>

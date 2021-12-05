@@ -1,6 +1,6 @@
 <h1>役職追加</h1>
 
-<%= form_with model: @rank do |f| %>
+<%= form_with(model: @rank, local: true) do |f| %>
 
   <div class="field">
     <%= f.label :name, '役職名' %><br>

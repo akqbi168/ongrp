@@ -57,13 +57,14 @@ class ReportsController < ApplicationController
       if @report.is_submitted == false
         redirect_to root_path, flash: { notice: '報告を一時保存しました。提出を完了するにはチェックを入れて更新してください。' }
       else
-
-        # job = Job.find_by(date: @report.date, store_id: @report.store_id) each do |j|
-
-        if Payment.find_by(job_id: j.id).exists?
-          @payment = Payment.find_by(job_id: j.id)
-        else
-          @payment = Payment.new
+        job = Job.where(date: @report.date, store_id: @report.store_id)
+        job.each do |j|
+          binding.pry
+          if Payment.find_by(job_id: j.id)
+            @payment = Payment.find_by(job_id: j.id)
+          else
+            @payment = Payment.new
+          end
         end
 
         @payment.report_id = @report.id

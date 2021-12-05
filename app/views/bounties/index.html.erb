@@ -1,7 +1,7 @@
 <h1>インセンティブ表</h1>
 
 
-<p>獲得件数加算級</p>
+<p>獲得件数加算給料</p>
 
 <div class="test10">
   <span class="test11">獲得件数</span>
@@ -14,31 +14,14 @@
 </div>
 
 <% @bounties.each do |b| %>
-  <div class="test10">
-    <span class="test11"><%= b.id %></span>
-    <span class="test11">
-      <%= number_to_currency(b.staff_c, unit: "¥", format: "%u %n", precision: 0) %>
-    </span>
-    <span class="test11">
-      <%= number_to_currency(b.staff_b, unit: "¥", format: "%u %n", precision: 0) %>
-    </span>
-    <span class="test11">
-      <%= number_to_currency(b.staff_a, unit: "¥", format: "%u %n", precision: 0) %>
-    </span>
-    <span class="test11">
-      <%= number_to_currency(b.lead_b, unit: "¥", format: "%u %n", precision: 0) %>
-    </span>
-    <span class="test11">
-      <%= number_to_currency(b.lead_a, unit: "¥", format: "%u %n", precision: 0) %>
-    </span>
-    <span class="test11">
-      <%= link_to '修正', edit_bounty_path(b.id) %>
-    </span>
-  </div>
-
-  <%# if @b.id > 20 %>
-    <%# break %>
-  <%# end %>
+  <% unless b.staff_c == 0 && b.staff_b == 0 && b.staff_a == 0 && b.lead_b == 0 && b.lead_a == 0 %>
+    <div class="test10">
+      <%= render 'index_row', b: b %>
+      <span class="test11">
+        <%= link_to '修正', edit_bounty_path(b.id) %>
+      </span>
+    </div>
+  <% end %>
 <% end %>
 
 <br>

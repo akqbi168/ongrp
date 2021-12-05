@@ -3,6 +3,17 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
+
+.col-common {
+  display: inline-block;
+}
+
+.pay-col {
+  margin-right: 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+
 .payment-row {
   display: block;
   // height: 36px;
@@ -12,15 +23,20 @@
   &:last-child {
     margin-bottom: 30px;
   }
+
+  .pay-date {
+    width: 2000px;
+  }
+
 }
 
+
 .payment-col {
-  display: inline-block;
   width:  8%;
   max-width: 60px;
-  margin-right: 6px;
-  text-align: center;
-  vertical-align: middle;
+  // margin-right: 6px;
+  // text-align: center;
+  // vertical-align: middle;
 
   .t-right {
     text-align: right;
@@ -96,4 +112,8 @@
     transform: translateY(3px);
     transition: 0;
   }
+}
+
+.search-form {
+  margin-bottom: 40px;
 }

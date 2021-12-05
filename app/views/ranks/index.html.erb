@@ -4,29 +4,40 @@
 
 <div>
     <div class="store-row">
-      <span class="store-button">役職名</span>
-      <span class="store-button">時給</span>
-      <span class="store-button">昇級条件</span>
-      <span class="store-button"></span>
+      <span class="payment-col">役職名</span>
+      <span class="payment-col">時給</span>
+      <span class="store-name" style="width: 400px">昇級条件</span>
+      <span class="rank-button"></span>
     </div>
 
   <% @ranks.each do |r| %>
     <div class="store-row">
-      <span class="store-button"><%= r.name %></span>
-      <span class="store-button">
+      <span class="payment-col"><%= r.name %></span>
+      <span class="payment-col">
         <%#= r.per_hour %>
         <%= number_to_currency(r.per_hour, unit: "¥", format: "%u %n", precision: 0) %>
       </span>
-      <span class="store-button"><%= safe_join(r.requirements.split("\n"),tag(:br)) %></span>
-      <span class="store-button"><%= link_to '変更', edit_rank_path(r.id), class: "store-button-deco" %></span>
+      <span class="store-name" style="width: 400px"><%= safe_join(r.requirements.split("\n"),tag(:br)) %></span>
+      <span class="rank-button"><%= link_to '変更', edit_rank_path(r.id), class: "store-button-deco" %></span>
     </div>
   <% end %>
 
-      <span class="store-button"></span>
-      <span class="store-button"></span>
-      <span class="store-button"></span>
-      <span class="store-button"><%= link_to '新規作成', new_rank_path, class: "store-button-deco bg-orange" %></span>
+      <span class="payment-col"></span>
+      <span class="payment-col"></span>
+      <span class="store-name" style="width: 400px"></span>
+      <span class="rank-button"><%= link_to '新規作成', new_rank_path, class: "store-button-deco bg-orange" %></span>
 
 </div>
+
+
+<p class="page-desription">
+  ◆支払い条件<br>
+  ① 支給月にポマト・プロに在籍していること<br>
+  ② 完了月の翌々月末に支給<br>
+  ③ 不正、虚偽によるクレーム等が発生した場合は支給対象外となる<br>
+  ④ 不正、虚偽によるクレーム等が支給してから発生した場合は返金対象となる<br>
+  ⑤ 納品ベースでのカウントとする<br>
+  ⑥ 1件の定義は新規での注文となります<br>
+</p>
 
 <p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

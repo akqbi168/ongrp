@@ -3,7 +3,7 @@ class JobsController < ApplicationController
   def index
     @date_origin = Date.new(2021,11,1)
     @wd = ["日", "月", "火", "水", "木", "金", "土"]
-    @staffs = Staff.all.order("id")
+    @staffs = Staff.all
     @jobs = Job.all
     @stores = Store.all
   end
@@ -15,12 +15,14 @@ class JobsController < ApplicationController
     @job = Job.new
     # @@path = Rails.application.routes.recognize_path(request.referer)
     @ranks = Rank.all.order("per_hour")
+    @staffs = Staff.all
   end
 
   def edit
     @@path = Rails.application.routes.recognize_path(request.referer)
     @job = Job.find(params[:id])
     @ranks = Rank.all.order("per_hour")
+    @staffs = Staff.all
   end
 
   def create

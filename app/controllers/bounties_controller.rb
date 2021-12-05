@@ -14,14 +14,20 @@ class BountiesController < ApplicationController
 
   def create
     @bounty = Bounty.new(bounty_params)
-    @bounty.save
-    redirect_to bounties_path
+    if @bounty.save
+      redirect_to bounties_path, flash: { notice: 'インセンティブを追加しました。' }
+    else
+      render 'new'
+    end
   end
 
   def update
     @bounty = Bounty.find(params[:id])
-    @bounty.update(bounty_params)
-    redirect_to bounties_path
+    if @bounty.update(bounty_params)
+      redirect_to bounties_path, flash: { notice: 'インセンティブを修正しました。' }
+    else
+      render 'edit'
+    end
   end
 
   private
