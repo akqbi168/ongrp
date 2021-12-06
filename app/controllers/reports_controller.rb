@@ -67,11 +67,11 @@ class ReportsController < ApplicationController
           end
         end
 
-        @payment.report_id = @report.id
-        @payment.indivisual_point
-        @payment.bonus_base
-        @payment.store_point
-        @payment.bonus_ratio
+        # @payment.report_id = @report.id
+        # @payment.indivisual_point = 
+        # @payment.bonus_base
+        # @payment.store_point
+        # @payment.bonus_ratio
 
 
 
