@@ -1,6 +1,8 @@
 class CasesController < ApplicationController
 
   def index
+    # @reports = Report.all
+    # @cases = Case.all
   end
 
   def new

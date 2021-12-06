@@ -42,12 +42,11 @@
 <%= link_to 'シフト入力', jobs_path, class: 'top-button fs22 bg-white' %>
 <p class="top-button-description">シフトの追加、編集を行います。</p>
 
-<%#= link_to '実績一覧', root_path, class: 'top-button fs22 bg-pink' %>
-<div class="top-button hover-stop fs22 bg-pink">× 実績一覧 ×</div>
-<p class="top-button-description">スタッフ毎や店舗別での獲得数など実績を確認します。</p>
+<%= link_to '実績一覧', cases_path, class: 'top-button fs22 bg-pink' %>
+<p class="top-button-description">店舗ごとの累計獲得数など実績を確認します。</p>
 
 <%= link_to '人件費管理', payments_path, class: 'top-button fs22 bg-pink' %>
-<p class="top-button-description">日当やインセンティブなど、支払い額を確認します。（PC専用）</p>
+<p class="top-button-description">スタッフごとの獲得実績や、日当・インセンティブなど支払い額を確認します。（PC専用）</p>
 
 <p class="top-button-description">インセンティブの修正は<%= link_to 'こちら', bounties_path %></p>
 

@@ -8,7 +8,7 @@ class JobsController < ApplicationController
     @date_origin = Date.new(2021,11,1)
     @wd = ["日", "月", "火", "水", "木", "金", "土"]
     @staffs = Staff.all
-    @jobs = Job.all
+    @jobs = Job.all.order("date")
     @stores = Store.all
   end
 
@@ -79,6 +79,9 @@ class JobsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def search
   end
 
   private

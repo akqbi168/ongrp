@@ -9,13 +9,17 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :stores, only: [:index, :new, :edit, :create, :update]
-  resources :staffs, only: [:index, :show, :new, :edit, :create, :update]
+  resources :stores, only: [:index, :new, :edit, :create, :update, :destroy]
+  resources :staffs, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   resources :reports
   get 'reports_temp', to: 'reports#index_temp'
   resources :cases, only: [:index, :new, :edit, :create, :update, :destroy]
-  resources :jobs
-  resources :payments, only: [:index, :edit, :create, :update] do
+  resources :jobs do
+    collection do
+      get 'search'
+    end
+  end
+  resources :payments, only: [:index, :edit, :create, :update, :destroy] do
     collection do
       get 'search'
     end

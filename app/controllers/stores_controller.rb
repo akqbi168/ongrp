@@ -15,7 +15,7 @@ class StoresController < ApplicationController
   def create
     @store = Store.new(store_params)
     if @store.save
-      redirect_to new_store_path, flash: { notice: '催事場所が新しく追加されました。' }
+      redirect_to stores_path, flash: { notice: '催事場所が新しく追加されました。' }
     else
       render 'new', flash: { notice: '追加できませんでした。' }
     end

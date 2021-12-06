@@ -9,10 +9,11 @@ class Report < ApplicationRecord
   belongs_to :user
   belongs_to :store, optional: true
 
-  # validates :cases, associated: true
+  with_options presence: true do
+    validates :date
+    validates :store_id
+  end
 
-  # def reject_case(attributes)
-  #   attributes.except(:point).values.all?(&:blank?)
-  # end
+  # validates :cases, associated: true
 
 end

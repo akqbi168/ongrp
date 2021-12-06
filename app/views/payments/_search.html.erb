@@ -1,9 +1,8 @@
 <%= search_form_for @q, url: payments_path do |f| %>
 
-  <%#= f.collection_select :date_eq, @paymentsall, :date, :date, include_blank: '日付を選択', class: '' %>
-  期間：<%= f.date_field :date_gteq, include_blank: true %> 〜 <%= f.date_field :date_lteq, include_blank: true %><br><br>
+  期間指定：<%= f.date_field :date_gteq, include_blank: true %> 〜 <%= f.date_field :date_lteq, include_blank: true %><br><br>
 
-  氏名：<%= f.collection_select :staff_id_eq, Staff.all, :id, :name, include_blank: '全員', class: '' %>　
+  氏　　名：<%= f.collection_select :staff_id_eq, Staff.all, :id, :name, include_blank: '全員', class: '' %>　
 
   <%= f.submit '検索', class: 'bg-light-orange' %>
 
