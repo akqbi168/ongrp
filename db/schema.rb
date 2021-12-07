@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_03_074455) do
+ActiveRecord::Schema.define(version: 2021_12_07_061236) do
 
   create_table "bounties", force: :cascade do |t|
     t.integer "staff_c", null: false
@@ -31,6 +31,9 @@ ActiveRecord::Schema.define(version: 2021_12_03_074455) do
     t.integer "timeframe"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "memo"
+    t.boolean "confirmed_by_client"
+    t.string "comment_by_client"
   end
 
   create_table "jobs", force: :cascade do |t|

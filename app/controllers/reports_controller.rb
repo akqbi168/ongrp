@@ -145,7 +145,7 @@ class ReportsController < ApplicationController
       :promotion_done_for_value4,
       :promotion_done_for_others,
       :promotion_done_for_others_memo,
-      cases_attributes: [:id, :report_id, :staff_id, :point, :timeframe, :_destroy]
+      cases_attributes: [:id, :report_id, :staff_id, :point, :timeframe, :memo, :confirmed_by_client, :comment_by_client, :_destroy]
     )
   end
 

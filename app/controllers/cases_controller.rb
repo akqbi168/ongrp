@@ -1,8 +1,9 @@
 class CasesController < ApplicationController
 
   def index
-    # @reports = Report.all
-    # @cases = Case.all
+    @reports = Report.all
+    @cases = Case.all
+    @wd = ["日", "月", "火", "水", "木", "金", "土"]
   end
 
   def new
@@ -55,7 +56,7 @@ class CasesController < ApplicationController
   private
 
   def case_params
-    params.require(:case).permit(:date, :report_id, :staff_id, :point, :timeframe)
+    params.require(:case).permit(:date, :report_id, :staff_id, :point, :timeframe, :memo, :confirmed_by_client, :comment_by_client)
   end
 
 end

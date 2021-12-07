@@ -1,4 +1,25 @@
-<h1>実績一覧</h1>
+<h1>催事報告（獲得状況）</h1>
+
+
+<% @cases.each do |c| %>
+
+
+<div class="case-index-row">
+  <% report = @reports.find(c.report_id) %>
+  ■<%= report.date.strftime("%m/%d(#{@wd[report.date.wday]})") %>　｜　
+  <%= c.point %> 件　｜　
+
+  備考<%= c.memo %>　｜　
+  確認<%= c.confirmed_by_client %>　｜　
+  ご返信<%= c.comment_by_client %>　｜　
+
+  <%#= link_to '返信', edit_case_path(c.id), class:"" %>
+
+</div>
+
+<br>
+
+<% end %>
 
 
 <p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

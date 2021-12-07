@@ -3,6 +3,14 @@
 <%= form_with model: @case do |c| %>
 
   <%= render 'reports/case_fields', f: c %>
+
+  <div class="field">
+    <%= c.label :memo, '備考' %>
+    <%= c.text_area :memo, placeholder: "追記事項があれば（クライアントにも伝わります）", cols: 40, rows: 8, class: "" %>
+  </div>
+
+  <br>
+
   <%= c.submit "送信", data: { confirm: "速報を報告します。よろしいですか？" }, class:"btn btn-lg btn-success", style:"" %>
 
 <% end %>
