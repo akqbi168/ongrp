@@ -4,10 +4,12 @@ class ReportsController < ApplicationController
 
   def index
     @reports = Report.all.where(is_submitted: true)
+    @wd = ["日", "月", "火", "水", "木", "金", "土"]
   end
 
   def index_temp
     @reports = Report.all.where(is_submitted: false)
+    @wd = ["日", "月", "火", "水", "木", "金", "土"]
   end
 
   def show
