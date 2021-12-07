@@ -13,7 +13,7 @@
   <% @reports.each do |r| %>
     <div class="store-row">
       <span class="store-button"><%= r.updated_at %></span>
-      <span class="store-button"><%= r.date %></span>
+      <span class="store-button"><%= r.date.strftime("%m/%d(#{@wd[r.date.wday]})") %></span>
       <span class="store-button"><%= Store.find(r.store_id).name %></span>
       <span class="store-button">
         <% if (Date.current - r.date).to_i <= 1 %>
