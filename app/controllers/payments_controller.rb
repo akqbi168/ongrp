@@ -7,7 +7,6 @@ class PaymentsController < ApplicationController
     @paymentsall = Payment.all.order("date")
     @ranks = Rank.all
     @bounties = Bounty.all
-    @wd = ["日", "月", "火", "水", "木", "金", "土"]
   end
 
   def edit

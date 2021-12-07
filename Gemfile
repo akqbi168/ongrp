@@ -80,3 +80,6 @@ gem 'ransack'
 gem 'pry-rails'
 gem 'better_errors'
 gem 'binding_of_caller'
+
+# for slack notification
+gem 'slack-notifier'

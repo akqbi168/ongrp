@@ -24,12 +24,17 @@ class Case < ApplicationRecord
     '不明／その他': 12
   }
 
-#Casesテーブルのpointカラムの合計値を求める
-array = [] #空の配列を用意し、
-  Case.all.each do |c|
-    array << c.point
-    #casesテーブルのレコードを１件ずつ取り出し、pointカラムのデータを配列に入れる
-  end
-array.sum
+  # enum point: {
+  #   '1.0': 0,
+  #   '0.9': 1,
+  #   '0.8': 2,
+  #   '0.7': 3,
+  #   '0.6': 4,
+  #   '0.5': 5,
+  #   '0.4': 6,
+  #   '0.3': 7,
+  #   '0.2': 8,
+  #   '0.1': 9
+  # }
 
 end

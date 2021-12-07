@@ -5,12 +5,29 @@
   <%= render 'reports/case_fields', f: c %>
 
   <div class="field">
-    <%= c.label :memo, '備考' %>
-    <%= c.text_area :memo, placeholder: "追記事項があれば（クライアントにも伝わります）", cols: 40, rows: 8, class: "" %>
+    <span class="form-new-left">
+      <%= c.label :customer_name, '契約者氏名' %>
+    </span>
+    <span class="form-new-right">
+      <%= c.text_field :customer_name, placeholder: "", class: "form-right" %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="form-new-left">
+      <%= c.label :memo, '備考' %>
+    </span>
+    <span class="form-new-right">
+      <%= c.text_area :memo, placeholder: "追記事項があれば（クライアントにも伝わります）", cols: 30, rows: 8, class: "form-right" %>
+    </span>
   </div>
 
   <br>
 
-  <%= c.submit "送信", data: { confirm: "速報を報告します。よろしいですか？" }, class:"btn btn-lg btn-success", style:"" %>
+  <div class="cf">
+    <!-- <div style="float: right;"> -->
+      <%= c.submit "送信", data: { confirm: "速報を報告します。よろしいですか？" }, class:"right button-send" %>
+    <!-- </div> -->
+  </div>
 
 <% end %>

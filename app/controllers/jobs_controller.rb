@@ -6,9 +6,8 @@ class JobsController < ApplicationController
     @results = @q.result.order("date")
 
     @date_origin = Date.new(2021,11,1)
-    @wd = ["日", "月", "火", "水", "木", "金", "土"]
     @staffs = Staff.all
-    @jobs = Job.all.order("date")
+    @jobs_by_date = Job.all.order("date")
     @stores = Store.all
   end
 
@@ -23,22 +22,9 @@ class JobsController < ApplicationController
   end
 
   def edit
-    @@path = Rails.application.routes.recognize_path(request.referer)
+    # @@path = Rails.application.routes.recognize_path(request.referer)
     @job = Job.find(params[:id])
     @ranks = Rank.all.order("per_hour")
-    @staffs = Staff.all
-  end
-
-  def report_jobs
-    my_reports = Report.where(user_id: current_user.id, is_submitted: true)
-    d = my_reports.order("date").last.date
-    @report = Report.find_by(user_id: current_user.id, date: d)
-    @jobs = Job.where(date: d, store_id: @report.store_id)
-    @staffs = Staff.all
-  end
-
-  def report_jobs_edit
-    @job = Job.find(params[:id])
     @staffs = Staff.all
   end
 
@@ -46,7 +32,6 @@ class JobsController < ApplicationController
     @job = Job.new(job_params)
 
     if @job.save
-      binding.pry
       @rank = Rank.all
       @payment = Payment.new
       @payment.staff_id = @job.staff_id
@@ -63,9 +48,7 @@ class JobsController < ApplicationController
         # else
           # redirect_to new_job_path, flash: { notice: 'シフトを追加修正しました。' }
         # end
-      binding.pry
     else
-      binding.pry
       render 'new'
     end
   end

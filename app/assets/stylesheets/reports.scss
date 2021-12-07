@@ -1,3 +1,26 @@
 // Place all the styles related to the reports controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.q_title {
+  margin: 30px auto 6px 0;
+}
+
+.q_subtitle {
+  margin: 12px auto 6px 0;
+}
+
+.form-new-left_wide {
+  display: inline-block;
+  width: 65%;
+  max-width: 620px;
+  margin-right: 10px;
+  float: left;
+}
+.form-new-right_narrow {
+  display: inline-block;
+  width: 25%;
+  max-width: 160px;
+  float: right;
+}

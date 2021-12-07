@@ -4,12 +4,10 @@ class ReportsController < ApplicationController
 
   def index
     @reports = Report.all.where(is_submitted: true)
-    @wd = ["日", "月", "火", "水", "木", "金", "土"]
   end
 
   def index_temp
     @reports = Report.all.where(is_submitted: false)
-    @wd = ["日", "月", "火", "水", "木", "金", "土"]
   end
 
   def show
@@ -149,7 +147,7 @@ class ReportsController < ApplicationController
       :promotion_done_for_value4,
       :promotion_done_for_others,
       :promotion_done_for_others_memo,
-      cases_attributes: [:id, :report_id, :staff_id, :point, :timeframe, :memo, :confirmed_by_client, :comment_by_client, :_destroy]
+      cases_attributes: [:id, :report_id, :staff_id, :point, :timeframe, :customer_name, :memo, :confirmed_by_client, :comment_by_client, :_destroy]
     )
   end
 

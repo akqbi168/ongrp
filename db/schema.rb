@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2021_12_07_061236) do
     t.integer "timeframe"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "customer_name"
     t.string "memo"
     t.boolean "confirmed_by_client"
     t.string "comment_by_client"

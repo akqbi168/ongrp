@@ -3,7 +3,6 @@ class CasesController < ApplicationController
   def index
     @reports = Report.all
     @cases = Case.all
-    @wd = ["日", "月", "火", "水", "木", "金", "土"]
   end
 
   def new
@@ -25,6 +24,7 @@ class CasesController < ApplicationController
     else
       @report = Report.new
       @report.date = Date.current
+      
       @report.store_id = 1
       @report.user_id = user.id
       @report.is_submitted = false
@@ -56,7 +56,7 @@ class CasesController < ApplicationController
   private
 
   def case_params
-    params.require(:case).permit(:date, :report_id, :staff_id, :point, :timeframe, :memo, :confirmed_by_client, :comment_by_client)
+    params.require(:case).permit(:date, :report_id, :staff_id, :point, :timeframe, :customer_name, :memo, :confirmed_by_client, :comment_by_client)
   end
 
 end

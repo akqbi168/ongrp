@@ -195,6 +195,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    slack-notifier (2.4.0)
     spring (3.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -256,6 +257,7 @@ DEPENDENCIES
   ransack
   sass-rails (>= 6)
   selenium-webdriver
+  slack-notifier
   spring
   sqlite3
   turbolinks (~> 5)
