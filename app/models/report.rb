@@ -14,6 +14,6 @@ class Report < ApplicationRecord
     validates :store_id
   end
 
-  # validates :cases, associated: true
+
 
 end

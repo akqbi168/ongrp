@@ -5,11 +5,11 @@
   <div class="field">
     <%= f.label :staff_id, '名前' %>
     <% if params[:staff_id] %>
-      <%#= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, value: params[:staff_id] %>
-      <%= f.collection_select :staff_id, @staffs.map, :id, :name, include_blank: 'スタッフ名を選択', class: '' %>
+      <%= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, value: params[:staff_id] %>
+      <%#= f.collection_select :staff_id, @staffs.map, :id, :name, include_blank: 'スタッフ名を選択', class: '' %>
     <% else %>
-      <%#= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, prompt:"＊名前を選択" %>
-      <%= f.collection_select :staff_id, @staffs, :id, :name, include_blank: 'スタッフ名を選択', class: '' %>
+      <%= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, prompt:"＊名前を選択" %>
+      <%#= f.collection_select :staff_id, @staffs, :id, :name, include_blank: 'スタッフ名を選択', class: '' %>
     <% end %>
   </div>
 

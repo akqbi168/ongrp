@@ -52,12 +52,12 @@ ActiveRecord::Schema.define(version: 2021_12_07_061236) do
     t.date "date", null: false
     t.integer "staff_id", null: false
     t.integer "job_id"
-    t.integer "report_id"
     t.time "time_start"
     t.time "time_end"
     t.integer "time_break"
     t.float "working_hours"
     t.integer "per_hour"
+    t.integer "report_id"
     t.float "indivisual_point"
     t.integer "bonus_base"
     t.float "store_point"

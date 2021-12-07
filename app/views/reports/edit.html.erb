@@ -23,9 +23,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :target, '総　　評' %>
-    <%= f.text_field :target, placeholder: "", class: "" %>
-    <%#= f.text_area :target, placeholder: "以下のコメント以外に何かあれば記載してください。", class: "" %>
+    <%= f.label :memo, '総　　評' %>
+    <%= f.text_area :memo, placeholder: "備考があれば記載してください。", cols: 40, rows: 4, class: "" %>
   </div>
 
   <br>
@@ -40,7 +39,6 @@
       (例)1件をAさんとBさんに半分ずつ分配：2件作成し、Aさん0.5点、Bさん0.5点と入力
     </p>
 
-
     <%#= f.fields_for :cases do |cc| %>
     <%= f.fields_for :cases, @report.cases.sort_by(&:timeframe) do |cc| %>
       <%= render 'case_fields', f: cc %>
@@ -54,12 +52,12 @@
   <p>========================</p>
 
   <!-- 勤怠報告 -->
-  <details open>
-  <summary>勤怠報告</summary>
+  <!-- <details open> -->
+  <!-- <summary>勤怠報告</summary> -->
 
-  </details>
+  <!-- </details> -->
 
-  <p>========================</p>
+  <!-- <p>========================</p> -->
 
   <!-- マケ用データ -->
   <details open>
