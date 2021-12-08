@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_07_061236) do
+ActiveRecord::Schema.define(version: 2021_12_03_074455) do
 
   create_table "bounties", force: :cascade do |t|
     t.integer "staff_c", null: false
@@ -27,14 +27,14 @@ ActiveRecord::Schema.define(version: 2021_12_07_061236) do
   create_table "cases", force: :cascade do |t|
     t.integer "report_id", null: false
     t.integer "staff_id", null: false
-    t.float "point", null: false
     t.integer "timeframe"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.float "point", null: false
     t.string "customer_name"
     t.string "memo"
     t.boolean "confirmed_by_client"
     t.string "comment_by_client"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -109,12 +109,15 @@ ActiveRecord::Schema.define(version: 2021_12_07_061236) do
     t.integer "discussed_only_for_denying_app"
     t.integer "discussed_only_for_others"
     t.string "discussed_only_for_others_memo"
-    t.integer "promotion_done_for_value1"
-    t.integer "promotion_done_for_value2"
-    t.integer "promotion_done_for_value3"
-    t.integer "promotion_done_for_value4"
+    t.integer "promotion_done_no_launching_later"
+    t.integer "promotion_done_nothing_on_demand"
+    t.integer "promotion_done_operating_impossible"
+    t.integer "promotion_done_app_malfunctioning"
     t.integer "promotion_done_for_others"
     t.string "promotion_done_for_others_memo"
+    t.integer "outside_delivery_area"
+    t.integer "number_of_samples"
+    t.string "details_of_app_malfunction"
     t.boolean "is_submitted", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
