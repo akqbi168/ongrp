@@ -9,95 +9,104 @@
 
 <div class="test0">
 
-<% if params[:q].present? %>
-  <% if params[:q].values.first.present? %>
-    <% date_first = params[:q].values.first.to_date %>
+  <% if params[:q].present? %>
+    <% if params[:q].values.first.present? %>
+      <% date_first = params[:q].values.first.to_date %>
+    <% else %>
+      <% date_first = @date_origin %>
+    <% end %>
+
+    <% if params[:q].values.last.present? %>
+      <% date_last = params[:q].values.last.to_date %>
+    <% else %>
+      <% date_last = @jobs_by_date.last.date.next_month.end_of_month if @jobs_by_date %>
+    <% end %>
   <% else %>
     <% date_first = @date_origin %>
+    <% if @jobs_by_date.present? %>
+      <% date_last = @jobs_by_date.last.date.next_month.end_of_month %>
+    <% else %>
+      <% date_last = @date_origin.next_month.end_of_month %>
+    <% end %>
   <% end %>
 
-  <% if params[:q].values.last.present? %>
-    <% date_last = params[:q].values.last.to_date %>
+  <% if @results.exists? %>
+    <% @results.each do |res| %>
+
+      <div class="test0">
+        <span class="test1">
+        </span>
+
+        <% for d in date_first..date_last do %>
+          <span class="test1">
+            <%= d.strftime("%m/%d(#{@wd[d.wday]})") %>
+          </span>
+        <% end %>
+      </div>
+
+
+      <% i = 0 %>
+      <% while i < @staffs.count %>
+        <% i += 1 %>
+
+        <div class="test0">
+              <%= link_to(edit_staff_path(i), class: "btn-job-name fs12") do %>
+                <span class="test1">
+                  <p class="fs14">
+                    <%= @staffs.find(i).name %>
+                  </p>
+                </span>
+              <% end %>
+
+          <% for d in date_first..date_last do %>
+            <% job_spot = @jobs_by_date.find_by(staff_id: i, date: d) %>
+
+            <% if job_spot.nil? %>
+              <%= link_to(new_job_path(staff_id: i, date: d), class: "btn-job-spot fs12") do %>
+                <span class="test1">
+                  <p style="line-height: 55px;">
+                    (追加)
+                  </p>
+                </span>
+              <% end %>
+            <% else %>
+              <%= link_to(edit_job_path(job_spot.id), class: "btn-job-spot fs12 bg-light-orange") do %>
+                <span class="test1">
+                  <p class="fs14">
+                    <%= job_spot.time_start.strftime("%H:%M") %>-<%= job_spot.time_end.strftime("%H:%M") %>
+                  </p>
+                  <p class="fs12">　
+                    <% unless job_spot.time_break == 0 || job_spot.time_break == nil %>
+                      (休憩 <%= job_spot.time_break %>分)
+                    <% end %>　
+                  </p>
+                  <p class="fs12">
+                    <% unless job_spot.store_id.nil? %>
+                      @<%= @stores.find(job_spot.store_id).name %>
+                    <% end %>
+                  </p>
+                  <p class="fs12">
+                    <% unless job_spot.rank_id.nil? %>
+                      <%= Rank.find(job_spot.rank_id).name %>
+                    <% end %>
+                  </p>
+                </span>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
   <% else %>
-    <% date_last = @jobs_by_date.last.date.next_month.end_of_month %>
-  <% end %>
-<% else %>
-  <% date_first = @date_origin %>
-  <% date_last = @jobs_by_date.last.date.next_month.end_of_month %>
-<% end %>
 
-
-<% @results.each do |res| %>
-
-  <div class="test0">
-    <span class="test1">
+    <span class="staff-button">
+      <%= link_to '新規作成', new_job_path, class: "staff-button-deco bg-orange" %>
     </span>
 
-    <% for d in date_first..date_last do %>
-      <span class="test1">
-        <%= d.strftime("%m/%d(#{@wd[d.wday]})") %>
-      </span>
-    <% end %>
-  </div>
-
-
-  <% i = 0 %>
-  <% while i < @staffs.count %>
-    <% i += 1 %>
-
-    <div class="test0">
-          <%= link_to(edit_staff_path(i), class: "btn-job-name fs12") do %>
-            <span class="test1">
-              <p class="fs14">
-                <%= @staffs.find(i).name %>
-              </p>
-            </span>
-          <% end %>
-
-      <% for d in date_first..date_last do %>
-        <% job_spot = @jobs_by_date.find_by(staff_id: i, date: d) %>
-
-        <% if job_spot.nil? %>
-          <%= link_to(new_job_path(staff_id: i, date: d), class: "btn-job-spot fs12") do %>
-            <span class="test1">
-              <p style="line-height: 55px;">
-                (追加)
-              </p>
-            </span>
-          <% end %>
-        <% else %>
-          <%= link_to(edit_job_path(job_spot.id), class: "btn-job-spot fs12 bg-light-orange") do %>
-            <span class="test1">
-              <p class="fs14">
-                <%= job_spot.time_start.strftime("%H:%M") %>-<%= job_spot.time_end.strftime("%H:%M") %>
-              </p>
-              <p class="fs12">　
-                <% unless job_spot.time_break == 0 || job_spot.time_break == nil %>
-                  (休憩 <%= job_spot.time_break %>分)
-                <% end %>　
-              </p>
-              <p class="fs12">
-                <% unless job_spot.store_id.nil? %>
-                  @<%= @stores.find(job_spot.store_id).name %>
-                <% end %>
-              </p>
-              <p class="fs12">
-                <% unless job_spot.rank_id.nil? %>
-                  <%= Rank.find(job_spot.rank_id).name %>
-                <% end %>
-              </p>
-            </span>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
   <% end %>
-<% end %>
-
-
 
 </div>
-
 
 
 <p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

@@ -6,9 +6,9 @@ class JobsController < ApplicationController
     @results = @q.result.order("date")
 
     @date_origin = Date.new(2021,11,1)
-    @staffs = Staff.all
+    @staffs = Staff.all.order("id")
     @jobs_by_date = Job.all.order("date")
-    @stores = Store.all
+    @stores = Store.all.order("id")
   end
 
   def show

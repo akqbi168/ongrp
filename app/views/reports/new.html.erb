@@ -1,5 +1,34 @@
-<h1>実施報告</h1>
+<h1>実施登録</h1>
 
-<%= render 'report' %>
+<%= form_with(model: @report, local: true) do |f| %>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      報告担当
+    </span>
+    <span class="col-common form-new-right">
+      <%= @user.name %>
+    </span>
+  </div>
+
+  <span class="col-common form-new-left">
+    <%= f.label :date, '日　　付' %>
+  </span>
+  <span class="col-common form-new-right">
+    <%= f.date_field :date, value: Date.current %>
+  </span>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :store_id, '実施場所' %>
+    </span>
+    <span class="col-common form-new-right">
+      <%= f.collection_select :store_id, @stores, :id, :name, include_blank: '実施場所を選択', class: '' %>
+    </span>
+  </div>
+
+<%= f.submit "登録", data: { confirm: "開始報告します。よろしいですか？" }, class:"btn btn-lg btn-success button-send" %>
+
+<% end %>
 
 <p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

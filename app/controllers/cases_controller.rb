@@ -22,16 +22,11 @@ class CasesController < ApplicationController
     if @report_today.exists?
       @report = Report.find_by(user_id: user, date: Date.current)
     else
-      @report = Report.new
-      @report.date = Date.current
-      
-      @report.store_id = 1
-      @report.user_id = user.id
-      @report.is_submitted = false
-      @report.save
+      redirect_to root_path, flash: { notice: '報告開始してください。' }
     end
 
     @case.report_id = @report.id
+    @case.confirmed_by_client = false
 
     if @case.save
       redirect_to root_path, flash: { notice: '速報を報告しました。' }
@@ -43,7 +38,7 @@ class CasesController < ApplicationController
   def update
     @case = Case.find(params[:id])
     @case.update(case_params)
-    redirect_to root_path, flash: { notice: 'スタッフ情報を更新しました。' }
+    redirect_to root_path, flash: { notice: '速報を更新しました。' }
   end
 
   def destroy
