@@ -9,7 +9,7 @@
 
 <% if @report_today.nil? %>
   <%= link_to '開始報告', new_report_path, class: 'top-button fs22 bg-pink' %>
-    <p class="top-button-description"><i class="fas fa-info-circle"></i> 催事の報告をする店舗を登録してください。開始報告が済むと獲得報告を送ることができます。</p>
+    <p class="top-button-description"><i class="fas fa-info-circle"></i> イベント報告をする店舗を登録してください。登録すると獲得報告を送ることができます。</p>
 <% elsif @report_today_draft.present? %>
   <%= link_to '獲得速報', new_case_path, class: 'top-button fs22 bg-orange' %>
     <p class="top-button-description"><i class="fas fa-info-circle"></i> 契約が決まったら1件ごとに獲得報告をしてください。（当日のみ報告可）</p>
