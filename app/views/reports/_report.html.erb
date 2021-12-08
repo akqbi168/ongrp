@@ -37,7 +37,7 @@
       <%= f.label :memo, '総　　評' %>
     </span>
     <span class="col-common form-new-right">
-      <%= f.text_area :memo, placeholder: "備考があれば記載してください。", cols: 30, rows: 8, class: "form-right" %>
+      <%= f.text_area :memo, placeholder: "備考があれば記載してください。", cols: 30, rows: 6, class: "form-right" %>
     </span>
   </div>
 
@@ -46,6 +46,7 @@
   <p>========================</p>
 
   <!-- 件数報告 -->
+  <!-- <div style="border: 2px solid #333333; border-radius: 3px; padding: 8px;"> -->
   <details open>
   <summary>獲得件数報告</summary>
     <p style="font-size: 12px;">
@@ -64,7 +65,7 @@
       <%#= link_to_add_association '実績の追加', f, :cases, { class: "btn btn-primary", style: "" } %>
     </div>
   </details>
-
+  <!-- </div> -->
   <p>========================</p>
 
   <!-- 勤怠報告 -->
@@ -168,15 +169,6 @@
         </span>
       </div>
 
-      <div class="field cf">
-        <span class="form-new-left_wide">
-          <%= f.label :purchased_for_others, 'その他' %>
-        </span>
-        <span class="form-new-right_narrow">
-          <%= f.number_field :purchased_for_others, class: "number_field" %>　件
-        </span>
-      </div>
-
       <div class="field">
         <%= f.label :purchased_for_others_memo, 'フリーコメント' %>
         <%= f.text_area :purchased_for_others_memo, style: "float: right;" %>
@@ -208,15 +200,6 @@
         </span>
         <span class="form-new-right_narrow">
           <%= f.number_field :downloaded_only_for_app_error, class: "number_field" %>　件
-        </span>
-      </div>
-
-      <div class="field cf">
-        <span class="form-new-left_wide">
-          <%= f.label :downloaded_only_for_others, 'その他' %>
-        </span>
-        <span class="form-new-right_narrow">
-          <%= f.number_field :downloaded_only_for_others, class: "number_field" %>　件
         </span>
       </div>
 
@@ -282,15 +265,6 @@
       </div>
 
       <div class="field cf">
-        <span class="form-new-left_wide">
-          <%= f.label :discussed_only_for_others, 'その他' %>
-        </span>
-        <span class="form-new-right_narrow">
-          <%= f.number_field :discussed_only_for_others, class: "number_field" %>　件
-        </span>
-      </div>
-
-      <div class="field cf">
         <%= f.label :discussed_only_for_others_memo, 'フリーコメント' %>
         <%= f.text_area :discussed_only_for_others_memo, style: "float: right;" %>
       </div>
@@ -299,52 +273,66 @@
 
       <div class="field cf">
         <span class="form-new-left_wide">
-          <%= f.label :promotion_done_for_value1, '項目１' %>
+          <%= f.label :promotion_done_no_launching_later, 'その後、起動していない' %>
         </span>
         <span class="form-new-right_narrow">
-          <%= f.number_field :promotion_done_for_value1, class: "number_field" %>　件
+          <%= f.number_field :promotion_done_no_launching_later, class: "number_field" %>　件
         </span>
       </div>
 
       <div class="field cf">
         <span class="form-new-left_wide">
-          <%= f.label :promotion_done_for_value2, '項目２' %>
+          <%= f.label :promotion_done_nothing_on_demand, '欲しいものがない' %>
         </span>
         <span class="form-new-right_narrow">
-          <%= f.number_field :promotion_done_for_value2, class: "number_field" %>　件
+          <%= f.number_field :promotion_done_nothing_on_demand, class: "number_field" %>　件
         </span>
       </div>
 
       <div class="field cf">
         <span class="form-new-left_wide">
-          <%= f.label :promotion_done_for_value3, '項目３' %>
+          <%= f.label :promotion_done_operating_impossible, 'アプリが操作できない' %>
         </span>
         <span class="form-new-right_narrow">
-          <%= f.number_field :promotion_done_for_value3, class: "number_field" %>　件
+          <%= f.number_field :promotion_done_operating_impossible, class: "number_field" %>　件
         </span>
       </div>
 
       <div class="field cf">
         <span class="form-new-left_wide">
-          <%= f.label :promotion_done_for_value4, '項目４' %>
+          <%= f.label :promotion_done_app_malfunctioning, 'アプリが動かない' %>
         </span>
         <span class="form-new-right_narrow">
-          <%= f.number_field :promotion_done_for_value4, class: "number_field" %>　件
-        </span>
-      </div>
-
-      <div class="field cf">
-        <span class="form-new-left_wide">
-          <%= f.label :promotion_done_for_others, 'その他' %>
-        </span>
-        <span class="form-new-right_narrow">
-          <%= f.number_field :promotion_done_for_others, class: "number_field" %>　件
+          <%= f.number_field :promotion_done_app_malfunctioning, class: "number_field" %>　件
         </span>
       </div>
 
       <div class="field cf">
         <%= f.label :promotion_done_for_others_memo, 'フリーコメント' %>
         <%= f.text_area :promotion_done_for_others_memo, style: "float: right;" %>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :outside_delivery_area, '配達エリア外' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :outside_delivery_area, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :number_of_samples, 'アンケート回収' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :number_of_samples, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <%= f.label :details_of_app_malfunction, 'アプリ不具合内容' %>
+        <%= f.text_area :details_of_app_malfunction, style: "float: right;" %>
       </div>
 
     </span>

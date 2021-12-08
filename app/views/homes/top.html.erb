@@ -3,7 +3,7 @@
 
 <p class="top-button-description">
   <% if user_signed_in? %>
-    <B><%= @user.name %></B>　さん。今日もお疲れさまです。
+    <B><%= @user.name %></B>　さん。今日もお疲れさまです <i class="far fa-grin-beam"></i>
   <% end %>
 </p>
 
@@ -12,48 +12,48 @@
 <% else %>
   <%= link_to '獲得速報', new_case_path, class: 'top-button fs22 bg-orange' %>
 <% end %>
-<p class="top-button-description">契約が決まったら1件ごとに獲得報告をしてください。（当日のみ報告可）</p>
+<p class="top-button-description"><i class="fas fa-info-circle"></i> 契約が決まったら1件ごとに獲得報告をしてください。（当日のみ報告可）</p>
 
 <% if @report_unsubmitted %>
   <%= link_to '実施報告', edit_report_path(@report_today), class: 'top-button fs22 bg-light-orange' %>
 <% else %>
   <%= link_to '実施報告', new_report_path, class: 'top-button fs22 bg-light-orange' %>
 <% end %>
-<p class="top-button-description">1日の催事が終わったら実施報告をお願いします。（一時保存可。当日分のみ報告可）</p>
+<p class="top-button-description"><i class="fas fa-info-circle"></i> 1日の催事が終わったら実施報告をお願いします。（一時保存可。当日分のみ報告可）</p>
 
 <%= link_to '編　　集', reports_temp_path, class: 'top-button fs22' %>
-<p class="top-button-description">一時保存した報告書を編集できます。
+<p class="top-button-description"><i class="fas fa-info-circle"></i> 一時保存した報告書を編集できます。
 <% if @report_unsubmitted.present? %>
   <br><span class="" style="color: red;"><b>未提出の報告書があります。</b></span>
 <% end %>
 </p>
 
 <%= link_to '報告一覧', reports_path, class: 'top-button fs22' %>
-<p class="top-button-description">今まで提出した報告書を確認できます。</p>
+<p class="top-button-description"><i class="fas fa-info-circle"></i> 今まで提出した報告書を確認できます。</p>
 
 
 <h4>＜クライアントメニュー＞</h4>
 
 <%= link_to '催事報告', cases_path, class: 'top-button fs22 bg-orange' %>
-<p class="top-button-description">獲得状況の一覧を表示します。何かコメントがあればこちらからお願いいたします。</p>
+<p class="top-button-description"><i class="fas fa-info-circle"></i> 獲得状況の一覧を表示します。何かコメントがあればこちらからお願いいたします。</p>
 
 
 <h4>＜管理者用メニュー＞</h4>
 
 <%= link_to '催事場所管理', stores_path, class: 'top-button fs22 bg-white' %>
-<p class="top-button-description">催事場所の追加や編集を行います。新規の場合は必ず実施の前日までに追加してください。</p>
+<p class="top-button-description"><i class="fas fa-info-circle"></i> 催事場所の追加や編集を行います。新規の場合は必ず実施の前日までに追加してください。</p>
 
 <%= link_to 'スタッフ管理', staffs_path, class: 'top-button fs22 bg-white' %>
-<p class="top-button-description">スタッフの追加、編集を行います。</p>
+<p class="top-button-description"><i class="fas fa-info-circle"></i> スタッフの追加、編集を行います。</p>
 
 <%= link_to 'シフト入力', jobs_path, class: 'top-button fs22 bg-white' %>
-<p class="top-button-description">シフトの追加、編集を行います。</p>
+<p class="top-button-description"><i class="fas fa-info-circle"></i> シフトの追加、編集を行います。</p>
 
 <%= link_to '実績一覧', root_path, class: 'top-button fs22 bg-pink' %>
-<p class="top-button-description">店舗ごとの累計獲得数など実績を確認します。</p>
+<p class="top-button-description"><i class="fas fa-info-circle"></i> 店舗ごとの累計獲得数など実績を確認します。</p>
 
 <%= link_to '人件費管理', payments_path, class: 'top-button fs22 bg-pink' %>
-<p class="top-button-description">スタッフごとの獲得実績や、日当・インセンティブなど支払い額を確認します。（PC専用）</p>
+<p class="top-button-description"><i class="fas fa-info-circle"></i> スタッフごとの獲得実績や、日当・インセンティブなど支払い額を確認します。（PC専用）</p>
 
 <p class="top-button-description">インセンティブの修正は<%= link_to 'こちら', bounties_path %></p>
 

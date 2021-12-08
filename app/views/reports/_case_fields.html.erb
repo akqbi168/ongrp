@@ -25,24 +25,29 @@
     </span>
   </div>
 
-  <div class="field">
+  <div class="field cf">
     <span class="form-new-left">
       <%= f.label :point, '件数' %>
     </span>
     <span class="form-new-right">
-      <%= f.number_field :point, value: 1.0, max: 1.0, min: 0, step: "0.1", class:"form-control number_field" %>
+      <%= f.number_field :point, max: 1.0, min: 0, step: "0.1", class:"form-control number_field" %>
     </span>
   </div>
 
-  <br>
+  <!-- <br> -->
   <div>
     <%#= link_to_remove_association "実績の削除", f, class:"btn btn-danger", style:"margin-top:15px;" %>
     <%#= link_to_remove_association "実績の削除", f %>
 
-    <%#= link_to '削除', case_path(f), method: :delete, class: "" %>
+    <%= link_to '削除', case_path(f.object.id), method: :delete, class: "" %>
+
+
+    <%#= f.fields_for :cases, @report.cases.sort_by(&:timeframe) do |cc| %>
+      <%#= render 'case_fields', f: cc %>
+
+
 
     <% if Case.where(report_id: @case).nil? %>
-    <% binding.pry %>
       <%= link_to '削除', case_path(Case.where(report_id: @case)[@case_num].id), method: :delete, data: { confirm: "削除します。よろしいですか？" }, class: "" %>
     <% end %>
     <% @case_num += 1 %>
@@ -82,5 +87,5 @@
       <%= f.number_field :point, value: 1.0, max: 1.0, min: 0, step: "0.1", class:"form-control number_field" %>
     </span>
   </div>
-  <br>
+
 <% end %>

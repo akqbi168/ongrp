@@ -64,11 +64,12 @@
               <span class="col-common pay-col pay-col-middle">
                 <% rp = Report.find_by(store_id: job.store_id, date: p.date) %>
                 <% indivisual_point = Case.where(report_id: rp, staff_id: p.staff_id).sum(:point).to_i %>
+                <% store_point = Case.where(report_id: rp).sum(:point).to_i %>
                 <% unless indivisual_point == 0 %>
                   <%#= 0.to_i %>
                 <%# else %>
                   <% bonus_base = @bounties.find(indivisual_point.to_i).staff_c %>
-                  <% bonus_ratio = @bounties.find(indivisual_point.to_i).ratio %>
+                  <% bonus_ratio = @bounties.find(store_point.to_i).ratio %>
                   <% bounty = bonus_base * bonus_ratio %>
                   <%= number_to_currency(bounty, unit: "¥", format: "%u %n", precision: 0) %><br>
                   <span style="font-size: 9px">

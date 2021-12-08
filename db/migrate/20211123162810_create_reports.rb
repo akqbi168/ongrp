@@ -37,12 +37,16 @@ class CreateReports < ActiveRecord::Migration[6.1]
         t.integer :discussed_only_for_others
         t.string :discussed_only_for_others_memo
 
-        t.integer :promotion_done_for_value1
-        t.integer :promotion_done_for_value2
-        t.integer :promotion_done_for_value3
-        t.integer :promotion_done_for_value4
+        t.integer :promotion_done_no_launching_later
+        t.integer :promotion_done_nothing_on_demand
+        t.integer :promotion_done_operating_impossible
+        t.integer :promotion_done_app_malfunctioning
         t.integer :promotion_done_for_others
         t.string :promotion_done_for_others_memo
+
+        t.integer :outside_delivery_area
+        t.integer :number_of_samples
+        t.string :details_of_app_malfunction
 
       t.boolean :is_submitted, null: false
 

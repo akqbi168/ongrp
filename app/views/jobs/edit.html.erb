@@ -6,7 +6,6 @@
   <div class="field">
     <%= f.label :staff_id, '名前' %>
     <% if params[:staff_id] %>
-      <% binding.pry %>
       <%#= f.collection_select :staff_id, @staffs, :id, :name, include_blank: 'スタッフ名を選択', class: '' %>
       <%= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, value: params[:staff_id] %>
     <% else %>

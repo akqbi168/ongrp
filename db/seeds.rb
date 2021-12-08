@@ -43,22 +43,22 @@ Rank.create(
 
 Bounty.create!(
   [
-    { staff_c:   50, staff_b:    0, staff_a:    0, lead_b: 0, lead_a: 0, director: 0, ratio: 0.5 },
-    { staff_c:  100, staff_b:    0, staff_a:    0, lead_b: 0, lead_a: 0, director: 0, ratio: 0.5 },
-    { staff_c:  500, staff_b:    0, staff_a:    0, lead_b: 0, lead_a: 0, director: 0, ratio: 0.5 },
-    { staff_c: 1000, staff_b: 1000, staff_a:    0, lead_b: 0, lead_a: 0, director: 0, ratio: 0.5 },
-    { staff_c: 1500, staff_b: 1500, staff_a: 1500, lead_b: 0, lead_a: 0, director: 0, ratio: 0.5 },
+    { staff_c:   50, staff_b:    0, staff_a:    0, lead_b: 0, lead_a: 0, director: 0, ratio: 0.0 },
+    { staff_c:  100, staff_b:    0, staff_a:    0, lead_b: 0, lead_a: 0, director: 0, ratio: 0.0 },
+    { staff_c:  500, staff_b:    0, staff_a:    0, lead_b: 0, lead_a: 0, director: 0, ratio: 0.0 },
+    { staff_c: 1000, staff_b: 1000, staff_a:    0, lead_b: 0, lead_a: 0, director: 0, ratio: 0.0 },
+    { staff_c: 1500, staff_b: 1500, staff_a: 1500, lead_b: 0, lead_a: 0, director: 0, ratio: 0.0 },
 
-    { staff_c: 2000, staff_b: 2000, staff_a: 2000, lead_b:    0, lead_a:    0, director: 0, ratio: 0.5 },
-    { staff_c: 2500, staff_b: 2500, staff_a: 2500, lead_b: 2500, lead_a:    0, director: 0, ratio: 0.5 },
-    { staff_c: 3000, staff_b: 3000, staff_a: 3000, lead_b: 3000, lead_a:    0, director: 0, ratio: 0.5 },
-    { staff_c: 5000, staff_b: 5000, staff_a: 5000, lead_b: 5000, lead_a: 5000, director: 0, ratio: 0.5 },
-    { staff_c: 5500, staff_b: 5500, staff_a: 5500, lead_b: 5500, lead_a: 5500, director: 0, ratio: 0.5 },
+    { staff_c: 2000, staff_b: 2000, staff_a: 2000, lead_b:    0, lead_a:    0, director: 0, ratio: 0.0 },
+    { staff_c: 2500, staff_b: 2500, staff_a: 2500, lead_b: 2500, lead_a:    0, director: 0, ratio: 0.0 },
+    { staff_c: 3000, staff_b: 3000, staff_a: 3000, lead_b: 3000, lead_a:    0, director: 0, ratio: 0.0 },
+    { staff_c: 5000, staff_b: 5000, staff_a: 5000, lead_b: 5000, lead_a: 5000, director: 0, ratio: 0.0 },
+    { staff_c: 5500, staff_b: 5500, staff_a: 5500, lead_b: 5500, lead_a: 5500, director: 0, ratio: 0.0 },
 
-    { staff_c: 6000, staff_b: 6000, staff_a: 6000, lead_b: 6000, lead_a: 6000, director: 0, ratio: 0.5 },
-    { staff_c: 6500, staff_b: 6500, staff_a: 6500, lead_b: 6500, lead_a: 6500, director: 0, ratio: 0.5 },
-    { staff_c: 7000, staff_b: 7000, staff_a: 7000, lead_b: 7000, lead_a: 7000, director: 0, ratio: 0.5 },
-    { staff_c: 7500, staff_b: 7500, staff_a: 7500, lead_b: 7500, lead_a: 7500, director: 0, ratio: 0.5 },
+    { staff_c: 6000, staff_b: 6000, staff_a: 6000, lead_b: 6000, lead_a: 6000, director: 0, ratio: 0.0 },
+    { staff_c: 6500, staff_b: 6500, staff_a: 6500, lead_b: 6500, lead_a: 6500, director: 0, ratio: 0.0 },
+    { staff_c: 7000, staff_b: 7000, staff_a: 7000, lead_b: 7000, lead_a: 7000, director: 0, ratio: 0.0 },
+    { staff_c: 7500, staff_b: 7500, staff_a: 7500, lead_b: 7500, lead_a: 7500, director: 0, ratio: 0.0 },
     { staff_c: 8000, staff_b: 8000, staff_a: 8000, lead_b: 8000, lead_a: 8000, director: 0, ratio: 0.5 },
 
     { staff_c:  8500, staff_b:  8500, staff_a:  8500, lead_b:  8500, lead_a:  8500, director: 0, ratio: 0.7 },

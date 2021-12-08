@@ -6,6 +6,7 @@ class CreateCases < ActiveRecord::Migration[6.1]
       t.integer :staff_id, null: false
       t.integer :timeframe
       t.float :point, null: false
+
       t.string :customer_name
       t.string :memo
       t.boolean :confirmed_by_client
