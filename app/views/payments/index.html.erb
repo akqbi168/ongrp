@@ -36,7 +36,9 @@
                 <%= Staff.find(job.staff_id).name %>
               </span>
               <span class="col-common pay-col pay-col-middle fs12">
-                <%= job.store_id %>. <%= Store.find(job.store_id).name %>
+                <% if job.store_id.present? %>
+                  <%= job.store_id %>. <%= Store.find(job.store_id).name %>
+                <% end %>
               </span>
               <span class="col-common pay-col pay-col-narrow">
                 <%= job.time_start.strftime("%H:%M") %> -
