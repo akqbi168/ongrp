@@ -1,57 +1,12 @@
-<!-- これはただのデータ入力用 -->
-
 <%= form_with(model: @job, local: true) do |f| %>
 
-<%# binding.pry %>  <div class="field">
-    <%= f.label :staff_id, '名前' %>
-    <% if params[:staff_id] %>
-<%# binding.pry %>
-      <%= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, {selected: params[:staff_id]} %>
-      <%#= f.collection_select :staff_id, @staffs.map, :id, :name, include_blank: 'スタッフ名を選択', class: '' %>
-    <% else %>
-<%# binding.pry %>
-      <%= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, prompt:"＊名前を選択" %>
-      <%#= f.collection_select :staff_id, @staffs, :id, :name, include_blank: 'スタッフ名を選択', class: '' %>
-    <% end %>
-  </div>
+  <%= render 'job_add', f: f %>
 
-  <div class="field">
-    <%= f.label :date, '日付' %>
-    <% if params[:date] %>
-      <%= f.date_field :date, value: params[:date] %>
-    <% else %>
-      <%= f.date_field :date %>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :time_start, '開始' %>　
-    <%= f.time_field :time_start %>
-  </div>
-
-  <div class="field">
-    <%= f.label :time_end, '終了' %>　
-    <%= f.time_field :time_end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :time_break, '休憩' %>　
-    <%= f.number_field :time_break, value: 0 %> 分
-  </div>
-
-  <div class="field">
-    <%= f.label :store_id, '店舗' %>
-    <%= f.select :store_id, Store.all.map { |store| [store.name, store.id] }, prompt:"＊店舗を選択" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :rank, '役職' %>
-    <%#= f.select :rank, Staff.ranks.keys, {class: "", prompt: "＊ランクを選択"} %>
-    <%#= f.select :rank_id, Rank.all.map { |rank| [rank.name, rank.id] }, value: Rank.find(Staff.find(params[:staff_id]).rank_id) %>
-    <%= f.select :rank_id, Rank.all.map { |rank| [rank.name, rank.id] }, {selected: Staff.find(params[:staff_id]).rank_id} %>
-  </div>
-
-  <br>
   <%= f.submit '作成' %>
 
 <% end %>
+
+<p class="back-to-top">
+  <%= link_to 'シフト一覧に戻る', jobs_path %><br>
+  <%= link_to 'スタッフ一覧に戻る', staffs_path %>
+</p>

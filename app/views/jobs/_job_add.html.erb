@@ -1,0 +1,76 @@
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :staff_id, '名　　前' %>
+    </span>
+    <span class="col-common form-new-right">
+      <% if params[:staff_id] %>
+        <%= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, {selected: params[:staff_id]} %>
+      <% else %>
+        <%= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, prompt:"＊名前を選択" %>
+      <% end %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :date, '日　　付' %>
+    </span>
+    <span class="col-common form-new-right">
+      <% if params[:date] %>
+        <%= f.date_field :date, value: params[:date] %>
+      <% else %>
+        <%= f.date_field :date %>
+      <% end %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :time_start, '開始時間' %>
+    </span>
+    <span class="col-common form-new-right">
+      <%= f.time_field :time_start %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :time_end, '終了時間' %>
+    </span>
+    <span class="col-common form-new-right">
+      <%= f.time_field :time_end %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :time_break, '休　　憩' %>
+    </span>
+    <span class="col-common form-new-right">
+      <%= f.number_field :time_break, value: 0, class: "number_field" %> 分
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :store_id, '稼働場所' %>
+    </span>
+    <span class="col-common form-new-right">
+      <%= f.select :store_id, Store.all.map { |store| [store.name, store.id] }, prompt:"＊催事場所を選択" %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :rank, '役　　職' %>
+    </span>
+    <span class="col-common form-new-right">
+      <% if params[:staff_id] %>
+        <%= f.select :rank_id, Rank.all.map { |rank| [rank.name, rank.id] }, {selected: Staff.find(params[:staff_id]).rank_id} %>
+      <% else %>
+        <%= f.select :rank_id, Rank.all.map { |rank| [rank.name, rank.id] }, prompt:"＊役職を選択" %>
+      <% end %>
+    </span>
+  </div>
+
+  <br>

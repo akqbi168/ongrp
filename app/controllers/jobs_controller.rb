@@ -16,9 +16,9 @@ class JobsController < ApplicationController
 
   def new
     @job = Job.new
-    # @@path = Rails.application.routes.recognize_path(request.referer)
     @ranks = Rank.all.order("per_hour")
     @staffs = Staff.all
+    @@path = Rails.application.routes.recognize_path(request.referer)
   end
 
   def edit
@@ -29,6 +29,7 @@ class JobsController < ApplicationController
   end
 
   def create
+    @@path = Rails.application.routes.recognize_path(request.referer)
     @job = Job.new(job_params)
 
     if @job.save
@@ -43,17 +44,18 @@ class JobsController < ApplicationController
       @payment.working_hours = (@job.time_end - @job.time_start) / 3600 - (@job.time_break / 60)
       @payment.per_hour = @rank.find(@job.rank_id).per_hour
       @payment.save
-        # if @@path[:controller] == "jobs" && @@path[:action] == "index"
-          redirect_to jobs_path, flash: { notice: 'シフトを追加しました。' }
-        # else
-          # redirect_to new_job_path, flash: { notice: 'シフトを追加修正しました。' }
-        # end
+      if @@path[:controller] == "jobs" && @@path[:action] == "index"
+        redirect_to jobs_path, flash: { notice: 'シフトを追加しました。' }
+      else
+        redirect_to new_job_path, flash: { notice: 'シフトを追加しました。' }
+      end
     else
       render 'new'
     end
   end
 
   def update
+    @@path = Rails.application.routes.recognize_path(request.referer)
     @job = Job.find(params[:id])
 
     @rank = Rank.all
@@ -73,8 +75,11 @@ class JobsController < ApplicationController
     @payment.per_hour = @rank.find(@job.rank_id).per_hour
 
     if @job.update(job_params) && @payment.save
-
-      redirect_to jobs_path, flash: { notice: 'シフトを修正しました。' }
+      if @@path[:controller] == "jobs" && @@path[:action] == "index"
+        redirect_to jobs_path, flash: { notice: 'シフトを修正しました。' }
+      else
+        redirect_to new_job_path, flash: { notice: 'シフトを修正しました。' }
+      end
     else
       render 'edit'
     end
