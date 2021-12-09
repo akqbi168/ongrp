@@ -6,7 +6,7 @@ class StaffsController < ApplicationController
 
   def show
     @staff = Staff.find(params[:id])
-    @date_indicator = Date.new(2021,11,01)
+    @date_indicator = Date.new(2021,12,01)
   end
 
   def new

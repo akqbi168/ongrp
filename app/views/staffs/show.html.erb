@@ -5,7 +5,7 @@
 <br><br><br>
 
   <%# @staffs.each do |s| %>
-  <% while @date_indicator.month == 11 do %>
+  <% while @date_indicator.month == 12 do %>
     <div class="staff-row">
       <% if @date_indicator.wday == 6 %><span style="color: blue;"><% end %>
       <% if @date_indicator.wday == 0 || @date_indicator == Date.new(2021,11,3) || @date_indicator == Date.new(2021,11,23) %>
