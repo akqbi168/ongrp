@@ -148,7 +148,7 @@ a:hover {
 
 /* width:800px 以下は非表示 */
 @media screen and (max-width:799px){
-  .if-witdh-too-narrow {
+  .if-width-too-narrow {
     display: none;
   }
 }

@@ -1,6 +1,6 @@
 <h1>報酬明細</h1>
 
-<div class="if-witdh-too-narrow">
+<div class="if-width-too-narrow">
 
   <div class="search-form">
     <%= render 'search', q: @q, url: payments_path %>
@@ -119,6 +119,10 @@
     <% end %>
   </div>
 
+</div>
+
+<div class="sp-only">
+  <p class="fs12">こちらはPCでのご利用をお願いいたします <i class="far fa-sad-tear"></i></p>
 </div>
 
 <p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>
