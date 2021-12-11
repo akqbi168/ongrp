@@ -30,10 +30,12 @@
               <% job = Job.find_by(staff_id: p.staff_id, date: p.date) %>
 
               <span class="col-common pay-col pay-col-middle">
-                <%= p.date .strftime("%m/%d(#{@wd[p.date.wday]})") %>
+                <%= p.date.strftime("%m/%d(#{@wd[p.date.wday]})") %>
               </span>
               <span class="col-common pay-col pay-col-wide">
-                <%= Staff.find(job.staff_id).name %>
+                <% if job.staff_id.present? %>
+                  <%= Staff.find(job.staff_id).name %>
+                <% end %>
               </span>
               <span class="col-common pay-col pay-col-middle fs12">
                 <% if job.store_id.present? %>
@@ -87,7 +89,7 @@
                   </span>
                 <% end %>
               </span>
-            <%#= link_to(edit_payment_path(p.id), class: "") do %>
+              <%#= link_to(edit_payment_path(p.id), class: "") do %>
               <span class="col-common pay-col pay-col-middle">
                 <% if bounty.nil? %>
                   <% daily_payment = per_hour * p.working_hours %>
@@ -96,32 +98,15 @@
                 <% end %>
                 <%= number_to_currency(daily_payment, unit: "¥", format: "%u %n", precision: 0) %>
               </span>
-            <%# end %>
-
-                <%# unless s.rank_id.nil? %>
-                  <%#= Rank.find(s.rank_id).name %>
-                <%# end %>
+              <%# end %>
             <% end %>
       </div>
-
- <!--      <div class="payment-row fs14">
-        <span class="col-common pay-col pay-col-wide"></span>
-        <span class="col-common pay-col pay-col-wide">氏名</span>
-        <span class="col-common pay-col pay-col-wide">店舗</span>
-        <span class="col-common pay-col pay-col-narrow">シフト</span>
-        <span class="col-common pay-col pay-col-narrow">時間数</span>
-        <span class="col-common pay-col pay-col-narrow">獲得数</span>
-        <span class="col-common pay-col pay-col-wide">時給</span>
-        <span class="col-common pay-col pay-col-narrow">店実績</span>
-        <span class="col-common pay-col pay-col-wide">インセン</span>
-        <span class="col-common pay-col pay-col-wide">日当合計</span>
-      </div> -->
     <% end %>
   </div>
 
 </div>
 
-<div class="sp-only">
+<div id="sp-only">
   <p class="fs12">こちらはPCでのご利用をお願いいたします <i class="far fa-sad-tear"></i></p>
 </div>
 

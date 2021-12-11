@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :change_weekday_format
 
-  before_action :error_messages
+  # before_action :error_messages
 
   protected
 
@@ -16,15 +16,15 @@ class ApplicationController < ActionController::Base
     @wd = ["日", "月", "火", "水", "木", "金", "土"]
   end
 
-  def error_messages
-    @bounty = Bounty.new
-    @case = Case.new
-    @job = Job.new
-    @payment = Payment.new
-    @rank = Rank.new
-    @report = Report.new
-    @staff = Staff.new
-    @store = Store.new
-  end
+  # def error_messages
+  #   @bounty = Bounty.new
+  #   @case = Case.new
+  #   @job = Job.new
+  #   @payment = Payment.new
+  #   @rank = Rank.new
+  #   @report = Report.new
+  #   @staff = Staff.new
+  #   @store = Store.new
+  # end
 
 end

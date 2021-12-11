@@ -8,6 +8,7 @@ class Job < ApplicationRecord
   with_options presence: true do
     validates :staff_id
     validates :date
+    validates :rank_id
     validates :time_start
     validates :time_end
   end

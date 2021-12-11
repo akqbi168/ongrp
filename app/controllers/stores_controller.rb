@@ -2,6 +2,7 @@ class StoresController < ApplicationController
 
   def index
     @stores = Store.all.all.order("id")
+    @reports = Report.all.order("date")
   end
 
   def new
@@ -17,7 +18,8 @@ class StoresController < ApplicationController
     if @store.save
       redirect_to stores_path, flash: { notice: '催事場所が新しく追加されました。' }
     else
-      render 'new', flash: { notice: '追加できませんでした。' }
+      flash.now[:alert] = "追加できませんでした。催事場所の名称を入力してください。"
+      render 'new'
     end
   end
 
@@ -26,7 +28,8 @@ class StoresController < ApplicationController
     if @store.update(store_params)
       redirect_to stores_path, flash: { notice: '催事場所を修正しました。' }
     else
-      render 'edit', flash: { notice: '修正できませんでした。' }
+      flash.now[:alert] = "追加できませんでした。催事場所の名称を入力してください。"
+      render 'edit'
     end
   end
 

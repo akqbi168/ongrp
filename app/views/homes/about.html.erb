@@ -1,0 +1,63 @@
+<h1>このサイトの説明</h1>
+
+
+<div class="homes_about">
+  <h3>OniGOキャンペーンの結果報告を報告するサイトです</h3>
+
+
+  <h3>1日の報告の流れ</h3>
+
+  <h4>1. 開始報告をする</h4>
+  <p>その日のキャンペーンが始まったら開始報告をしてください。ログインすると自分の名前、今日の日付が自動で入力されるので、イベント報告をする催事場所を選択してしてください。</p>
+
+  <h4>2. 獲得速報をする</h4>
+  <p>契約が決まったら1件ごとに速報を送ってください。速報には1時間ごとの獲得時間帯、獲得したスタッフ名、契約したお客様の氏名、備考欄（キャンペーン適用済み等）を記入します。</p>
+
+
+<br><br><br><br><br><br>
+
+
+  サイトから直接データを追加できない場合はこちら
+
+  <h2>サイトマップ</h2>
+  <h4>
+    <%#= link_to 'こちら', stores_path, class: "" %>
+    <%= link_to(stores_path, class: "store-button-deco bg-light-orange") do %>
+      催事場所一覧<br>
+      <i class="fas fa-store"></i>
+    <% end %>
+  </h4>
+
+  <h4>
+    <%#= link_to 'こちら', staffs_path, class: "" %>
+    <%= link_to(staffs_path, class: "store-button-deco bg-light-orange") do %>
+      スタッフ一覧<br>
+      <i class="fas fa-user-friends"></i>
+    <% end %>
+  </h4>
+
+  <h4>
+    <%#= link_to 'こちら', ranks_path, class: "" %>
+    <%= link_to(ranks_path, class: "store-button-deco bg-light-orange") do %>
+      役職一覧<br>
+      <i class="fas fa-graduation-cap"></i>
+    <% end %>
+  </h4>
+
+  <h4>
+    <%#= link_to 'こちら', bounties_path, class: "" %>
+    <%= link_to(bounties_path, class: "store-button-deco bg-light-orange") do %>
+      インセン表<br>
+      <i class="fas fa-dollar-sign"></i>
+    <% end %>
+  </h4>
+
+  <h4>
+    <%#= link_to 'こちら', payments_path, class: "" %>
+    <%= link_to(payments_path, class: "store-button-deco bg-light-orange") do %>
+      人件費管理表<br>
+      <i class="fab fa-amazon-pay"></i>
+    <% end %>
+  </h4>
+
+</div>

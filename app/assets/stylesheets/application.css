@@ -56,9 +56,15 @@ a:hover {
   top: -30px;
 }
 
-.messages p {
+.messages .notice {
+  color: #588ced;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.messages .alert {
   color: #d73d3d;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bold;
 }
 
@@ -136,6 +142,19 @@ a:hover {
   transition: 0;
 }
 
+.link_to_do_text {
+  color: black;
+  background: linear-gradient(transparent 80%, #ee772f 20%);
+  border-radius: 1px;
+  padding: 0 3px;
+  transition: 0.3s;
+}
+.link_to_do_text:hover {
+  /*color: white;*/
+  background: linear-gradient(#ffaa55 100%, #ee772f 20%);
+  /*transition: 0.3s;*/
+}
+
 
 
 /* PC用 */
@@ -172,11 +191,11 @@ a:hover {
   }
 
   .form-new-left {
-    display: block;
+    /*display: block;*/
   }
 
   .form-new-right {
-    display: block;
-    width: 100%;
+    /*display: block;*/
+    /*width: 100%;*/
   }
 }

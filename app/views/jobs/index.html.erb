@@ -22,7 +22,8 @@
       <% date_last = @jobs_by_date.last.date.next_month.end_of_month if @jobs_by_date %>
     <% end %>
   <% else %>
-    <% date_first = @date_origin %>
+    <%# date_first = @date_origin %>
+    <% date_first = Date.current.beginning_of_month %>
     <% if @jobs_by_date.present? %>
       <% date_last = @jobs_by_date.last.date.next_month.end_of_month %>
     <% else %>
@@ -87,7 +88,7 @@
                 </p>
                 <p class="fs12">
                   <% unless job_spot.store_id.nil? %>
-                    @<%= @stores.find(job_spot.store_id).name %>
+                    <%= @stores.find(job_spot.store_id).name %>
                   <% end %>
                 </p>
                 <p class="fs12">

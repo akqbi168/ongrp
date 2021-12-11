@@ -26,8 +26,8 @@ Rails.application.routes.draw do
   end
   resources :ranks, only: [:index, :new, :edit, :create, :update]
   resources :bounties, only: [:index, :new, :edit, :create, :update]
-  # resources :achievements
 
+  get 'about', to: 'homes#about'
   root 'homes#top'
 
 end

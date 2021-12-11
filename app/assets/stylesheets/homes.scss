@@ -50,3 +50,20 @@ h4 {
 }
 
 
+
+// about
+.homes_about {
+  h1, h2, h3, h5, p {
+    margin: 0 0 25px;
+    padding: 0;
+  }
+
+  p {
+    font-size: 14px;
+    margin: 0 0 10px;
+  }
+
+  a {
+    color: #000000;
+  }
+}

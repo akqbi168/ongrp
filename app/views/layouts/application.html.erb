@@ -16,11 +16,6 @@
         <div class="messages">
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>
-          <% if @report.errors.any? %>
-              <% @report.errors.full_messages.each do |msg| %>
-                <p><%= msg %></p>
-              <% end %>
-          <% end %>
         </div>
         <%= yield %>
       </div>

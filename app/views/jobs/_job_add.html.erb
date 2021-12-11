@@ -47,7 +47,11 @@
       <%= f.label :time_break, '休　　憩' %>
     </span>
     <span class="col-common form-new-right">
-      <%= f.number_field :time_break, value: 0, class: "number_field" %> 分
+      <% if action_name == "new" %>
+        <%= f.number_field :time_break, value: 0, class: "number_field" %> 分
+      <% else %>
+        <%= f.number_field :time_break, class: "number_field" %> 分
+      <% end %>
     </span>
   </div>
 

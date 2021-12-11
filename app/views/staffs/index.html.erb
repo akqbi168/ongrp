@@ -2,37 +2,56 @@
 
 <div>
   <div class="staff-row">
-    <span class="staff-id">No.</span>
-    <span class="staff-name">氏名</span>
-    <span class="staff-rank">ランク</span>
-    <span class="staff-button">獲得数</span>
-    <span class="staff-button">シフト</span>
-    <span class="staff-button">変更</span>
+    <span class="col-common staff-col staff-id">No.</span>
+    <span class="col-common staff-col staff-name">氏名</span>
+    <span class="col-common staff-col staff-rank">ランク</span>
+    <span class="col-common staff-col staff-button">シフト</span>
+    <span class="col-common staff-col staff-point">獲得数</span>
+    <span class="col-common staff-col staff-point">獲得力/h<br><span class="fs12">(前日まで)</span></span>
   </div>
   <% @staffs.each do |s| %>
     <div class="staff-row">
-      <span class="staff-id"><%= s.id %>.</span>
-      <span class="staff-name"><%= s.name %></span>
-      <span class="staff-rank">
+      <span class="col-common staff-col staff-id"><%= s.id %>.</span>
+      <span class="col-common staff-col staff-name">
+        <%= link_to(edit_staff_path(s.id), class: "link_to_do_text") do %>
+          <%= s.name %>
+        <% end %>
+      </span>
+      <span class="col-common staff-col staff-rank">
         <% unless s.rank_id.nil? %>
           <%= Rank.find(s.rank_id).name %>
         <% end %>
       </span>
-      <span class="staff-button">
-        <%#= link_to '獲得数', staff_path(s), class: "staff-button-deco bg-light-orange" %>
-      </span>
-      <span class="staff-button">
+      <span class="col-common staff-col staff-button">
         <%= link_to 'シフト', new_job_path(staff_id: s.id), class: "staff-button-deco bg-white" %>
       </span>
-      <span class="staff-button"><%= link_to '変更', edit_staff_path(s), class: "staff-button-deco" %></span>
+      <span class="col-common staff-col staff-point">
+        <%#= link_to '獲得数', staff_path(s), class: "staff-button-deco bg-light-orange" %>
+
+        <%# report_till_yesterday = @reports.where("date < ?", Date.today) %>
+        <%# report_till_yesterday.each do |ry| %>
+          <%# points_sum_till_yesterday = Case.where(report_id: ry.id, staff_id: s.id).sum(:point) %>
+        <%# end %>
+
+        <% points_sum_till_yesterday = Case.where(staff_id: s.id).sum(:point) %>
+        <%= points_sum_till_yesterday %>
+      </span>
+      <span class="col-common staff-col staff-point">
+        <%# js = Job.all.where("date < ?", Date.today) %>
+        <% js = Job.all.where("staff_id = ? and date < ?", s.id, Date.today) %>
+        <% hours_so_far = ( js.pluck(:time_end).sum - js.pluck(:time_start).sum ) / 3600 - js.pluck(:time_break).sum / 60 %>
+        <% unless hours_so_far == 0 || hours_so_far == nil %>
+          <%= ( points_sum_till_yesterday * 1 / hours_so_far ).round(2) %>
+        <% end %>
+      </span>
     </div>
   <% end %>
-    <span class="staff-id"></span>
-    <span class="staff-name"></span>
-    <span class="staff-rank"></span>
-    <span class="staff-button"></span>
-    <span class="staff-button"></span>
-    <span class="staff-button"><%= link_to '新規作成', new_staff_path, class: "staff-button-deco bg-orange" %></span>
+    <span class="col-common staff-col staff-id"></span>
+    <span class="col-common staff-col staff-name"></span>
+    <span class="col-common staff-col staff-rank"></span>
+    <span class="col-common staff-col staff-button"></span>
+    <span class="col-common staff-col staff-point"></span>
+    <span class="col-common staff-col staff-point"><%= link_to '新規作成', new_staff_path, class: "staff-button-deco bg-orange" %></span>
 </div>
 
 <p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

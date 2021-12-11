@@ -17,6 +17,7 @@ class BountiesController < ApplicationController
     if @bounty.save
       redirect_to bounties_path, flash: { notice: 'インセンティブを追加しました。' }
     else
+      flash.now[:alert] = "データを追加できませんでした。適用しない項目には 0 を入力してください。"
       render 'new'
     end
   end
@@ -26,6 +27,7 @@ class BountiesController < ApplicationController
     if @bounty.update(bounty_params)
       redirect_to bounties_path, flash: { notice: 'インセンティブを修正しました。' }
     else
+      flash.now[:alert] = "データを修正できませんでした。適用しない項目には 0 を入力してください。"
       render 'edit'
     end
   end

@@ -14,45 +14,48 @@
   }
 }
 
+.staff-col {
+  margin-right: 9px;
+  // text-align: center;
+  vertical-align: middle;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
 .staff-id {
-  display: inline-block;
   width: 5%;
   max-width: 36px;
-  margin-right: 9px;
   text-align: right;
-  vertical-align: middle;
 }
 
 .staff-name {
-  display: inline-block;
   width: 35%;
   max-width: 280px;
-  margin-right: 9px;
-  vertical-align: middle;
-  // margin: 0 auto 12px 0;
+  text-align: left;
 }
 
 .staff-rank {
-  display: inline-block;
-  width: 10%;
-  max-width: 72px;
-  // margin-right: 9px;
+  width: 12%;
+  max-width: 96;
   text-align: center;
-  vertical-align: middle;
-  // margin: 0 auto 12px 0;
 }
 
 .staff-button {
-  display: inline-block;
-  width: 15%;
-  max-width: 108px;
-  margin-left: 9px;
+  width: 12%;
+  max-width: 96px;
   text-align: center;
-  vertical-align: middle;
 
   .bg-orange {
     margin-top: 18px;
   }
+}
+
+.staff-point {
+  width: 12%;
+  max-width: 96px;
+  text-align: center;
 }
 
 .staff-button-deco {

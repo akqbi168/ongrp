@@ -3,6 +3,7 @@ class Case < ApplicationRecord
   with_options presence: true do
     validates :point, numericality: { greater_than: 0, less_than_or_equal_to: 1}
     validates :timeframe
+    validates :staff_id
   end
 
   belongs_to :report
@@ -23,18 +24,5 @@ class Case < ApplicationRecord
     '20:00-20:59': 11,
     '不明／その他': 12
   }
-
-  # enum point: {
-  #   '1.0': 0,
-  #   '0.9': 1,
-  #   '0.8': 2,
-  #   '0.7': 3,
-  #   '0.6': 4,
-  #   '0.5': 5,
-  #   '0.4': 6,
-  #   '0.3': 7,
-  #   '0.2': 8,
-  #   '0.1': 9
-  # }
 
 end

@@ -31,7 +31,8 @@ class CasesController < ApplicationController
     if @case.save
       redirect_to root_path, flash: { notice: '速報を報告しました。' }
     else
-      render 'new', flash: { notice: '報告できませんでした。' }
+      flash.now[:alert] = "報告できませんでした。未入力の項目や数字の半角入力などを確認してください。"
+      render 'new'
     end
   end
 

@@ -17,10 +17,6 @@ class ReportsController < ApplicationController
     @user = current_user
     @report = Report.new
     @stores = Store.all.order("id")
-
-    # @staffs = Staff.all.order("name")
-    # @case = @report.cases.build
-    # @case_num = 0
   end
 
   def edit
@@ -46,7 +42,8 @@ class ReportsController < ApplicationController
     if @report.save
       redirect_to root_path, flash: { notice: '報告を開始しました。' }
     else
-      render 'new', flash: { notice: '更新できませんでした。' }
+      flash.now[:alert] = "実施場所を選択してください。"
+      render 'new'
     end
   end
 
@@ -91,7 +88,8 @@ class ReportsController < ApplicationController
         redirect_to root_path, flash: { notice: '報告を提出しました。本日も一日お疲れさまでした。' }
       end
     else
-      render 'edit', flash: { notice: '更新できませんでした。' }
+      flash.now[:alert] = "更新できませんでした。未入力の項目や数字の半角入力などを確認してください。"
+      render 'edit'
     end
   end
 
@@ -149,7 +147,17 @@ class ReportsController < ApplicationController
       :outside_delivery_area,
       :number_of_samples,
       :details_of_app_malfunction,
-      cases_attributes: [:id, :report_id, :staff_id, :point, :timeframe, :customer_name, :memo, :confirmed_by_client, :comment_by_client, :_destroy]
+      cases_attributes: [
+        :id,
+        :report_id,
+        :staff_id,
+        :point,
+        :timeframe,
+        :customer_name,
+        :memo,
+        :confirmed_by_client,
+        :comment_by_client,
+        :_destroy]
     )
   end
 

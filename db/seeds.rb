@@ -166,10 +166,10 @@ Bounty.create!(
 
 
 
-Store.create(name: 'オニゴ第一倉庫前')
-Store.create(name: 'お店２２２２')
-Store.create(name: 'オニゴーストア北３条店前')
-Store.create(name: '四条河原町広場')
+Store.create(name: 'OniGO 自由が丘')
+Store.create(name: 'OniGO 鷹番')
+Store.create(name: 'OniGO 武蔵小山')
+# Store.create(name: '四条河原町広場')
 
 Staff.create(name: '棚鎌　佐宏', rank_id: 1)
 Staff.create(name: '幾　タリラ', rank_id: 2)

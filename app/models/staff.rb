@@ -5,6 +5,11 @@ class Staff < ApplicationRecord
   has_many :jobs
   has_many :payments
 
+  with_options presence: true do
+    validates :name
+    validates :rank_id
+  end
+
   enum rank: {
     '未設定': 0,
     Staff_C: 1,

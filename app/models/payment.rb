@@ -6,4 +6,9 @@ class Payment < ApplicationRecord
     belongs_to :report
   end
 
+  with_options presence: true do
+    validates :date
+    validates :staff_id
+  end
+
 end
