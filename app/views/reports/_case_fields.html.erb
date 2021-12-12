@@ -1,56 +1,58 @@
 <% if controller_name == "reports" %>
+  <div class="nested-fields ">
 
-  <% unless (Case.where(report_id: @report).order(:timeframe).first(@case_num).sum { |hash| hash[:point]} + 0.9).floor == (Case.where(report_id: @report).order(:timeframe).first(@case_num+1).sum { |hash| hash[:point]} + 0.9).floor %>
-    <p style="text-align: center;">-  <%= (Case.where(report_id: @report).order(:timeframe).first(@case_num+1).sum { |hash| hash[:point]} + 0.9).floor %> 件目  -</p>
-  <% end %>
-
-
-
-  <div class="field cf">
-    <span class="col-common form-new-left">
-      <%= f.label :timeframe, '獲得時間', class: "form-new-left40" %>
-    </span>
-    <span class="col-common form-new-right">
-      <%= f.select :timeframe, Case.timeframes.keys, {class: "form-new-right60", prompt:"時間帯を選択"} %>
-    </span>
-  </div>
-
-  <div class="field">
-    <span class="form-new-left">
-      <%= f.label :staff_id, '名前' %>
-    </span>
-    <span class="form-new-right">
-      <%#= f.collection_select :staff_id, @staffs, :id, :name, { prompt: '選択してください' }, { class: 'form-control' } %>
-      <%= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, prompt:"獲得者を選択" %>
-    </span>
-  </div>
-
-  <div class="field cf">
-    <span class="form-new-left">
-      <%= f.label :point, '件数' %>
-    </span>
-    <span class="form-new-right">
-      <%= f.number_field :point, max: 1.0, min: 0, step: "0.1", class:"form-control number_field" %>
-    </span>
-  </div>
-
-  <!-- <br> -->
-  <div>
-    <%#= link_to_remove_association "実績の削除", f, class:"btn btn-danger", style:"margin-top:15px;" %>
-    <%#= link_to_remove_association "実績の削除", f %>
-
-    <%= link_to '削除', case_path(f.object.id), method: :delete, class: "" %>
-
-
-    <%#= f.fields_for :cases, @report.cases.sort_by(&:timeframe) do |cc| %>
-      <%#= render 'case_fields', f: cc %>
-
-
-
-    <% if Case.where(report_id: @case).nil? %>
-      <%= link_to '削除', case_path(Case.where(report_id: @case)[@case_num].id), method: :delete, data: { confirm: "削除します。よろしいですか？" }, class: "" %>
+    <% unless (Case.where(report_id: @report).order(:timeframe).first(@case_num).sum { |hash| hash[:point]} + 0.9).floor == (Case.where(report_id: @report).order(:timeframe).first(@case_num+1).sum { |hash| hash[:point]} + 0.9).floor %>
+      <p style="text-align: center;">-  <%= (Case.where(report_id: @report).order(:timeframe).first(@case_num+1).sum { |hash| hash[:point]} + 0.9).floor %> 件目  -</p>
     <% end %>
-    <% @case_num += 1 %>
+
+
+
+    <div class="field cf">
+      <span class="col-common form-new-left">
+        <%= f.label :timeframe, '獲得時間', class: "form-new-left40" %>
+      </span>
+      <span class="col-common form-new-right">
+        <%= f.select :timeframe, Case.timeframes.keys, {class: "form-new-right60", prompt:"時間帯を選択"} %>
+      </span>
+    </div>
+
+    <div class="field">
+      <span class="form-new-left">
+        <%= f.label :staff_id, '名前' %>
+      </span>
+      <span class="form-new-right">
+        <%#= f.collection_select :staff_id, @staffs, :id, :name, { prompt: '選択してください' }, { class: 'form-control' } %>
+        <%= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, prompt:"獲得者を選択" %>
+      </span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left">
+        <%= f.label :point, '件数' %>
+      </span>
+      <span class="form-new-right">
+        <%= f.number_field :point, max: 1.0, min: 0, step: "0.1", class:"form-control number_field" %>
+      </span>
+    </div>
+
+    <!-- <br> -->
+    <div>
+        <%#= link_to_remove_association "実績の削除", f, class:"btn btn-danger", style:"margin-top:15px;" %>
+        <%= link_to_remove_association "実績の削除", f %>
+
+      <%= link_to '削除', case_path(f.object.id), method: :delete, class: "" %>
+
+
+      <%#= f.fields_for :cases, @report.cases.sort_by(&:timeframe) do |cc| %>
+        <%#= render 'case_fields', f: cc %>
+
+
+
+      <% if Case.where(report_id: @case).nil? %>
+        <%= link_to '削除', case_path(Case.where(report_id: @case)[@case_num].id), method: :delete, data: { confirm: "削除します。よろしいですか？" }, class: "" %>
+      <% end %>
+      <% @case_num += 1 %>
+    </div>
   </div>
 <% end %>
 
