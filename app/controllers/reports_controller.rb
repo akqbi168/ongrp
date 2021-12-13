@@ -1,13 +1,11 @@
 class ReportsController < ApplicationController
 
-  # before_action :case_exists, only: [:new]
-
   def index
-    @reports = Report.all.where(user_id: current_user.id, is_submitted: true)
+    @reports = Report.all.where(user_id: current_user.id, is_submitted: true).order("updated_at")
   end
 
   def index_temp
-    @reports = Report.all.where(user_id: current_user.id, is_submitted: false)
+    @reports = Report.all.where(user_id: current_user.id, is_submitted: false).order("updated_at")
   end
 
   def show
@@ -15,8 +13,10 @@ class ReportsController < ApplicationController
 
   def new
     @user = current_user
-    @report = Report.new
     @stores = Store.all.order("id")
+    @report = Report.new
+    @case = @report.cases.build
+    @score = @case.scores.build
   end
 
   def edit
@@ -28,7 +28,12 @@ class ReportsController < ApplicationController
     else
       @report = Report.find(params[:id])
     end
-    # @case = Case.find(params[:id]) if @case
+
+    @case = Case.find_by(report_id: @report.id)
+    # @case = Case.find(params[:id])
+    if @case.present?
+      @score = Score.find_by(case_id: @case.id)
+    end
     @stores = Store.all.order("id")
     @staffs = Staff.all.order("id")
   end
@@ -49,62 +54,82 @@ class ReportsController < ApplicationController
 
   def update
     @report = Report.find(params[:id])
+
     if @report.update(report_params)
-      if @report.is_submitted == false
-        redirect_to root_path, flash: { notice: '報告を一時保存しました。提出を完了するにはチェックを入れて更新してください。' }
+      if @report.cases.count != @report.scores.sum(:point)
+        flash.now[:alert] = "スコアの合計を確認してください。"
+        render 'edit'
       else
-        job = Job.where(date: @report.date, store_id: @report.store_id)
-        job.each do |j|
-          if Payment.find_by(job_id: j.id)
-            @payment = Payment.find_by(job_id: j.id)
-          else
-            @payment = Payment.new
-            @payment.date = @report.date
-            @payment.staff_id = job.staff_id
-            @payment.job_id = job.id
+        if @report.is_submitted == false
+          redirect_to root_path, flash: { notice: '報告を一時保存しました。提出を完了するにはチェックを入れて更新してください。' }
+        else
+          job = Job.where(date: @report.date, store_id: @report.store_id)
+          job.each do |j|
+            if Payment.find_by(job_id: j.id).present?
+              @payment = Payment.find_by(job_id: j.id)
+            else
+              @payment = Payment.new
+              @payment.date = @report.date
+              @payment.staff_id = job.staff_id
+              @payment.job_id = job.id
+            end
+
+            @payment.report_id = @report.id
+            if @payment.staff_id.present?
+              @payment.indivisual_point = @report.scores.where(staff_id: j.staff_id).sum(:point)
+            else
+              @payment.indivisual_point = 0
+            end
+
+            # rank_array = ["staff_c", "staff_b", "staff_a", "lead_b", "lead_a", "director"]
+            # i = 1
+            # while i <= 6 do
+            #   binding.pry
+            #   @payment.bonus_base = Bounty.find(@payment.indivisual_point.to_i).rank_array[i-1]
+            #   i += 1
+            # end
+            if j.rank_id.present? && @payment.indivisual_point != 0
+              bounty = Bounty.find(@payment.indivisual_point.to_i)
+              if j.rank_id == 1
+                @payment.bonus_base = bounty.staff_c
+              elsif j.rank_id == 2
+                @payment.bonus_base = bounty.staff_b
+              elsif j.rank_id == 3
+                @payment.bonus_base = bounty.staff_a
+              elsif j.rank_id == 4
+                @payment.bonus_base = bounty.lead_b
+              elsif j.rank_id == 5
+                @payment.bonus_base = bounty.lead_a
+              elsif j.rank_id == 6
+                @payment.bonus_base = bounty.director
+              end
+            else
+              @payment.bonus_base = 0
+            end
+
+            unless @report.scores.sum(:point) == 0 || @report.scores.sum(:point) == nil
+              @payment.store_point = @report.scores.sum(:point)
+            end
+
+            unless @payment.store_point == 0 || @payment.store_point == nil
+              @payment.bonus_ratio = Bounty.find(@payment.store_point.round).ratio
+            end
+
+            @payment.report_id = @report.id
+            @payment.save
           end
+
+          # @payment.report_id = @report.id
+          redirect_to root_path, flash: { notice: '報告を提出しました。本日も一日お疲れさまでした。' }
         end
-
-        @payment.report_id = @report.id
-        # @payment.indivisual_point
-        # @payment.bonus_base
-        # @payment.store_point
-        # @payment.bonus_ratio
-
-
-
-        # @cases = Case.all.where(report_id: @report.id)
-        # @cases.each do |c|
-        #   payment = Payment.new
-        #   payment.staff_id = c.staff_id
-        #   payment.date = @report.date
-        #   payment.rank = c.staff_id
-        #   binding.pry
-        #   payment.daily_result = c.point
-        #   # payment.working_hours
-        #   payment.save
-        # end
-
-        redirect_to root_path, flash: { notice: '報告を提出しました。本日も一日お疲れさまでした。' }
       end
     else
-      flash.now[:alert] = "更新できませんでした。未入力の項目や数字の半角入力などを確認してください。"
+      flash.now[:alert] = "未入力の項目や数字の半角入力などを確認してください。"
       render 'edit'
     end
   end
 
   private
-
-  # def case_exists
-  #   report_today = Report.where(user_id: current_user, date: Date.current)
-  #   unless Case.where(report_id: report_today).exists?
-  #     redirect_to root_path
-  #   end
-  # end
-
-  # def report_params
-  #   params.require(:report).permit(:date, :target, :store_id, :user_id, :is_submitted, :comment, :action_approached, :action_discussed, :done_purchased, :done_downloaded_only, :done_discussed_only, :done_promotion, cases_attributes: [:id, :date, :report_id, :staff_id, :point, :timeframe, :_destroy])
-  # end
 
   def report_params
     params.require(:report).permit(
@@ -150,14 +175,19 @@ class ReportsController < ApplicationController
       cases_attributes: [
         :id,
         :report_id,
-        :staff_id,
-        :point,
         :timeframe,
         :customer_name,
         :memo,
         :confirmed_by_client,
         :comment_by_client,
-        :_destroy]
+        :_destroy,
+        scores_attributes: [
+          :id,
+          :staff_id,
+          :point,
+          :_destroy
+        ]
+      ]
     )
   end
 

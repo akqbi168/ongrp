@@ -18,11 +18,9 @@ class JobsController < ApplicationController
     @job = Job.new
     @ranks = Rank.all.order("per_hour")
     @staffs = Staff.all
-    # @@path = Rails.application.routes.recognize_path(request.referer)
   end
 
   def edit
-    # @@path = Rails.application.routes.recognize_path(request.referer)
     @job = Job.find(params[:id])
     @ranks = Rank.all.order("per_hour")
     @staffs = Staff.all
@@ -75,7 +73,6 @@ class JobsController < ApplicationController
     #     普通にアップデートする
     # job_recordがなければ（updateでデータが別日に移るorスタッフが変わったら）
     #   普通にアップデートする
-
     if job_record.present?
       if job_record.id != @job.id
         flash.now[:alert] = "勤務がすでに登録されています。更新する場合はシフト一覧から該当データを選択してください。"

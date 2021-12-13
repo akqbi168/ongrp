@@ -1,13 +1,13 @@
 class Case < ApplicationRecord
 
-  with_options presence: true do
-    validates :point, numericality: { greater_than: 0, less_than_or_equal_to: 1}
-    validates :timeframe
-    validates :staff_id
-  end
+  has_many :scores, inverse_of: :case, dependent: :destroy
+  accepts_nested_attributes_for :scores, allow_destroy: true, reject_if: :all_blank
 
   belongs_to :report
-  belongs_to :staff
+
+  with_options presence: true do
+    validates :timeframe
+  end
 
   enum timeframe: {
     '09:00-09:59': 0,

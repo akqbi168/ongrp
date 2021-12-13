@@ -33,7 +33,7 @@
           <%# points_sum_till_yesterday = Case.where(report_id: ry.id, staff_id: s.id).sum(:point) %>
         <%# end %>
 
-        <% points_sum_till_yesterday = Case.where(staff_id: s.id).sum(:point) %>
+        <% points_sum_till_yesterday = Score.where(staff_id: s.id).sum(:point) %>
         <%= points_sum_till_yesterday %>
       </span>
       <span class="col-common staff-col staff-point">

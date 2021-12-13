@@ -83,3 +83,4 @@ gem 'binding_of_caller'
 
 # for slack notification
 gem 'slack-notifier'
+gem 'dotenv-rails'

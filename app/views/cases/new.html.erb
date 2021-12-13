@@ -1,31 +1,49 @@
 <h1>獲得速報</h1>
 
-<%= form_with model: @case do |c| %>
+<%= form_with(model: @case, local: true) do |f| %>
 
-  <%= render 'reports/case_fields', f: c %>
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :timeframe, '獲得時間', class: "form-new-left40" %>
+    </span>
+    <span class="col-common form-new-right">
+      <%= f.select :timeframe, Case.timeframes.keys, {class: "form-new-right60", prompt:"-----------"} %>
+    </span>
+  </div>
+
+  <div class="field">
+    <%= f.fields_for :scores do |sc| %>
+      <%= render 'score_fields', f: sc %>
+    <%end%>
+    <div class="links">
+      <%= link_to_add_association "追加", f, :scores, class: "cocoon_add_button bg-orange" %>
+    </div>
+  </div>
 
   <div class="field">
     <span class="form-new-left">
-      <%= c.label :customer_name, '契約者氏名' %>
+      <%= f.label :customer_name, '契約者氏名' %>
     </span>
     <span class="form-new-right">
-      <%= c.text_field :customer_name, placeholder: "", class: "form-right" %>
+      <%= f.text_field :customer_name, class: "form-right" %>
     </span>
   </div>
 
   <div class="field">
     <span class="form-new-left">
-      <%= c.label :memo, '備考' %>
+      <%= f.label :memo, '備考' %>
     </span>
     <span class="form-new-right">
-      <%#= c.text_area :memo, placeholder: "追記事項があれば（クライアントにも伝わります）", cols: 30, rows: 8, class: "form-right" %><%= c.text_area :memo, placeholder: "追記事項があればどうぞ", cols: 30, rows: 8, class: "form-right" %>
+      <%= f.text_area :memo, placeholder: "追記事項があればこちらに記載してください。", cols: 30, rows: 8, class: "form-right" %>
     </span>
   </div>
 
   <br>
 
   <div class="cf">
-    <%= c.submit "送信", data: { confirm: "速報を報告します。よろしいですか？" }, class:"right button-send" %>
+    <%= f.submit "送信", data: { confirm: "速報を報告します。よろしいですか？" }, class:"right button-send" %>
   </div>
 
 <% end %>
+
+<p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

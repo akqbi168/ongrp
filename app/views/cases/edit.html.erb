@@ -1,0 +1,49 @@
+<h1>確認</h1>
+
+<%= form_with(model: @case, local: true) do |f| %>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :timeframe, '獲得時間', class: "form-new-left40" %>
+    </span>
+    <span class="col-common form-new-right">
+      <%= @case.timeframe %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="form-new-left">
+      <%= f.label :customer_name, '契約者氏名' %>
+    </span>
+    <span class="form-new-right">
+      <%= @case.customer_name %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="form-new-left">
+      <%= f.label :memo, '備　　　考' %>
+    </span>
+    <span class="form-new-right">
+      <%= @case.memo %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="form-new-left">
+      <%= f.label :comment_by_client, 'ご　返　信' %>
+    </span>
+    <span class="form-new-right">
+      <%= f.text_area :comment_by_client, placeholder: "", cols: 30, rows: 8, class: "form-right" %>
+    </span>
+  </div>
+
+  <br>
+
+  <div class="cf">
+    <%= f.submit "送信", data: { confirm: "速報を報告します。よろしいですか？" }, class:"right button-send" %>
+  </div>
+
+<% end %>
+
+<p class="back-to-top"><%= link_to '一覧に戻る', cases_path %></p>

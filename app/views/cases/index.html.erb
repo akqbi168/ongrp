@@ -1,23 +1,33 @@
-<h1>催事報告（獲得状況）</h1>
+<h1>獲得一覧</h1>
 
 
-<% @cases.each do |c| %>
+<% @reports.each do |r| %>
+  <%= r.date %><br>
 
+  <% @cases.each do |c| %>
 
-<div class="case-index-row">
-  <% report = @reports.find(c.report_id) %>
-  ■<%= report.date.strftime("%m/%d(#{@wd[report.date.wday]})") %>　｜　
-  <%= c.point %> 件　｜　
+    <div class="case-index-row">
+      <% if c.comment_by_client.present? %>
+        <p style="color: #bbbbbb">
+      <% else %>
+        <p>
+      <% end %>
+          <%# report = @reports.find(c.report_id) %>
+          <%#= report.date.strftime("%m/%d(#{@wd[report.date.wday]})") %>
+          <%#= check_box_tag :confirmed_by_client, c %>
 
-  備考<%= c.memo %>　｜　
-  確認<%= c.confirmed_by_client %>　｜　
-  ご返信<%= c.comment_by_client %>　｜　
+          契約者氏名：<%= c.customer_name %><br>
+          備　　　考：<%= c.memo %><br>
+          ご　返　信：<%= c.comment_by_client %><br>
+        </p>
 
-  <%#= link_to '返信', edit_case_path(c.id), class:"" %>
+      <%= link_to '操作', edit_case_path(c.id), class:"" %>
 
-</div>
+    </div>
 
-<br>
+  <br>
+
+  <% end %>
 
 <% end %>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_03_074455) do
+ActiveRecord::Schema.define(version: 2021_12_12_142243) do
 
   create_table "bounties", force: :cascade do |t|
     t.integer "staff_c", null: false
@@ -26,12 +26,10 @@ ActiveRecord::Schema.define(version: 2021_12_03_074455) do
 
   create_table "cases", force: :cascade do |t|
     t.integer "report_id", null: false
-    t.integer "staff_id", null: false
     t.integer "timeframe"
-    t.float "point", null: false
     t.string "customer_name"
     t.string "memo"
-    t.boolean "confirmed_by_client"
+    t.boolean "confirmed_by_client", default: false
     t.string "comment_by_client"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -119,6 +117,14 @@ ActiveRecord::Schema.define(version: 2021_12_03_074455) do
     t.integer "number_of_samples"
     t.string "details_of_app_malfunction"
     t.boolean "is_submitted", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "scores", force: :cascade do |t|
+    t.integer "case_id", null: false
+    t.integer "staff_id", null: false
+    t.float "point", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

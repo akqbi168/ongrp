@@ -18,7 +18,7 @@ class StoresController < ApplicationController
     if @store.save
       redirect_to stores_path, flash: { notice: '催事場所が新しく追加されました。' }
     else
-      flash.now[:alert] = "追加できませんでした。催事場所の名称を入力してください。"
+      flash.now[:alert] = "催事場所の名称を正しく入力してください。"
       render 'new'
     end
   end
@@ -28,7 +28,7 @@ class StoresController < ApplicationController
     if @store.update(store_params)
       redirect_to stores_path, flash: { notice: '催事場所を修正しました。' }
     else
-      flash.now[:alert] = "追加できませんでした。催事場所の名称を入力してください。"
+      flash.now[:alert] = "催事場所の名称を正しく入力してください。"
       render 'edit'
     end
   end

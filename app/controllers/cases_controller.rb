@@ -1,17 +1,20 @@
 class CasesController < ApplicationController
 
+  before_action :cases_exist, only: [:new]
+
   def index
-    @reports = Report.all
     @cases = Case.all
+    @reports = Report.all
   end
 
   def new
-    user = current_user
-    @report_today = Report.where(user_id: user, date: Date.current)
+    @user = current_user
     @case = Case.new
+    @score = @case.scores.build
   end
 
   def edit
+    @case = Case.find(params[:id])
   end
 
   def create
@@ -30,29 +33,64 @@ class CasesController < ApplicationController
 
     if @case.save
       redirect_to root_path, flash: { notice: '速報を報告しました。' }
+
+      # Slack通知処理を呼び出し
+      notice_page_info(@case)
     else
-      flash.now[:alert] = "報告できませんでした。未入力の項目や数字の半角入力などを確認してください。"
+      flash.now[:alert] = "未入力の項目を確認してください。"
       render 'new'
     end
   end
 
   def update
     @case = Case.find(params[:id])
-    @case.update(case_params)
-    redirect_to root_path, flash: { notice: '速報を更新しました。' }
+    if @case.update(case_params)
+      redirect_to cases_path, flash: { notice: '更新しました。' }
+    else
+      flash.now[:alert] = "更新できませんでした。"
+      render 'edit'
+    end
   end
 
-  def destroy
-    @case = Case.find(params[:id])
-    @report = Report.find(@case.report_id)
-    @case.destroy
-    redirect_to edit_report_path(@report), flash: { notice: '速報を削除しました。' }
+  def cases_exist
+    @report_today = Report.where(user_id: current_user, date: Date.current)
+    if @report_today.nil?
+      redirect_to root_path, flash: { alert: '速報を追加するにはまず日報の報告を開始してください。' }
+    end
   end
 
   private
 
+  def notice_page_info(page)
+    # 本文を生成
+    message = <<~"EOS"
+      契約1件獲得しました！
+
+      【催事】#{Store.find(Report.find(page.report_id).store_id).name}
+      【氏名】#{page.customer_name}　様
+      【備考】#{page.memo}
+
+      よろしくお願い致します。
+    EOS
+    # Slack通知処理を呼び出し
+    notice_slack(message)
+  end
+
   def case_params
-    params.require(:case).permit(:date, :report_id, :staff_id, :point, :timeframe, :customer_name, :memo, :confirmed_by_client, :comment_by_client)
+    params.require(:case).permit(
+      :report_id,
+      :timeframe,
+      :customer_name,
+      :memo,
+      :confirmed_by_client,
+      :comment_by_client,
+      scores_attributes: [
+        :id,
+        :staff_id,
+        :point,
+        :_destroy
+      ]
+    )
   end
 
 end

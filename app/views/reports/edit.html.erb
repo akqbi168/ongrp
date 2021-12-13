@@ -1,5 +1,356 @@
 <h1>実施報告</h1>
 
-<%= render 'report' %>
+<div class="field">
+  <span class="col-common form-new-left">報告担当</span>
+  <span class="col-common form-new-left"><%#= @user.name %></span>
+</div>
+
+<%= form_with(model: @report, local: true) do |f| %>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :date, '日　　付' %>
+    </span>
+    <span class="col-common form-new-right">
+      <%= f.date_field :date %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :store_id, '実施場所' %>
+    </span>
+    <span class="col-common form-new-right">
+      <%= f.collection_select :store_id, Store.all, :id, :name, include_blank: '実施場所を選択', class: '' %>
+      <%#= f.select :store_id, Store.all.map { |store| [store.name, store.id] } %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :target, '目標件数' %>
+    </span>
+    <span class="col-common form-new-right">
+      <%= f.number_field :target, class: "number_field" %>　件
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :target, '獲得件数' %>
+    </span>
+    <span class="col-common form-new-right">
+      <span class="number_field">
+        <%= @report.cases.count %>　件
+      </span>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="col-common form-new-right">
+      <%= f.label :memo, '総　　評' %>
+    </span>
+    <span class="col-common form-new-right">
+      <%= f.text_area :memo, placeholder: "備考があれば記載してください。", cols: 30, rows: 6, class: "form-right" %>
+    </span>
+  </div>
+
+  <br>
+
+  <p>========================</p>
+
+  <!-- 件数報告 -->
+  <!-- <div style="border: 2px solid #333333; border-radius: 3px; padding: 8px;"> -->
+  <details open>
+  <summary>獲得件数報告 (<%= @report.cases.count %>件)</summary>
+    <p class="fs12">
+      獲得の時間帯と獲得者を選んでください。1件を複数人で分配する場合は人数分作成し、その合計が1.0点になるように入力してください。<br>
+      (例)1件をAさんとBさんに半分ずつ分配：2件作成し、Aさん0.5点、Bさん0.5点と入力
+    </p>
+
+    <%= f.fields_for :cases, @report.cases.order("timeframe") do |cc| %>
+      <%= render 'case_fields', f: cc %>
+    <% end %>
+
+  </details>
+
+  <p>========================</p>
+
+  <!-- 勤怠報告 -->
+  <!-- <details open> -->
+  <!-- <summary>勤怠報告</summary> -->
+
+  <!-- </details> -->
+
+  <!-- <p>========================</p> -->
+
+  <!-- マケ用データ -->
+  <details open>
+  <summary>アンケート</summary>
+
+    <span class="fs14">
+
+      <p class="q_title fs16">1. アクション内容</p>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :action_approached, 'お声かけ' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :action_approached, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :action_discussed, 'お話ができた' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :action_discussed, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :action_purchased, '購入いただけた' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :action_purchased, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :action_downloaded_only, 'ダウンロードのみ' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :action_downloaded_only, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :action_discussed_only, 'お話だけだった' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :action_discussed_only, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :action_promotion_done, 'キャンペーン済み' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :action_promotion_done, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <p class="q_title fs16">2. お話ができた方へ</p>
+
+      <p class="q_subtitle fs14">[購入いただけた]</p>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :purchased_for_value, 'お得だから' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :purchased_for_value, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :purchased_for_wanted, '欲しい商品だった' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :purchased_for_wanted, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :purchased_for_trial, 'OniGOを使ってみたかった' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :purchased_for_trial, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field">
+        <%= f.label :purchased_for_others_memo, 'フリーコメント' %>
+        <%= f.text_area :purchased_for_others_memo, style: "float: right;" %>
+      </div>
+
+      <p class="q_subtitle fs14">[ダウンロードのみ]</p>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :downloaded_only_for_no_time, '今、時間がない' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :downloaded_only_for_no_time, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :downloaded_only_for_no_cards, 'クレジットカードなし' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :downloaded_only_for_no_cards, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :downloaded_only_for_app_error, 'アプリ不具合' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :downloaded_only_for_app_error, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <%= f.label :downloaded_only_for_others_memo, 'フリーコメント' %>
+        <%= f.text_area :downloaded_only_for_others_memo, style: "float: right;" %>
+      </div>
+
+      <p class="q_subtitle fs14">[お話だけだった]</p>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :discussed_only_for_no_time, '今、時間がない' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :discussed_only_for_no_time, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :discussed_only_for_no_downloadable, 'DLできない' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :discussed_only_for_no_downloadable, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :discussed_only_for_denying_cards, 'クレジットカード拒否' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :discussed_only_for_denying_cards, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :discussed_only_for_no_demand, '欲しいものがない' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :discussed_only_for_no_demand, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :discussed_only_for_app_error, 'アプリ不具合' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :discussed_only_for_app_error, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :discussed_only_for_denying_app, 'アプリ拒否' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :discussed_only_for_denying_app, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <%= f.label :discussed_only_for_others_memo, 'フリーコメント' %>
+        <%= f.text_area :discussed_only_for_others_memo, style: "float: right;" %>
+      </div>
+
+      <p class="q_subtitle fs14">[キャンペーン済]</p>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :promotion_done_no_launching_later, 'その後、起動していない' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :promotion_done_no_launching_later, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :promotion_done_nothing_on_demand, '欲しいものがない' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :promotion_done_nothing_on_demand, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :promotion_done_operating_impossible, 'アプリが操作できない' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :promotion_done_operating_impossible, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :promotion_done_app_malfunctioning, 'アプリが動かない' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :promotion_done_app_malfunctioning, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <%= f.label :promotion_done_for_others_memo, 'フリーコメント' %>
+        <%= f.text_area :promotion_done_for_others_memo, style: "float: right;" %>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :outside_delivery_area, '配達エリア外' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :outside_delivery_area, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <span class="form-new-left_wide">
+          <%= f.label :number_of_samples, 'アンケート回収' %>
+        </span>
+        <span class="form-new-right_narrow">
+          <%= f.number_field :number_of_samples, class: "number_field" %>　件
+        </span>
+      </div>
+
+      <div class="field cf">
+        <%= f.label :details_of_app_malfunction, 'アプリ不具合内容' %>
+        <%= f.text_area :details_of_app_malfunction, style: "float: right;" %>
+      </div>
+
+    </span>
+
+  </details>
+
+  <p class="page-desription fs12"><%= f.check_box :is_submitted, :style => "height=1em; " %>  実績報告を<B>提出</B>する場合はチェックを入れてください（チェックをつけずに更新ボタンを押すと一時保存ができます）</p>
+
+  <%= f.submit "更新", data: { confirm: "実施報告を更新します。よろしいですか？" }, class:"btn btn-lg btn-success button-send" %>
+
+<% end %>
 
 <p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

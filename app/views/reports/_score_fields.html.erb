@@ -1,0 +1,22 @@
+<div class="nested-fields">
+
+  <div class="field">
+    <span class="form-new-left">
+      <%= f.label :staff_id, 'スタッフ' %>
+    </span>
+    <span class="form-new-right">
+      <%= f.select :staff_id, Staff.all.map { |staff| [staff.name, staff.id] }, include_blank: '-----------' %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="form-new-left">
+      <%= f.label :point, 'スコア' %>
+    </span>
+    <span class="form-new-right">
+      <%= f.number_field :point, max: 1.0, min: 0, step: "0.1", class:"form-control number_field" %>
+    </span>
+      <%#= link_to_remove_association "スタッフ削除", f, class: "cocoon_remove_button" %>
+  </div>
+
+</div>

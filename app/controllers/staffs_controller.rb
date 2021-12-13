@@ -25,7 +25,7 @@ class StaffsController < ApplicationController
     if @staff.save
       redirect_to staffs_path, flash: { notice: 'スタッフ情報が追加されました。' }
     else
-      flash.now[:alert] = "追加できませんでした。氏名と役職を入力してください。"
+      flash.now[:alert] = "氏名と役職を入力してください。"
       render 'new'
     end
   end
@@ -35,7 +35,7 @@ class StaffsController < ApplicationController
     if @staff.update(staff_params)
       redirect_to staffs_path, flash: { notice: 'スタッフ情報を更新しました。' }
     else
-      flash.now[:alert] = "修正できませんでした。氏名と役職を確認してください。"
+      flash.now[:alert] = "氏名と役職を確認してください。"
       render 'edit'
     end
   end

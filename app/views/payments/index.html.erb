@@ -52,56 +52,75 @@
               <span class="col-common pay-col pay-col-narrow">
                 <% rp = Report.find_by(store_id: job.store_id, date: p.date) %>
                 <% unless p.nil? %>
-                  <% indivisual_point = Case.where(report_id: rp, staff_id: p.staff_id).sum(:point).to_f %>
-                  <%= indivisual_point %>
+                  <% if p.indivisual_point == nil? %>
+                    <% indivisual_point = Case.where(report_id: rp, staff_id: p.staff_id).sum(:point).to_f %>
+                    <%= indivisual_point %>
+                  <% else %>
+                    <%= p.indivisual_point %>
+                  <% end %>
                 <% end %>
               </span>
               <span class="col-common pay-col pay-col-narrow fs12">
                 <%= Rank.find(job.rank_id).name %>
               </span>
               <span class="col-common pay-col pay-col-middle">
-                <% per_hour = @ranks.find(job.rank_id).per_hour %>
-                <%= number_to_currency(per_hour, unit: "¥", format: "%u %n", precision: 0) %>
+                <% if p.per_hour.nil? %>
+                  <% per_hour = @ranks.find(job.rank_id).per_hour %>
+                  <%= number_to_currency(per_hour, unit: "¥", format: "%u %n", precision: 0) %>
+                <% else %>
+                  <%= number_to_currency(p.per_hour, unit: "¥", format: "%u %n", precision: 0) %>
+                <% end %>
               </span>
               <span class="col-common pay-col pay-col-narrow">
-                <% rp = Report.find_by(store_id: job.store_id, date: p.date) %>
-                <% store_point = Case.where(report_id: rp).sum(:point).to_i %>
-                <%= store_point %>
+                <% if p.store_point.present? %>
+                  <%= p.store_point %>
+                <% elsif job.present? %>
+                  <%= Report.find_by(date: p.date, store_id: job.store_id).scores.sum(:point) %>
+                <% end %>
               </span>
               <span class="col-common pay-col pay-col-middle">
-                <% rp = Report.find_by(store_id: job.store_id, date: p.date) %>
-                <% indivisual_point = Case.where(report_id: rp, staff_id: p.staff_id).sum(:point).to_i %>
-                <% store_point = Case.where(report_id: rp).sum(:point).to_i %>
-                <% unless indivisual_point == 0 %>
-                  <%#= 0.to_i %>
-                <%# else %>
-                  <% if job.rank_id == 1 %><% bonus_base = @bounties.find(indivisual_point.to_i).staff_c %><% end %>
-                  <% if job.rank_id == 2 %><% bonus_base = @bounties.find(indivisual_point.to_i).staff_b %><% end %>
-                  <% if job.rank_id == 3 %><% bonus_base = @bounties.find(indivisual_point.to_i).staff_a %><% end %>
-                  <% if job.rank_id == 4 %><% bonus_base = @bounties.find(indivisual_point.to_i).lead_b %><% end %>
-                  <% if job.rank_id == 5 %><% bonus_base = @bounties.find(indivisual_point.to_i).lead_a %><% end %>
-                  <% if job.rank_id == 6 %><% bonus_base = @bounties.find(indivisual_point.to_i).director %><% end %>
-                  <% bonus_ratio = @bounties.find(store_point.to_i).ratio %>
-                  <% bounty = bonus_base * bonus_ratio %>
+                <% if p.bonus_base.present? && p.bonus_ratio.present? %>
+                  <% bounty = p.bonus_base * p.bonus_ratio %>
                   <%= number_to_currency(bounty, unit: "¥", format: "%u %n", precision: 0) %><br>
                   <span style="font-size: 9px">
-                    (<%= number_to_currency(bonus_base, unit: "¥", format: "%u %n", precision: 0) %> x<%= bonus_ratio %>)
+                    (<%= number_to_currency(p.bonus_base, unit: "¥", format: "%u %n", precision: 0) %> x<%= p.bonus_ratio %>)
                   </span>
                 <% end %>
               </span>
               <%#= link_to(edit_payment_path(p.id), class: "") do %>
               <span class="col-common pay-col pay-col-middle">
-                <% if bounty.nil? %>
-                  <% daily_payment = per_hour * p.working_hours %>
-                <% else %>
-                  <% daily_payment = per_hour * p.working_hours + bounty %>
+                <% if p.bonus_base.present? && p.working_hours.present? %>
+                  <% extra_time = [(p.working_hours - 8), 0].max %>
+                  <% time_value = 8 + extra_time * 1.25 %>
+                  <% salary = p.per_hour * time_value %>
+
+                  <%= number_to_currency(salary + bounty, unit: "¥", format: "%u %n", precision: 0) %>
                 <% end %>
-                <%= number_to_currency(daily_payment, unit: "¥", format: "%u %n", precision: 0) %>
+                <%# if p.bonus_base.nil? %>
+                  <%# daily_payment = per_hour * p.working_hours %>
+                <%# else %>
+                  <%# daily_payment = per_hour * p.working_hours + p.bonus_base %>
+                <%# end %>
+                <%#= number_to_currency(daily_payment, unit: "¥", format: "%u %n", precision: 0) %>
               </span>
               <%# end %>
             <% end %>
       </div>
     <% end %>
+
+<!--       <div class="payment-row fs14">
+        <span class="col-common pay-col pay-col-middle">合計</span>
+        <span class="col-common pay-col pay-col-wide"></span>
+        <span class="col-common pay-col pay-col-middle"></span>
+        <span class="col-common pay-col pay-col-narrow"></span>
+        <span class="col-common pay-col pay-col-narrow"></span>
+        <span class="col-common pay-col pay-col-narrow"></span>
+        <span class="col-common pay-col pay-col-narrow"></span>
+        <span class="col-common pay-col pay-col-middle"></span>
+        <span class="col-common pay-col pay-col-narrow"></span>
+        <span class="col-common pay-col pay-col-middle"><%= @results.sum(:working_hours) %></span>
+        <span class="col-common pay-col pay-col-middle"><%= @results.sum(:daily_payment) %></span>
+      </div> -->
   </div>
 
 </div>
