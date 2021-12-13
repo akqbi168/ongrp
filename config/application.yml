@@ -1,0 +1,13 @@
+# config/application.yml
+
+# 共通の設定
+default: &default
+  webhook_url: <%= Rails.application.credentials[:webhook_url] %>
+
+# 開発環境の設定
+development:
+  <<: *default
+
+# 本番環境の設定
+production:
+  <<: *default
