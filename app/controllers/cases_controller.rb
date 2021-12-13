@@ -37,7 +37,8 @@ class CasesController < ApplicationController
       redirect_to root_path, flash: { notice: '速報を報告しました。' }
 
       # Slack通知処理を呼び出し
-      notice_page_info(@case)
+      # notice_page_info(@case)
+      notifier.ping "<!here> ユーザーが削除されました。"
     else
       flash.now[:alert] = "未入力の項目を確認してください。"
       render 'new'
@@ -69,8 +70,8 @@ class CasesController < ApplicationController
       url,
       username: '獲得速報',
       icon_emoji: ':sunglasses:'
-    ).
-    Slack::Notifier.new(WEBHOOK_URL).ping('<!here> メッセージ内容をここに記載')
+    )
+    # Slack::Notifier.new(WEBHOOK_URL).ping('<!here> メッセージ内容をここに記載')
   end
 
   # def notice_slack(message)
@@ -84,20 +85,20 @@ class CasesController < ApplicationController
   # end
 
 
-  def notice_page_info(page)
-    # 本文を生成
-    message = <<~"EOS"
-      契約1件獲得しました！
+  # def notice_page_info(page)
+  #   # 本文を生成
+  #   message = <<~"EOS"
+  #     契約1件獲得しました！
 
-      【催事】#{Store.find(Report.find(page.report_id).store_id).name}
-      【氏名】#{page.customer_name}　様
-      【備考】#{page.memo}
+  #     【催事】#{Store.find(Report.find(page.report_id).store_id).name}
+  #     【氏名】#{page.customer_name}　様
+  #     【備考】#{page.memo}
 
-      よろしくお願い致します。
-    EOS
-    # Slack通知処理を呼び出し
-    notice_slack(message)
-  end
+  #     よろしくお願い致します。
+  #   EOS
+  #   # Slack通知処理を呼び出し
+  #   notice_slack(message)
+  # end
 
   def case_params
     params.require(:case).permit(
