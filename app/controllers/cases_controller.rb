@@ -38,7 +38,8 @@ class CasesController < ApplicationController
 
       # Slack通知処理を呼び出し
       # notice_page_info(@case)
-      notifier.ping "<!here> ユーザーが削除されました。"
+
+      # notifier.ping "<!here> ユーザーが削除されました。"
     else
       flash.now[:alert] = "未入力の項目を確認してください。"
       render 'new'
@@ -64,15 +65,15 @@ class CasesController < ApplicationController
 
   private
 
-  def notifier
-    url = Rails.configuration.x.app.webhook_url
-    Slack::Notifier.new(
-      url,
-      username: '獲得速報',
-      icon_emoji: ':sunglasses:'
-    )
-    # Slack::Notifier.new(WEBHOOK_URL).ping('<!here> メッセージ内容をここに記載')
-  end
+  # def notifier
+  #   url = Rails.configuration.x.app.webhook_url
+  #   Slack::Notifier.new(
+  #     url,
+  #     username: '獲得速報',
+  #     icon_emoji: ':sunglasses:'
+  #   )
+  #   # Slack::Notifier.new(WEBHOOK_URL).ping('<!here> メッセージ内容をここに記載')
+  # end
 
   # def notice_slack(message)
   #   notifier = Slack::Notifier.new(
