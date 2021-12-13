@@ -19,14 +19,14 @@ class ApplicationController < ActionController::Base
   end
 
   # slack通知用メソッド
-  def notice_slack(message)
-    notifier = Slack::Notifier.new(
-      ENV['SLACK_WEBHOOK_URL'],
-      channel: "##{ENV['SLACK_CHANNEL']}",
-      username: '獲得速報'
-    )
+  # def notice_slack(message)
+  #   notifier = Slack::Notifier.new(
+  #     ENV['SLACK_WEBHOOK_URL'],
+  #     channel: "##{ENV['SLACK_CHANNEL']}",
+  #     username: '獲得速報'
+  #   )
 
-    notifier.ping(message)
-  end
+  #   notifier.ping(message)
+  # end
 
 end

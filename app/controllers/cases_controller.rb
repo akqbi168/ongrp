@@ -2,6 +2,8 @@ class CasesController < ApplicationController
 
   before_action :cases_exist, only: [:new]
 
+  WEBHOOK_URL = Rails.application.credentials[:webhook_url]
+
   def index
     @cases = Case.all
     @reports = Report.all
@@ -60,6 +62,27 @@ class CasesController < ApplicationController
   end
 
   private
+
+  def notifier
+    url = Rails.configuration.x.app.webhook_url
+    Slack::Notifier.new(
+      url,
+      username: '獲得速報',
+      icon_emoji: ':sunglasses:'
+    ).
+    Slack::Notifier.new(WEBHOOK_URL).ping('<!here> メッセージ内容をここに記載')
+  end
+
+  # def notice_slack(message)
+  #   notifier = Slack::Notifier.new(
+  #     ENV['SLACK_WEBHOOK_URL'],
+  #     channel: "##{ENV['SLACK_CHANNEL']}",
+  #     username: '獲得速報'
+  #   )
+
+  #   notifier.ping(message)
+  # end
+
 
   def notice_page_info(page)
     # 本文を生成
