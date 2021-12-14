@@ -9,4 +9,7 @@ class HomesController < ApplicationController
   def about
   end
 
+  def history
+  end
+
 end

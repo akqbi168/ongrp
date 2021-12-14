@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :bounties, only: [:index, :new, :edit, :create, :update]
 
   get 'about', to: 'homes#about'
+  get 'history', to: 'homes#history'
   root 'homes#top'
 
 end
