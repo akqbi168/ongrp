@@ -8,56 +8,68 @@
   <h3>1日の報告の流れ</h3>
 
   <h4>1. 開始報告をする</h4>
-  <p>その日のキャンペーンが始まったら開始報告をしてください。報告当日の日付とイベント催事場所を選択してしてください。</p>
+  <p>その日のキャンペーンが始まったら開始報告をしてください。報告当日の日付とイベント実施場所を選択して、登録ボタンを押すだけです。</p>
 
   <h4>2. 獲得速報をする</h4>
-  <p>契約が決まったら1件ごとに速報を送ってください。速報には1時間ごとの獲得時間帯、獲得したスタッフ名、契約したお客様の氏名、備考欄（キャンペーン適用済み等）を記入します。</p>
+  <p>契約が決まったら1件ごとに速報を送ってください。獲得した時間帯やスタッフ名と、必要に応じて契約したお客様の氏名や備考欄（キャンペーン適用済み等）を記入します。送信ボタンを押せば登録完了します。<br>
+  <br>
+  獲得1件を複数人に分配する場合は追加ボタンを押し、スコアを合計1.0になるように配分してください。例えば1件を7:3に分ける場合は、Aさんに0.7、Bさんに0.3、と入力します。この分配方法は事前にキャンペーン責任者（大井さん）と相談し、許可がおりた現場や日程のみ行うことができます。
+  </p>
+
+  <h4>3. 実施報告をする</h4>
+  <p>1日の勤務が終了したら実施報告を送ってください。実施報告画面には今まで送った速報のデータが表示されているので相違ないか確認し、必要に応じて獲得時間やスタッフ欄を修正します。獲得件数が足りない場合は、新たにトップ画面から速報を追加してください。獲得件数が多い場合は三角ボタンを押すと閉じることができます。<br>
+  <br>
+  画面をスクロールするとアンケートの入力ができます。該当する欄に数字を入れ、コメントがあればフリーコメントの部分に記入してください。基本的には紙の報告書と同じフォーマットです。<br>
+  <br>
+  そのままページ一番下の更新ボタンを押すと一時保存ができます。催事中に件数を確認したりメモをしておくのにご利用ください。再開する場合はトップ画面の実施報告ボタンを押してください。
+</p>
 
 
 <br><br><br><br><br><br>
 
+  <% if current_user.account_level == "headquarter_admin" || current_user.account_level == "manager" || current_user.account_level == "admin" %>
+    サイトから直接データを追加できない場合はこちら
 
-  サイトから直接データを追加できない場合はこちら
+    <h2>サイトマップ</h2>
+    <h4>
+      <%#= link_to 'こちら', stores_path, class: "" %>
+      <%= link_to(stores_path, class: "store-button-deco bg-light-orange") do %>
+        催事場所一覧<br>
+        <i class="fas fa-store"></i>
+      <% end %>
+    </h4>
 
-  <h2>サイトマップ</h2>
-  <h4>
-    <%#= link_to 'こちら', stores_path, class: "" %>
-    <%= link_to(stores_path, class: "store-button-deco bg-light-orange") do %>
-      催事場所一覧<br>
-      <i class="fas fa-store"></i>
-    <% end %>
-  </h4>
+    <h4>
+      <%#= link_to 'こちら', staffs_path, class: "" %>
+      <%= link_to(staffs_path, class: "store-button-deco bg-light-orange") do %>
+        スタッフ一覧<br>
+        <i class="fas fa-user-friends"></i>
+      <% end %>
+    </h4>
 
-  <h4>
-    <%#= link_to 'こちら', staffs_path, class: "" %>
-    <%= link_to(staffs_path, class: "store-button-deco bg-light-orange") do %>
-      スタッフ一覧<br>
-      <i class="fas fa-user-friends"></i>
-    <% end %>
-  </h4>
+    <h4>
+      <%#= link_to 'こちら', ranks_path, class: "" %>
+      <%= link_to(ranks_path, class: "store-button-deco bg-light-orange") do %>
+        役職一覧<br>
+        <i class="fas fa-graduation-cap"></i>
+      <% end %>
+    </h4>
 
-  <h4>
-    <%#= link_to 'こちら', ranks_path, class: "" %>
-    <%= link_to(ranks_path, class: "store-button-deco bg-light-orange") do %>
-      役職一覧<br>
-      <i class="fas fa-graduation-cap"></i>
-    <% end %>
-  </h4>
+    <h4>
+      <%#= link_to 'こちら', bounties_path, class: "" %>
+      <%= link_to(bounties_path, class: "store-button-deco bg-light-orange") do %>
+        インセン表<br>
+        <i class="fas fa-dollar-sign"></i>
+      <% end %>
+    </h4>
 
-  <h4>
-    <%#= link_to 'こちら', bounties_path, class: "" %>
-    <%= link_to(bounties_path, class: "store-button-deco bg-light-orange") do %>
-      インセン表<br>
-      <i class="fas fa-dollar-sign"></i>
-    <% end %>
-  </h4>
-
-  <h4>
-    <%#= link_to 'こちら', payments_path, class: "" %>
-    <%= link_to(payments_path, class: "store-button-deco bg-light-orange") do %>
-      人件費管理表<br>
-      <i class="fab fa-amazon-pay"></i>
-    <% end %>
-  </h4>
+    <h4>
+      <%#= link_to 'こちら', payments_path, class: "" %>
+      <%= link_to(payments_path, class: "store-button-deco bg-light-orange") do %>
+        人件費管理表<br>
+        <i class="fab fa-amazon-pay"></i>
+      <% end %>
+    </h4>
+  <% end %>
 
 </div>
