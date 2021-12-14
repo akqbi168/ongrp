@@ -6,7 +6,7 @@ class HomesController < ApplicationController
     @report_today_draft = Report.find_by(user_id: @user, date: Date.current, is_submitted: false)
   end
 
-  def aboutt
+  def about
   end
 
 end
