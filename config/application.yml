@@ -1,13 +1,13 @@
-# config/application.yml
+# # config/application.yml
 
-# 共通の設定
-default: &default
+# # 共通の設定
+# default: &default
 
-# 開発環境の設定
-development:
-  WEBHOOL_URL: <%= Rails.application.credentials[:WEBHOOL_URL] %>
+# # 開発環境の設定
+# development:
+#   WEBHOOL_URL: <%= Rails.application.credentials[:WEBHOOL_URL] %>
 
-# 本番環境の設定
-production:
-  WEBHOOL_URL: <%= Rails.application.credentials[:WEBHOOL_URL] %>
-  # WEBHOOL_URL: <%= Rails.application.credentials[:WEBHOOK_URL_for_Pomato_OniGO] %>
+# # 本番環境の設定
+# production:
+#   WEBHOOL_URL: <%= Rails.application.credentials[:WEBHOOL_URL] %>
+#   # WEBHOOL_URL: <%= Rails.application.credentials[:WEBHOOK_URL_for_Pomato_OniGO] %>

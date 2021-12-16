@@ -30,6 +30,6 @@ module Ongrp
     config.assets.initialize_on_precompile = false
 
 
-    config.x.app = config_for(:application)
+    # config.x.app = config_for(:application)
   end
 end

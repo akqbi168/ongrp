@@ -41,7 +41,7 @@ class CasesController < ApplicationController
 
       # notifier.ping "<!here> ユーザーが削除されました。"
       # notice_slack(@case)
-
+      binding.pry
       notifier
     else
       flash.now[:alert] = "未入力の項目を確認してください。"
