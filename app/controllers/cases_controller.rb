@@ -2,7 +2,7 @@ class CasesController < ApplicationController
 
   before_action :cases_exist, only: [:new]
 
-  WEBHOOK_URL = Rails.application.credentials[:webhook_url]
+  WEBHOOK_URL = Rails.application.credentials[:WEBHOOK_URL]
 
   def index
     @cases = Case.all
@@ -40,6 +40,9 @@ class CasesController < ApplicationController
       # notice_page_info(@case)
 
       # notifier.ping "<!here> ユーザーが削除されました。"
+      # notice_slack(@case)
+
+      notifier
     else
       flash.now[:alert] = "未入力の項目を確認してください。"
       render 'new'
@@ -65,16 +68,46 @@ class CasesController < ApplicationController
 
   private
 
-  # def notifier
-  #   url = Rails.configuration.x.app.webhook_url
-  #   Slack::Notifier.new(
-  #     url,
-  #     username: '獲得速報',
-  #     icon_emoji: ':sunglasses:'
-  #   )
-  #   # Slack::Notifier.new(WEBHOOK_URL).ping('<!here> メッセージ内容をここに記載')
+  def notifier
+    # Slack::Notifier.new(WEBHOOK_URL, username: '通知Bot', icon_emoji: ':sunglasses:')
+    # Slack::Notifier.new(WEBHOOK_URL).ping('メッセージ内容をここに記載')
+    Slack::Notifier.new(WEBHOOK_URL, username: '獲得速報').ping(
+      '<!here> ユーザーが追加されました。'
+    )
+  end
+
+  #   # 本文を生成
+  #   message = <<~"EOS"
+  #     契約1件獲得しました！
+
+  #     【催事】#{Store.find(Report.find(page.report_id).store_id).name}
+  #     【氏名】#{page.customer_name}　様
+  #     【備考】#{page.memo}
+
+  #     よろしくお願い致します。
+  #   EOS
+  #   # Slack通知処理を呼び出し
+  #   notice_slack(message)
   # end
 
+
+  # slack通知用メソッド
+  # def notice_slack(message)
+  #   notifier = Slack::Notifier.new(
+  #     Rails.application.credentials[:WEBHOOK_URL],
+  #     channel: "test-onigo-notifier",
+  #     username: '獲得速報'
+  #   )
+
+  #   notifier.ping(message)
+  # end
+
+  # def notifier
+  #   url = Rails.configuration.x.app.WEBHOOK_URL # 追記
+  #   Slack::Notifier.new(url, username: '通知Bot', icon_emoji: ':sunglasses:')
+  # end
+
+  # slack通知用メソッド
   # def notice_slack(message)
   #   notifier = Slack::Notifier.new(
   #     ENV['SLACK_WEBHOOK_URL'],
@@ -83,6 +116,16 @@ class CasesController < ApplicationController
   #   )
 
   #   notifier.ping(message)
+  # end
+
+  # def notifier
+  #   url = Rails.configuration.x.app.webhook_url
+  #   Slack::Notifier.new(
+  #     url,
+  #     username: '獲得速報',
+  #     icon_emoji: ':sunglasses:'
+  #   )
+  #   # Slack::Notifier.new(WEBHOOK_URL).ping('<!here> メッセージ内容をここに記載')
   # end
 
 

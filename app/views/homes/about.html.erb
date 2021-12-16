@@ -27,6 +27,50 @@
 
 <br><br><br><br><br><br>
 
+  <% if current_user.account_level == "manager" || current_user.account_level == "admin" %>
+    サイトから直接データを追加できない場合はこちら
 
+    <h2>サイトマップ</h2>
+    <h4>
+      <%#= link_to 'こちら', stores_path, class: "" %>
+      <%#= link_to(stores_path, class: "store-button-deco bg-light-orange") do %>
+      <%= link_to(stores_path, class: "home_button_deco bg-light-orange") do %>
+        <i class="fas fa-store"></i>催事場所一覧
+      <% end %>
+    </h4>
+
+    <h4>
+      <%#= link_to 'こちら', staffs_path, class: "" %>
+      <%#= link_to(staffs_path, class: "store-button-deco bg-light-orange") do %>
+      <%= link_to(staffs_path, class: "home_button_deco bg-light-orange") do %>
+        <i class="fas fa-user-friends"></i>スタッフ一覧
+      <% end %>
+    </h4>
+
+    <h4>
+      <%#= link_to 'こちら', ranks_path, class: "" %>
+      <%#= link_to(ranks_path, class: "store-button-deco bg-light-orange") do %>
+      <%= link_to(ranks_path, class: "home_button_deco bg-light-orange") do %>
+        <i class="fas fa-graduation-cap"></i>役職一覧
+      <% end %>
+    </h4>
+
+    <h4>
+      <%#= link_to 'こちら', bounties_path, class: "" %>
+      <%#= link_to(bounties_path, class: "store-button-deco bg-light-orange") do %>
+      <%= link_to(bounties_path, class: "home_button_deco bg-light-orange") do %>
+        <i class="fas fa-dollar-sign"></i>インセン表
+      <% end %>
+    </h4>
+
+    <h4 class="cf">
+      <%#= link_to 'こちら', payments_path, class: "" %>
+      <%= link_to(payments_path, class: "home_button_deco bg-light-orange") do %>
+      <%#= link_to(payments_path, class: "") do %>
+        <i class="fab fa-amazon-pay"></i>
+          人件費管理表
+      <% end %>
+    </h4>
+  <% end %>
 
 </div>

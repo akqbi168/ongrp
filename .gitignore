@@ -30,7 +30,6 @@
 .byebug_history
 
 /db/secret_seeds.rb
-/.env
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
