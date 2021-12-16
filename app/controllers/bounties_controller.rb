@@ -1,5 +1,8 @@
 class BountiesController < ApplicationController
 
+  before_action :manager_level_only
+  before_action :admin_only, only: [:new, :create]
+
   def index
     @bounties = Bounty.all.order("id")
   end

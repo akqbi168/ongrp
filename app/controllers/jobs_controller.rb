@@ -1,5 +1,8 @@
 class JobsController < ApplicationController
 
+  before_action :hq_admin_level_only, only: [:index, :new, :edit, :create, :update]
+  before_action :admin_only, only: [:destroy]
+
   def index
     @q = Job.ransack(params[:q])
     # @results = @q.result.includes(:date).order("date")
@@ -9,9 +12,6 @@ class JobsController < ApplicationController
     @staffs = Staff.all.order("id")
     @jobs_by_date = Job.all.order("date")
     @stores = Store.all.order("id")
-  end
-
-  def show
   end
 
   def new
@@ -149,6 +149,20 @@ class JobsController < ApplicationController
         flash.now[:alert] = "修正できませんでした。入力項目を確認してください。"
         render 'edit'
       end
+    end
+  end
+
+  def destroy
+    @job = Job.find(params[:id])
+    binding.pry
+    if @payment = Payment.find_by(job_id: @job.id).present?
+      @payment = Payment.find_by(job_id: @job.id)
+    end
+    if @job.destroy && @payment.destroy
+      redirect_to jobs_path, flash: { notice: 'シフトを削除しました。' }
+    else
+      flash.now[:alert] = "削除できませんでした。解決しない場合は管理者に連絡してください。"
+      render 'edit'
     end
   end
 

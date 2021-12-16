@@ -1,5 +1,8 @@
 class ReportsController < ApplicationController
 
+  before_action :no_client, only: [:index, :index_temp, :show, :new, :edit, :create, :update]
+  before_action :admin_only, only: [:destroy]
+
   def index
     @reports = Report.all.where(user_id: current_user.id, is_submitted: true).order("updated_at")
   end
@@ -84,7 +87,6 @@ class ReportsController < ApplicationController
             # rank_array = ["staff_c", "staff_b", "staff_a", "lead_b", "lead_a", "director"]
             # i = 1
             # while i <= 6 do
-            #   binding.pry
             #   @payment.bonus_base = Bounty.find(@payment.indivisual_point.to_i).rank_array[i-1]
             #   i += 1
             # end
@@ -127,6 +129,9 @@ class ReportsController < ApplicationController
       flash.now[:alert] = "未入力の項目や数字の半角入力などを確認してください。"
       render 'edit'
     end
+  end
+
+  def access_admin_only
   end
 
   private

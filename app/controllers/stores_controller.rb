@@ -1,5 +1,9 @@
 class StoresController < ApplicationController
 
+  before_action :no_director_and_no_client
+  before_action :hq_admin_level_only, only: [:edit, :update]
+  before_action :admin_only, only: [:destroy]
+
   def index
     @stores = Store.all.all.order("id")
     @reports = Report.all.order("date")
@@ -31,6 +35,9 @@ class StoresController < ApplicationController
       flash.now[:alert] = "催事場所の名称を正しく入力してください。"
       render 'edit'
     end
+  end
+
+  def destroy
   end
 
   private

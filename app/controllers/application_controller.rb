@@ -29,4 +29,54 @@ class ApplicationController < ActionController::Base
   #   notifier.ping(message)
   # end
 
+  def admin_only
+    unless current_user.account_level == 'admin'
+      redirect_to root_path, flash: { alert: 'エラー(A01)：管理者に連絡してください。' }
+    end
+  end
+
+  def manager_level_only
+    unless current_user.account_level == 'manager' || current_user.account_level == 'admin'
+      redirect_to root_path
+    end
+  end
+
+  def hq_admin_level_only
+    unless current_user.account_level == 'headquarter_admin' || current_user.account_level == 'manager' || current_user.account_level == 'admin'
+      redirect_to root_path
+    end
+  end
+
+  def no_director_and_no_client
+    unless current_user.account_level == 'headquarter' || current_user.account_level == 'headquarter_admin' || current_user.account_level == 'manager' || current_user.account_level == 'admin'
+      redirect_to root_path, flash: { alert: 'エラー(A99)：権限がありません。' }
+    end
+  end
+
+  def no_director
+    unless current_user.account_level == 'client' || current_user.account_level == 'headquarter' || current_user.account_level == 'headquarter_admin' || current_user.account_level == 'manager' || current_user.account_level == 'admin'
+      redirect_to root_path, flash: { alert: 'エラー(A99)：権限がありません。' }
+    end
+  end
+
+  def no_client
+    unless current_user.account_level == 'director' || current_user.account_level == 'headquarter' || current_user.account_level == 'headquarter_admin' || current_user.account_level == 'manager' || current_user.account_level == 'admin'
+      redirect_to root_path, flash: { alert: 'エラー(A99)：権限がありません。' }
+    end
+  end
+
+  def current_user_only
+    unless current_user == User.find(session[:user_id])
+      redirect_to root_path
+    end
+  end
+
+    # undefined: 0,
+    # director: 1,
+    # client: 2,
+    # headquarter: 3,
+    # headquarter_admin: 4,
+    # manager: 5,
+    # admin: 6
+
 end

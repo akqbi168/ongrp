@@ -1,5 +1,9 @@
 class PaymentsController < ApplicationController
 
+  before_action :hq_admin_level_only
+  before_action :manager_level_only, only: [:edit, :update]
+  before_action :admin_only, only: [:new, :create, :destroy]
+
   def index
     @q = Payment.ransack(params[:q])
     @results = @q.result.includes(:staff).order("date")
@@ -20,6 +24,9 @@ class PaymentsController < ApplicationController
   end
 
   def search
+  end
+
+  def destroy
   end
 
 end

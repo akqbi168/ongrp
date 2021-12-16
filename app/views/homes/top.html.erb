@@ -1,11 +1,13 @@
 <h1>OniGOレポ</h1>
 
 
+
 <p class="top-button-description">
   <% if user_signed_in? %>
     <B><%= @user.name %></B>　さん。今日もお疲れさまです <i class="far fa-grin-beam"></i>
   <% end %>
 </p>
+
 
 
 <% if current_user.account_level == "director" || current_user.account_level == "headquarter_admin" || current_user.account_level == "manager" || current_user.account_level == "admin" %>
@@ -32,6 +34,7 @@
 <% end %>
 
 
+
 <% if current_user.account_level == "client" || current_user.account_level == "manager" || current_user.account_level == "admin" %>
   <h4>＜クライアントメニュー＞</h4>
 
@@ -40,17 +43,18 @@
 <% end %>
 
 
+
 <% if current_user.account_level == "headquarter" || current_user.account_level == "headquarter_admin" || current_user.account_level == "manager" || current_user.account_level == "admin" %>
   <h4>＜管理者用メニュー＞</h4>
 
   <%= link_to '催事場所管理', stores_path, class: 'top-button fs22 bg-white' %>
   <p class="top-button-description"><i class="fas fa-info-circle"></i> 催事場所の追加や編集を行います。新規の場合は必ず実施の前日までに追加してください。</p>
-
-  <%= link_to 'スタッフ管理', staffs_path, class: 'top-button fs22 bg-white' %>
-  <p class="top-button-description"><i class="fas fa-info-circle"></i> スタッフの追加、編集を行います。</p>
 <% end %>
 
 <% if current_user.account_level == "headquarter_admin" || current_user.account_level == "manager" || current_user.account_level == "admin" %>
+  <%= link_to 'スタッフ管理', staffs_path, class: 'top-button fs22 bg-white' %>
+  <p class="top-button-description"><i class="fas fa-info-circle"></i> スタッフの追加、編集を行います。</p>
+
   <%= link_to 'シフト入力', jobs_path, class: 'top-button fs22 bg-white' %>
   <p class="top-button-description"><i class="fas fa-info-circle"></i> シフトの追加、編集を行います。</p>
 

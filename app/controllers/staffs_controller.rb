@@ -1,8 +1,10 @@
 class StaffsController < ApplicationController
 
+  before_action :hq_admin_level_only
+  before_action :admin_only, only: [:show, :destroy]
+
   def index
     @staffs = Staff.all.order("id")
-    # @reports = Report.all
   end
 
   def show

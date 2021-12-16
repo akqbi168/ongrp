@@ -1,5 +1,8 @@
 class RanksController < ApplicationController
 
+  before_action :manager_level_only
+  before_action :admin_only, only: [:new, :create]
+
   def index
     @ranks = Rank.all.order("per_hour")
   end

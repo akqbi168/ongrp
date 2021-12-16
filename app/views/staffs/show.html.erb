@@ -16,7 +16,7 @@
       <span class="staff-name"><%= Rank.find(@staff.rank_id).name %></span>
       <span class="staff-rank">
         <% rp = Report.where(store_id: 1, date: @date_indicator) %>
-        <%= Case.where(report_id: rp, staff_id: @staff.id).sum(:point) %>
+        <%#= Case.where(report_id: rp, staff_id: @staff.id).scores.sum(:point) %>
       </span>
       <% @date_indicator += 1 %>
 
