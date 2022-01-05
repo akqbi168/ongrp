@@ -7,14 +7,28 @@
   <%= render 'search', q: @q, url: jobs_path %>
 </div>
 
-<div class="test0 if_width_too_narrow">
+<div class="test0">
 
-  <% if params[:q].present? && params[:q].values.first.present? %>
-    <% date_first = params[:q].values.first.to_date %>
-    <% date_last = params[:q].values.last.to_date + 6 %>
+  <% if params[:q].present? %>
+    <% if params[:q].values.first.present? %>
+      <% date_first = params[:q].values.first.to_date %>
+    <% else %>
+      <% date_first = @date_origin %>
+    <% end %>
+
+    <% if params[:q].values.last.present? %>
+      <% date_last = params[:q].values.last.to_date %>
+    <% else %>
+      <% date_last = @jobs_by_date.last.date.next_month.end_of_month if @jobs_by_date %>
+    <% end %>
   <% else %>
-      <% date_first = Date.current %>
-      <% date_last = Date.current + 6 %>
+    <%# date_first = @date_origin %>
+    <% date_first = Date.current.beginning_of_month %>
+    <% if @jobs_by_date.present? %>
+      <% date_last = @jobs_by_date.last.date.next_month.end_of_month %>
+    <% else %>
+      <% date_last = @date_origin.next_month.end_of_month %>
+    <% end %>
   <% end %>
 
 
@@ -24,49 +38,46 @@
 
   <br><br>
 
-  <!-- 日付の欄 -->
-  <div class="test0">
-    <span class="test1">
-    </span>
-
-    <% for d in date_first..date_last do %>
+  <% if @results.exists? %>
+    <div class="test0">
       <span class="test1">
-        <%= d.strftime("%m/%d(#{@wd[d.wday]})") %>
       </span>
-    <% end %>
-  </div>
 
+      <% for d in date_first..date_last do %>
+        <span class="test1">
+          <%= d.strftime("%m/%d(#{@wd[d.wday]})") %>
+        </span>
+      <% end %>
+    </div>
 
-  <!-- スタッフシフトの欄 -->
-  <% if @staffs.exists? %>
 
     <% i = 0 %>
     <% while i < @staffs.count %>
       <% i += 1 %>
 
       <div class="test0">
-        <%= link_to(edit_staff_path(i), class: "btn-job-name") do %>
-          <span class="test1">
-            <p class="fs14">
-              <%= @staffs.find(i).name %>
-            </p>
-          </span>
-        <% end %>
+            <%= link_to(edit_staff_path(i), class: "btn-job-name fs12") do %>
+              <span class="test1">
+                <p class="fs14">
+                  <%= @staffs.find(i).name %>
+                </p>
+              </span>
+            <% end %>
 
         <% for d in date_first..date_last do %>
           <% job_spot = @jobs_by_date.find_by(staff_id: i, date: d) %>
 
           <% if job_spot.nil? %>
-            <%= link_to(new_job_path(staff_id: i, date: d), class: "btn-job-spot") do %>
+            <%= link_to(new_job_path(staff_id: i, date: d), class: "btn-job-spot fs12") do %>
               <span class="test1">
-                <p style="line-height: 55px; font-size: 11px;">
+                <p style="line-height: 55px;">
                   (追加)
                 </p>
               </span>
             <% end %>
           <% else %>
-            <%= link_to(edit_job_path(job_spot.id), class: "btn-job-spot") do %>
-              <span class="test1 bg-light-orange">
+            <%= link_to(edit_job_path(job_spot.id), class: "btn-job-spot fs12 bg-light-orange") do %>
+              <span class="test1">
                 <p class="fs14">
                   <%= job_spot.time_start.strftime("%H:%M") %>-<%= job_spot.time_end.strftime("%H:%M") %>
                 </p>
@@ -88,6 +99,7 @@
               </span>
             <% end %>
           <% end %>
+
         <% end %>
       </div>
     <% end %>
@@ -95,8 +107,5 @@
 
 </div>
 
-<!-- <div id="sp-only">
-  <p class="fs12">こちらはPCでのご利用をお願いいたします <i class="far fa-sad-tear"></i></p>
-</div> -->
 
 <p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

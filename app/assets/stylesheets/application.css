@@ -37,6 +37,14 @@ a:hover {
   clear: both;
 }
 
+.float_left {
+  float: left;
+}
+
+.float_right {
+  float: right;
+}
+
 .wrapper {
   width: 100%;
   padding: 100px 0;
@@ -171,7 +179,7 @@ a:hover {
 
 /* width:800px 以下は非表示 */
 @media screen and (max-width:799px){
-  .if-width-too-narrow {
+  .if_width_too_narrow {
     display: none;
   }
 }

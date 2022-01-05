@@ -9,14 +9,14 @@ class JobsController < ApplicationController
     @results = @q.result.order("date")
 
     @date_origin = Date.new(2021,8,1)
-    @staffs = Staff.all.order("id")
-    @jobs_by_date = Job.all.order("date")
-    @stores = Store.all.order("id")
+    @staffs = Staff.order("id")
+    @jobs_by_date = Job.order("date")
+    @stores = Store.order("id")
   end
 
   def new
     @job = Job.new
-    @ranks = Rank.all.order("per_hour")
+    @ranks = Rank.order("per_hour")
     @staffs = Staff.all
   end
 
