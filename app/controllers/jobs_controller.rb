@@ -45,7 +45,7 @@ class JobsController < ApplicationController
         @payment.time_start = @job.time_start
         @payment.time_end = @job.time_end
         @payment.time_break = @job.time_break
-        @payment.working_hours = (@job.time_end - @job.time_start) / 3600 - (@job.time_break / 60)
+        @payment.working_hours = (@job.time_end - @job.time_start) / 3600 - (@job.time_break.to_f / 60)
         @payment.per_hour = Rank.find(@job.rank_id).per_hour
         @payment.save
         if @@path[:controller] == "jobs"
@@ -90,7 +90,7 @@ class JobsController < ApplicationController
         @payment.time_start = job_current.time_start
         @payment.time_end = job_current.time_end
         @payment.time_break = job_current.time_break
-        @payment.working_hours = (job_current.time_end - job_current.time_start) / 3600 - (job_current.time_break / 60)
+        @payment.working_hours = (job_current.time_end - job_current.time_start) / 3600 - (job_current.time_break.to_f / 60)
         @payment.per_hour = Rank.find(job_current.rank_id).per_hour
 
         if @job.update(job_params) && @payment.update(
@@ -100,7 +100,7 @@ class JobsController < ApplicationController
           time_start: job_current.time_start,
           time_end: job_current.time_end,
           time_break: job_current.time_break,
-          working_hours: (job_current.time_end - job_current.time_start) / 3600 - (job_current.time_break / 60),
+          working_hours: (job_current.time_end - job_current.time_start) / 3600 - (job_current.time_break.to_f / 60),
           per_hour: Rank.find(job_current.rank_id).per_hour
         )
           if @@path[:controller] == "jobs"
@@ -127,7 +127,7 @@ class JobsController < ApplicationController
       @payment.time_start = job_current.time_start
       @payment.time_end = job_current.time_end
       @payment.time_break = job_current.time_break
-      @payment.working_hours = (job_current.time_end - job_current.time_start) / 3600 - (job_current.time_break / 60)
+      @payment.working_hours = (job_current.time_end - job_current.time_start) / 3600 - (job_current.time_break.to_f / 60)
       @payment.per_hour = Rank.find(job_current.rank_id).per_hour
 
       if @job.update(job_params) && @payment.update(
@@ -137,7 +137,7 @@ class JobsController < ApplicationController
         time_start: job_current.time_start,
         time_end: job_current.time_end,
         time_break: job_current.time_break,
-        working_hours: (job_current.time_end - job_current.time_start) / 3600 - (job_current.time_break / 60),
+        working_hours: (job_current.time_end - job_current.time_start) / 3600 - (job_current.time_break.to_f / 60),
         per_hour: Rank.find(job_current.rank_id).per_hour
       )
         if @@path[:controller] == "jobs"
@@ -154,7 +154,6 @@ class JobsController < ApplicationController
 
   def destroy
     @job = Job.find(params[:id])
-    binding.pry
     if @payment = Payment.find_by(job_id: @job.id).present?
       @payment = Payment.find_by(job_id: @job.id)
     end

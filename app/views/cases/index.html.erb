@@ -1,31 +1,69 @@
 <h1>獲得一覧</h1>
 
-
 <% @reports.each do |r| %>
-  <%= r.date %><br>
 
-  <% @cases.each do |c| %>
+  <table>
+    <thead>
+      <p class="cases-index-date">
+        <%= r.date.strftime("%Y/%m/%d(#{@wd[r.date.wday]})") %>
+      </p>
+      <br>
+
+      <tr>
+        <th class="th-id">ID</th>
+        <th class="th-name">契約者氏名</th>
+        <th class="th-memo">備　　　考</th>
+        <th class="th-comment">ご　返　信</th>
+        <th class="th-id"></th>
+      </tr>
+    </thead>
+
+    <% @cases.where(report_id: r.id).each do |c| %>
+      <tbody>
+        <tr>
+          <td class="th-id"><%= c.id %></td>
+          <td class="th-name"><%= c.customer_name %></td>
+          <td class="th-memo"><%= c.memo %></td>
+          <td class="th-comment"><%= c.comment_by_client %></td>
+          <td class="th-id"><%= link_to '返信', edit_case_path(c.id) %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+
+<% end %>
+
+
+
+<!-- 
+
+<%# @reports.each do |r| %>
+  <%#= r.date %><br>
+
+  <%# @cases.each do |c| %>
 
     <div class="case-index-row">
-      <% if c.comment_by_client.present? %>
+      <%# if c.comment_by_client.present? %>
         <p style="color: #bbbbbb">
-      <% else %>
+      <%# else %>
         <p>
-      <% end %>
-          契約者氏名：<%= c.customer_name %><br>
-          備　　　考：<%= c.memo %><br>
-          ご　返　信：<%= c.comment_by_client %><br>
+      <%# end %>
+          契約者氏名：<%#= c.customer_name %><br>
+          備　　　考：<%#= c.memo %><br>
+          ご　返　信：<%#= c.comment_by_client %><br>
         </p>
 
-      <%= link_to '操作', edit_case_path(c.id), class:"" %>
+      <%#= link_to '操作', edit_case_path(c.id), class:"" %>
 
     </div>
 
   <br>
 
-  <% end %>
+  <%# end %>
 
-<% end %>
+<%# end %>
+
+ -->
 
 
 <p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

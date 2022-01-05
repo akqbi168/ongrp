@@ -4,7 +4,17 @@
 
   <div class="field">
     <span class="col-common form-new-left">
-      <%= f.label :timeframe, '獲得時間', class: "form-new-left40" %>
+      <%= f.label :timeframe, '日　　　付', class: "form-new-left40" %>
+    </span>
+    <span class="col-common form-new-right">
+      <% d = @reports.find(@case.report_id).date %>
+      <%= d.strftime("%Y/%m/%d(#{@wd[d.wday]})") %>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class="col-common form-new-left">
+      <%= f.label :timeframe, '時　　　間', class: "form-new-left40" %>
     </span>
     <span class="col-common form-new-right">
       <%= @case.timeframe %>

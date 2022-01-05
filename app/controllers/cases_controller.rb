@@ -9,8 +9,8 @@ class CasesController < ApplicationController
   WEBHOOK_URL = Rails.application.credentials[:WEBHOOK_URL]
 
   def index
+    @reports = Report.all.order("date")
     @cases = Case.all
-    @reports = Report.all
   end
 
   def new
@@ -20,6 +20,7 @@ class CasesController < ApplicationController
   end
 
   def edit
+    @reports = Report.all
     @case = Case.find(params[:id])
   end
 

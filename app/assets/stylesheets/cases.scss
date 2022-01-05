@@ -28,3 +28,43 @@
 .form-right-select {
   width: 90vw;
 }
+
+
+
+// client-side
+
+.cases-index-date {
+  color: black;
+  background: linear-gradient(transparent 80%, #ee772f 20%);
+  border-radius: 1px;
+  padding: 0 3px;
+  transition: 0.3s;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+th, td {
+  padding: 2px;
+  border: 1px solid #000;
+}
+
+.th-id {
+  width: 5%;
+  min-width: 40px;
+  text-align: center;
+}
+
+.th-name {
+  width: 15%;
+  min-width: 120px;
+}
+
+.th-memo, .th-comment {
+  width: 35%;
+  min-width: 320px;
+}
