@@ -1,13 +1,13 @@
 <h1>実施報告</h1>
 
-<div class="field">
+<div class="field cf">
   <span class="col-common form-new-left">報告担当</span>
-  <span class="col-common form-new-left"><%#= @user.name %></span>
+  <span class="col-common form-new-right"><%= @user.name %></span>
 </div>
 
 <%= form_with(model: @report, local: true) do |f| %>
 
-  <div class="field">
+  <div class="field cf">
     <span class="col-common form-new-left">
       <%= f.label :date, '日　　付' %>
     </span>
@@ -16,7 +16,7 @@
     </span>
   </div>
 
-  <div class="field">
+  <div class="field cf">
     <span class="col-common form-new-left">
       <%= f.label :store_id, '実施場所' %>
     </span>
@@ -26,7 +26,7 @@
     </span>
   </div>
 
-  <div class="field">
+  <div class="field cf">
     <span class="col-common form-new-left">
       <%= f.label :target, '目標件数' %>
     </span>
@@ -35,7 +35,7 @@
     </span>
   </div>
 
-  <div class="field">
+  <div class="field cf">
     <span class="col-common form-new-left">
       <%= f.label :target, '獲得件数' %>
     </span>
@@ -46,8 +46,8 @@
     </span>
   </div>
 
-  <div class="field">
-    <span class="col-common form-new-right">
+  <div class="field cf">
+    <span class="col-common form-new-left">
       <%= f.label :memo, '総　　評' %>
     </span>
     <span class="col-common form-new-right">
@@ -177,7 +177,7 @@
         </span>
       </div>
 
-      <div class="field">
+      <div class="field cf">
         <%= f.label :purchased_for_others_memo, 'フリーコメント' %>
         <%= f.text_area :purchased_for_others_memo, style: "float: right;" %>
       </div>

@@ -19,18 +19,14 @@
       <p class="top-button-description"><i class="fas fa-info-circle"></i> 契約が決まったら1件ごとに獲得報告をしてください。（当日のみ報告可）</p>
     <%= link_to '実施報告', edit_report_path(@report_today), class: 'top-button fs22 bg-light-orange' %>
       <p class="top-button-description"><i class="fas fa-info-circle"></i> 1日の催事が終わったら実施報告をお願いします。（一時保存可。当日分のみ報告可）</p>
-  <% else %>
   <% end %>
-
-  <%= link_to '編　　集', reports_temp_path, class: 'top-button fs22' %>
-  <p class="top-button-description"><i class="fas fa-info-circle"></i> 一時保存した報告書を編集できます。
-  <% if @report_unsubmitted.present? %>
-    <br><span class="" style="color: red;"><b>未提出の報告書があります。</b></span>
-  <% end %>
-  </p>
 
   <%= link_to '報告一覧', reports_path, class: 'top-button fs22' %>
-  <p class="top-button-description"><i class="fas fa-info-circle"></i> 今まで提出した報告書を確認できます。</p>
+  <p class="top-button-description"><i class="fas fa-info-circle"></i> 自分が提出した報告書一覧です。過去の未提出報告書もこちらです。
+    <% if @report_unsubmitted.present? %>
+      <br><span class="" style="color: red;"><b>未提出の報告書があります。</b></span>
+    <% end %>
+  </p>
 <% end %>
 
 

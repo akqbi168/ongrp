@@ -22,7 +22,7 @@ class JobsController < ApplicationController
 
   def edit
     @job = Job.find(params[:id])
-    @ranks = Rank.all.order("per_hour")
+    @ranks = Rank.order("per_hour")
     @staffs = Staff.all
   end
 
@@ -73,48 +73,7 @@ class JobsController < ApplicationController
     #     普通にアップデートする
     # job_recordがなければ（updateでデータが別日に移るorスタッフが変わったら）
     #   普通にアップデートする
-    if job_record.present?
-      if job_record.id != @job.id
-        flash.now[:alert] = "勤務がすでに登録されています。更新する場合はシフト一覧から該当データを選択してください。"
-        render 'edit'
-      else
-        if Payment.find_by(job_id: @job.id)
-          @payment = Payment.find_by(job_id: @job.id)
-        else
-          @payment = Payment.new
-        end
-
-        @payment.staff_id = job_current.staff_id
-        @payment.date = job_current.date
-        @payment.job_id = job_current.id
-        @payment.time_start = job_current.time_start
-        @payment.time_end = job_current.time_end
-        @payment.time_break = job_current.time_break
-        @payment.working_hours = (job_current.time_end - job_current.time_start) / 3600 - (job_current.time_break.to_f / 60)
-        @payment.per_hour = Rank.find(job_current.rank_id).per_hour
-
-        if @job.update(job_params) && @payment.update(
-          staff_id: job_current.staff_id,
-          date: job_current.date,
-          job_id: @job.id,
-          time_start: job_current.time_start,
-          time_end: job_current.time_end,
-          time_break: job_current.time_break,
-          working_hours: (job_current.time_end - job_current.time_start) / 3600 - (job_current.time_break.to_f / 60),
-          per_hour: Rank.find(job_current.rank_id).per_hour
-        )
-          if @@path[:controller] == "jobs"
-            redirect_to jobs_path, flash: { notice: 'シフトを追加しました。' }
-          elsif @@path[:controller] == "staffs"
-            redirect_to new_job_path, flash: { notice: 'シフトを追加しました。' }
-          end
-        else
-          flash.now[:alert] = "修正できませんでした。入力項目を確認してください。"
-          render 'edit'
-        end
-      end
-
-    else
+    if job_record.nil? || job_record.id == @job.id
       if Payment.find_by(job_id: @job.id)
         @payment = Payment.find_by(job_id: @job.id)
       else
@@ -149,6 +108,10 @@ class JobsController < ApplicationController
         flash.now[:alert] = "修正できませんでした。入力項目を確認してください。"
         render 'edit'
       end
+    else
+      # flash.now[:alert] = "勤務がすでに登録されています。更新する場合はシフト一覧から該当データを選択してください。"
+      # render 'edit'
+      redirect_to edit_job_path(@job.id), flash: { notice: '勤務がすでに登録されています。更新する場合はシフト一覧から該当データを選択してください。' }
     end
   end
 

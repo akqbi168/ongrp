@@ -14,7 +14,7 @@
   <div class="field">
     <%= f.fields_for :scores do |sc| %>
       <%= render 'score_fields', f: sc %>
-    <%end%>
+    <% end %>
     <div class="links">
       <%= link_to_add_association "追加", f, :scores, class: "cocoon_add_button bg-orange" %>
     </div>

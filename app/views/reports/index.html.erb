@@ -1,26 +1,50 @@
-<h1>過去の報告一覧</h1>
+<h1>報告一覧</h1>
 
-<p class="page-desription">今まで報告完了したものの一覧です。実施日の翌日まで修正が可能です。</p>
+<p class="page-desription">今までの報告一覧です。実施日の翌日まで修正が可能です。</p>
+
+<p class="report-box-sample fs12">
+  <span class="sample light-orange"></span>......保存済みの報告を修正します。完了するには提出ボックスにチェックを入れて更新してください。
+    <br>
+  <span class="sample gray"></span>.....提出完了した報告内容を確認します。修正するには責任者に連絡してください。
+</p>
 
 <div>
-    <div class="store-row">
-      <span class="store-button">報告日時</span>
-      <span class="store-button">実施日</span>
-      <span class="store-button">店舗</span>
-      <span class="store-button"></span>
-    </div>
-
   <% @reports.each do |r| %>
-    <div class="store-row">
-      <span class="store-button"><%= r.updated_at.strftime("%Y/%m/%d %H:%M:%S") %></span>
-      <span class="store-button"><%= r.date.strftime("%m/%d(#{@wd[r.date.wday]})") %></span>
-      <span class="store-button"><%= Store.find(r.store_id).name %></span>
-      <span class="store-button">
-        <% if (Date.current - r.date).to_i <= 1 %>
-          <%= link_to '変更', edit_report_path(r), class: "store-button-deco" %>
-        <% end %>
-      </span>
-    </div>
+    <% if r.is_submitted == true && (Date.current - r.date).to_i > 1 %>
+
+      <%= link_to(report_path(r), class: "") do %>
+        <div class="report-box">
+          <span class=""><%= r.date.strftime("%-m/%-d(#{@wd[r.date.wday]})") %></span>
+          <span class=""><%= Store.find(r.store_id).name %></span>
+            <span id="sp-only"><br></span>
+            <i>
+          <span class="updated_at fs12">last: <%= r.updated_at.strftime("%Y/%-m/%-d %H:%M:%S") %></span>
+          <span class="fs12">完了</span>
+            </i>
+        </div>
+      <% end %>
+
+    <% else %>
+
+      <%= link_to(edit_report_path(r), class: "") do %>
+        <div class="report-box-temp">
+          <span class=""><%= r.date.strftime("%-m/%-d(#{@wd[r.date.wday]})") %></span>
+          <span class=""><%= Store.find(r.store_id).name %></span>
+            <span id="sp-only"><br></span>
+            <i>
+          <span class="updated_at fs12">last: <%= r.updated_at.strftime("%Y/%-m/%-d %H:%M:%S") %></span>
+          <span class="fs12">
+            <% if r.is_submitted == true %>
+              完了（編集可）
+            <% elsif r.is_submitted == false %>
+              保存済み
+            <% end %>
+          </span>
+            </i>
+        </div>
+      <% end %>
+
+    <% end %>
   <% end %>
 </div>
 

@@ -2,7 +2,7 @@
 
 <%= form_with(model: @report, local: true) do |f| %>
 
-  <div class="field">
+  <div class="field cf">
     <span class="col-common form-new-left">
       報告担当
     </span>
@@ -11,19 +11,21 @@
     </span>
   </div>
 
-  <span class="col-common form-new-left">
-    <%= f.label :date, '日　　付' %>
-  </span>
-  <span class="col-common form-new-right">
-    <%= f.date_field :date, value: Date.current %>
-  </span>
+  <div class="field cf">
+    <span class="col-common form-new-left">
+      <%= f.label :date, '日　　付' %>
+    </span>
+    <span class="col-common form-new-right">
+      <%= f.date_field :date, value: Date.current, class: "" %>
+    </span>
+  </div>
 
-  <div class="field">
+  <div class="field cf">
     <span class="col-common form-new-left">
       <%= f.label :store_id, '実施場所' %>
     </span>
     <span class="col-common form-new-right">
-      <%= f.collection_select :store_id, @stores, :id, :name, include_blank: '実施場所を選択', class: '' %>
+      <%= f.collection_select :store_id, @stores, :id, :name, include_blank: '実施場所を選択', class: "" %>
     </span>
   </div>
 

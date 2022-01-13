@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   resources :stores, only: [:index, :new, :edit, :create, :update, :destroy]
   resources :staffs
   resources :reports
-  get 'reports_temp', to: 'reports#index_temp'
   resources :cases, only: [:index, :new, :edit, :create, :update, :destroy]
   # resources :scores, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   resources :jobs, only: [:index, :new, :edit, :create, :update, :destroy] do

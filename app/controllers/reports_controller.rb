@@ -4,19 +4,24 @@ class ReportsController < ApplicationController
   before_action :admin_only, only: [:destroy]
 
   def index
-    @reports = Report.all.where(user_id: current_user.id, is_submitted: true).order("updated_at")
+    @reports = Report.where(user_id: current_user.id).order("is_submitted").order("date DESC")
   end
 
   def index_temp
-    @reports = Report.all.where(user_id: current_user.id, is_submitted: false).order("updated_at")
+    @reports = Report.where(user_id: current_user.id, is_submitted: false).order("updated_at")
   end
 
   def show
+    @report = Report.find(params[:id])
+    @users = User.all
+    @stores = Store.all
+    @cases = Case.where(report_id: @report.id).order("timeframe")
+    @scores = Score.all
   end
 
   def new
     @user = current_user
-    @stores = Store.all.order("id")
+    @stores = Store.order("id")
     @report = Report.new
     @case = @report.cases.build
     @score = @case.scores.build
@@ -33,17 +38,16 @@ class ReportsController < ApplicationController
     end
 
     @case = Case.find_by(report_id: @report.id)
-    # @case = Case.find(params[:id])
     if @case.present?
       @score = Score.find_by(case_id: @case.id)
     end
-    @stores = Store.all.order("id")
-    @staffs = Staff.all.order("id")
+    @stores = Store.order("id")
+    @staffs = Staff.order("id")
   end
 
   def create
     @user = current_user
-    @stores = Store.all.order("id")
+    @stores = Store.order("id")
     @report = Report.new(report_params)
     @report.user_id = @user.id
     @report.is_submitted = false
@@ -129,9 +133,6 @@ class ReportsController < ApplicationController
       flash.now[:alert] = "未入力の項目や数字の半角入力などを確認してください。"
       render 'edit'
     end
-  end
-
-  def access_admin_only
   end
 
   private

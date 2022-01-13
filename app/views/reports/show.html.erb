@@ -1,0 +1,257 @@
+<h1>実施報告</h1>
+
+<div class="field cf">
+  <span class="col-common form-new-left">報告担当</span>
+  <span class="col-common form-new-right"><%= @users.find(@report.user_id).name %></span>
+</div>
+
+<div class="field cf">
+  <span class="col-common form-new-left">日　　付</span>
+  <span class="col-common form-new-right"><%= @report.date.strftime("%Y/%-m/%-d(#{@wd[@report.date.wday]})") %></span>
+</div>
+
+<div class="field cf">
+  <span class="col-common form-new-left">実施場所</span>
+  <span class="col-common form-new-right"><%= @stores.find(@report.store_id).name %></span>
+</div>
+
+<div class="field cf">
+  <span class="col-common form-new-left">目標件数</span>
+  <span class="col-common form-new-right"><%= @report.target %>　件</span>
+</div>
+
+<div class="field cf">
+  <span class="col-common form-new-left">獲得件数</span>
+  <span class="col-common form-new-right"><%= @report.cases.count %>　件</span>
+</div>
+
+<div class="field cf">
+  <span class="col-common form-new-left">総　　評</span>
+  <span class="col-common form-new-right"><%= @report.memo %></span>
+</div>
+
+<br>
+
+<p>========================</p>
+
+<!-- 件数報告 -->
+<details close>
+<summary>獲得件数報告 (<%= @report.cases.count %>件)</summary>
+
+<% @cases.each do |cc, i| %>
+
+  <div class="fs14" style="border: 1px solid #555555; border-radius: 6px; padding: 8px; margin: 8px auto;">
+
+    <!-- <br> -->
+
+    <%= @cases.index(cc)+1 %> 件目
+
+    <div class="field">
+      <span class="col-common form-new-left">獲得時間</span>
+      <span class="col-common form-new-right"><%= cc.timeframe %></span>
+    </div>
+
+    <% @scores.where(case_id: cc.id).each do |ccsc| %>
+      <div class="field">
+        <span class="col-common form-new-left">獲得者名</span>
+        <span class="col-common form-new-right">
+          <%= Staff.find(ccsc.staff_id).name %>
+          <% if cc.scores.count != 1 %>
+            (<%= ccsc.point %>)
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <span class="col-common form-new-left">
+        契約者氏名
+      </span>
+      <span class="col-common form-new-right">
+        <%= cc.customer_name %>
+        <% if cc.customer_name.present? %>
+        　様
+        <% end %>
+      </span>
+    </div>
+
+  </div>
+
+<% end %>
+
+</details>
+
+<br>
+
+<p>========================</p>
+
+<!-- マケ用データ -->
+<details close>
+<summary>アンケート</summary>
+
+  <span class="fs14">
+
+    <p class="q_title fs16">1. アクション内容</p>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">お声かけ</span>
+      <span class="form-new-right_narrow"><%= @report.action_approached %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">お話ができた</span>
+      <span class="form-new-right_narrow"><%= @report.action_discussed %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">購入いただけた</span>
+      <span class="form-new-right_narrow"><%= @report.action_purchased %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">ダウンロードのみ</span>
+      <span class="form-new-right_narrow"><%= @report.action_downloaded_only %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">お話だけだった</span>
+      <span class="form-new-right_narrow"><%= @report.action_discussed_only %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">キャンペーン済み</span>
+      <span class="form-new-right_narrow"><%= @report.action_promotion_done %>　件</span>
+    </div>
+
+    <p class="q_title fs16">2. お話ができた方へ</p>
+
+    <p class="q_subtitle fs14">[購入いただけた]</p>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">お得だから</span>
+      <span class="form-new-right_narrow"><%= @report.purchased_for_value %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">欲しい商品だった</span>
+      <span class="form-new-right_narrow"><%= @report.purchased_for_wanted %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">OniGOを使ってみたかった</span>
+      <span class="form-new-right_narrow"><%= @report.purchased_for_trial %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="col-common form-new-left">コメント</span>
+      <span class="col-common form-new-right float_right"><%= @report.purchased_for_others_memo %></span>
+    </div>
+
+    <p class="q_subtitle fs14">[ダウンロードのみ]</p>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">今、時間がない</span>
+      <span class="form-new-right_narrow"><%= @report.downloaded_only_for_no_time %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">クレジットカードなし</span>
+      <span class="form-new-right_narrow"><%= @report.downloaded_only_for_no_cards %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">アプリ不具合</span>
+      <span class="form-new-right_narrow"><%= @report.downloaded_only_for_app_error %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="col-common form-new-left">コメント</span>
+      <span class="col-common form-new-right float_right"><%= @report.downloaded_only_for_others_memo %></span>
+    </div>
+
+    <p class="q_subtitle fs14">[お話だけだった]</p>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">今、時間がない</span>
+      <span class="form-new-right_narrow"><%= @report.discussed_only_for_no_time %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">DLできない</span>
+      <span class="form-new-right_narrow"><%= @report.discussed_only_for_no_downloadable %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">クレジットカード拒否</span>
+      <span class="form-new-right_narrow"><%= @report.discussed_only_for_denying_cards %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">欲しいものがない</span>
+      <span class="form-new-right_narrow"><%= @report.discussed_only_for_no_demand %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">アプリ不具合</span>
+      <span class="form-new-right_narrow"><%= @report.discussed_only_for_app_error %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">アプリ拒否</span>
+      <span class="form-new-right_narrow"><%= @report.discussed_only_for_denying_app %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="col-common form-new-left">コメント</span>
+      <span class="col-common form-new-right float_right"><%= @report.discussed_only_for_others_memo %></span>
+    </div>
+
+    <p class="q_subtitle fs14">[キャンペーン済]</p>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">その後、起動していない</span>
+      <span class="form-new-right_narrow"><%= @report.promotion_done_no_launching_later %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">欲しいものがない</span>
+      <span class="form-new-right_narrow"><%= @report.promotion_done_nothing_on_demand %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">アプリが操作できない</span>
+      <span class="form-new-right_narrow"><%= @report.promotion_done_operating_impossible %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">アプリが動かない</span>
+      <span class="form-new-right_narrow"><%= @report.promotion_done_app_malfunctioning %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="col-common form-new-left">コメント</span>
+      <span class="col-common form-new-right float_right"><%= @report.promotion_done_for_others_memo %></span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">配達エリア外</span>
+      <span class="form-new-right_narrow"><%= @report.outside_delivery_area %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="form-new-left_wide">アンケート回収</span>
+      <span class="form-new-right_narrow"><%= @report.number_of_samples %>　件</span>
+    </div>
+
+    <div class="field cf">
+      <span class="col-common form-new-left">アプリ不<br>具合内容</span>
+      <span class="col-common form-new-right float_right"><%= @report.details_of_app_malfunction %></span>
+    </div>
+
+  </span>
+
+</details>
+
+<p class="back-to-top"><%= link_to '一覧に戻る', reports_path %></p>
+
+<p class="back-to-top"><%= link_to 'トップに戻る', root_path %></p>

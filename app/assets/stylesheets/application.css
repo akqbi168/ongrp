@@ -76,6 +76,10 @@ a:hover {
   font-weight: bold;
 }
 
+.width100 {
+  width: 100%;
+}
+
 .back-to-top {
   display: block;
   margin: 30px 0 0;
@@ -131,10 +135,7 @@ a:hover {
 .button-send {
   display: block;
   color: #ffffff;
-  /*font-size: 20px;*/
   font-weight: 600;
-  /*background-color: #ffaa55;*/
-  /*background-color: #479a5f;*/
   background-color: #3474e0;
   border-radius: 1px;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
@@ -162,7 +163,6 @@ a:hover {
   transition: 0.3s;
 }
 .link_to_do_text:hover {
-  /*color: white;*/
   background: linear-gradient(#ffaa55 100%, #ee772f 20%);
   /*transition: 0.3s;*/
 }
@@ -195,7 +195,6 @@ a:hover {
     width: 94%;
     /*max-width: 960px;*/
     margin-top: 0;
-    /*padding: 15vw 5%;*/
   }
 
   #pc-only {
@@ -211,4 +210,14 @@ a:hover {
     /*width: 50%;*/
   }
 
+  .report-box-sample .light-orange,
+  .report-box-sample .gray {
+    background-color: #ffffff;
+  }
+
+  .report-box,
+  .report-box-temp {
+    padding: 8px 16px;
+    margin: 8px auto;
+  }
 }
