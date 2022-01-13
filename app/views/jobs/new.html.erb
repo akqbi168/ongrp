@@ -7,6 +7,11 @@
 <% end %>
 
 <p class="back-to-top">
-  <%= link_to 'シフト一覧に戻る', jobs_path %><br>
+  <% if params[:date].present? %>
+    <%= link_to 'シフト一覧に戻る', jobs_path(@q, :'q[date_gteq' => params[:date].to_date - 3) %>
+  <% else %>
+    <%= link_to 'シフト一覧に戻る', jobs_path(@q, :'q[date_gteq' => Date.current) %>
+  <% end %>
+  <br>
   <%= link_to 'スタッフ一覧に戻る', staffs_path %>
 </p>

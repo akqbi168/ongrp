@@ -37,7 +37,6 @@
         <%= points_sum_till_yesterday %>
       </span>
       <span class="col-common staff-col staff-point">
-        <%# js = Job.all.where("date < ?", Date.today) %>
         <% js = Job.all.where("staff_id = ? and date < ?", s.id, Date.today) %>
         <% hours_so_far = ( js.pluck(:time_end).sum - js.pluck(:time_start).sum ) / 3600 - js.pluck(:time_break).sum / 60 %>
         <% unless hours_so_far == 0 || hours_so_far == nil %>

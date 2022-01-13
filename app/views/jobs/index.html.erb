@@ -7,6 +7,13 @@
   <%= render 'search', q: @q, url: jobs_path %>
 </div>
 
+<%= link_to jobs_path(@q, :'q[date_gteq' => "#{@q.date_gteq}".to_date - 7) do %>
+  <p>week <<<<<<<</p>
+<% end %>
+<%= link_to jobs_path(@q, :'q[date_gteq' => "#{@q.date_gteq}".to_date + 7) do %>
+  <p>>>>>>>> week</p>
+<% end %>
+
 <div class="test0 if_width_too_narrow">
 
   <% if params[:q].present? && params[:q].values.first.present? %>
@@ -19,9 +26,8 @@
 
 
   <span class="staff-button">
-    <%= link_to '新規作成', new_job_path, class: "staff-button-deco bg-orange" %>
+    <%= link_to '新規作成', new_job_path(date: @q.date_gteq), class: "staff-button-deco bg-orange" %>
   </span><br>
-
   <br><br>
 
   <!-- 日付の欄 -->

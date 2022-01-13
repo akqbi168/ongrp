@@ -49,7 +49,7 @@ class JobsController < ApplicationController
         @payment.per_hour = Rank.find(@job.rank_id).per_hour
         @payment.save
         if @@path[:controller] == "jobs"
-          redirect_to jobs_path, flash: { notice: 'シフトを追加しました。' }
+          redirect_to jobs_path(@q, :'q[date_gteq' => @job.date - 3), flash: { notice: 'シフトを追加しました。' }
         elsif @@path[:controller] == "staffs"
           redirect_to new_job_path, flash: { notice: 'シフトを追加しました。' }
         end
@@ -100,7 +100,7 @@ class JobsController < ApplicationController
         per_hour: Rank.find(job_current.rank_id).per_hour
       )
         if @@path[:controller] == "jobs"
-          redirect_to jobs_path, flash: { notice: 'シフトを追加しました。' }
+          redirect_to jobs_path(@q, :'q[date_gteq' => @job.date - 3), flash: { notice: 'シフトを追加しました。' }
         elsif @@path[:controller] == "staffs"
           redirect_to new_job_path, flash: { notice: 'シフトを追加しました。' }
         end
@@ -121,7 +121,7 @@ class JobsController < ApplicationController
       @payment = Payment.find_by(job_id: @job.id)
     end
     if @job.destroy && @payment.destroy
-      redirect_to jobs_path, flash: { notice: 'シフトを削除しました。' }
+      redirect_to jobs_path(@q, :'q[date_gteq' => @job.date - 3), flash: { notice: 'シフトを削除しました。' }
     else
       flash.now[:alert] = "削除できませんでした。解決しない場合は管理者に連絡してください。"
       render 'edit'
