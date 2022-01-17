@@ -36,24 +36,24 @@
     <h4>
       <%#= link_to 'こちら', stores_path, class: "" %>
       <%#= link_to(stores_path, class: "store-button-deco bg-light-orange") do %>
-      <%= link_to(stores_path, class: "home_button_deco bg-light-orange") do %>
-        <i class="fas fa-store"></i>催事場所一覧
+      <%= link_to(new_store_path, class: "home_button_deco bg-light-orange") do %>
+        <i class="fas fa-store"></i>催事場所を追加
       <% end %>
     </h4>
 
     <h4>
       <%#= link_to 'こちら', staffs_path, class: "" %>
       <%#= link_to(staffs_path, class: "store-button-deco bg-light-orange") do %>
-      <%= link_to(staffs_path, class: "home_button_deco bg-light-orange") do %>
-        <i class="fas fa-user-friends"></i>スタッフ一覧
+      <%= link_to(new_staff_path, class: "home_button_deco bg-light-orange") do %>
+        <i class="fas fa-user-friends"></i>スタッフを追加
       <% end %>
     </h4>
 
     <h4>
       <%#= link_to 'こちら', ranks_path, class: "" %>
       <%#= link_to(ranks_path, class: "store-button-deco bg-light-orange") do %>
-      <%= link_to(ranks_path, class: "home_button_deco bg-light-orange") do %>
-        <i class="fas fa-graduation-cap"></i>役職一覧
+      <%= link_to(new_rank_path, class: "home_button_deco bg-light-orange") do %>
+        <i class="fas fa-graduation-cap"></i>役職を追加
       <% end %>
     </h4>
 
@@ -67,11 +67,10 @@
 
     <h4 class="cf">
       <%#= link_to 'こちら', payments_path, class: "" %>
-      <%= link_to(payments_path, class: "home_button_deco bg-light-orange") do %>
-      <%#= link_to(payments_path, class: "") do %>
-        <i class="fab fa-amazon-pay"></i>
-          人件費管理表
-      <% end %>
+      <%#= link_to(payments_path, class: "home_button_deco bg-light-orange") do %>
+<!--         <i class="fab fa-amazon-pay"></i>
+          人件費管理表 -->
+      <%# end %>
     </h4>
   <% end %>
 

@@ -6,6 +6,15 @@
     <%= render 'search', q: @q, url: payments_path %>
   </div>
 
+  <div class="job-arrow-area cf">
+    <span class="staff-button">
+      <%= link_to '◀︎ 前の月へ', payments_path(@q, :'q[date_gteq' => "#{@q.date_gteq}".to_date.prev_month.beginning_of_month, :'q[date_lteq' => "#{@q.date_lteq}".to_date.prev_month.end_of_month), class: "staff-button-deco float_left fs14" %>
+    </span>
+    <span class="staff-button">
+      <%= link_to '次の月へ ▶︎', payments_path(@q, :'q[date_gteq' => "#{@q.date_gteq}".to_date.next_month.beginning_of_month, :'q[date_lteq' => "#{@q.date_lteq}".to_date.next_month.end_of_month), class: "staff-button-deco float_right fs14" %>
+    </span>
+  </div>
+
 
   <div>
       <div class="payment-row fs14">
