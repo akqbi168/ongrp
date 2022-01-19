@@ -7,12 +7,21 @@
   </div>
 
   <div class="job-arrow-area cf">
-    <span class="staff-button">
-      <%= link_to '◀︎ 前の月へ', payments_path(@q, :'q[date_gteq' => "#{@q.date_gteq}".to_date.prev_month.beginning_of_month, :'q[date_lteq' => "#{@q.date_lteq}".to_date.prev_month.end_of_month), class: "staff-button-deco float_left fs14" %>
-    </span>
-    <span class="staff-button">
-      <%= link_to '次の月へ ▶︎', payments_path(@q, :'q[date_gteq' => "#{@q.date_gteq}".to_date.next_month.beginning_of_month, :'q[date_lteq' => "#{@q.date_lteq}".to_date.next_month.end_of_month), class: "staff-button-deco float_right fs14" %>
-    </span>
+    <% if @q.staff_id_eq.present? %>
+      <span class="staff-button">
+        <%= link_to '◀︎ 前の月へ', payments_path(q: { date_gteq: @q.date_gteq.to_date.prev_month.beginning_of_month, date_lteq: @q.date_lteq.to_date.prev_month.end_of_month, staff_id_eq: @q.staff_id_eq }), class: "staff-button-deco float_left fs14" %>
+      </span>
+      <span class="staff-button">
+        <%= link_to '次の月へ ▶︎', payments_path(q: { date_gteq: @q.date_gteq.to_date.next_month.beginning_of_month, date_lteq: @q.date_lteq.to_date.next_month.end_of_month, staff_id_eq: @q.staff_id_eq }), class: "staff-button-deco float_right fs14" %>
+      </span>
+    <% else %>
+      <span class="staff-button">
+        <%= link_to '◀︎ 前の月へ', payments_path(q: { date_gteq: @q.date_gteq.to_date.prev_month.beginning_of_month, date_lteq: @q.date_lteq.to_date.prev_month.end_of_month }), class: "staff-button-deco float_left fs14" %>
+      </span>
+      <span class="staff-button">
+        <%= link_to '次の月へ ▶︎', payments_path(q: { date_gteq: @q.date_gteq.to_date.next_month.beginning_of_month, date_lteq: @q.date_lteq.to_date.next_month.end_of_month }), class: "staff-button-deco float_right fs14" %>
+      </span>
+    <% end %>
   </div>
 
 
@@ -73,6 +82,7 @@
             <% rp = Report.find_by(store_id: job.store_id, date: p.date) %>
             <% unless p.nil? %>
               <% if p.indivisual_point == nil? %>
+                <!-- ここ要注意 repairment 改良 -->
                 <% indivisual_point = Case.where(report_id: rp, staff_id: p.staff_id).sum(:point).to_f %>
                 <%= indivisual_point %>
               <% else %>
