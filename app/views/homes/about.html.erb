@@ -34,44 +34,57 @@
 
     <h2>サイトマップ</h2>
     <h4>
-      <%#= link_to 'こちら', stores_path, class: "" %>
-      <%#= link_to(stores_path, class: "store-button-deco bg-light-orange") do %>
       <%= link_to(new_store_path, class: "home_button_deco bg-light-orange") do %>
         <i class="fas fa-store"></i>催事場所を追加
       <% end %>
     </h4>
 
     <h4>
-      <%#= link_to 'こちら', staffs_path, class: "" %>
-      <%#= link_to(staffs_path, class: "store-button-deco bg-light-orange") do %>
       <%= link_to(new_staff_path, class: "home_button_deco bg-light-orange") do %>
         <i class="fas fa-user-friends"></i>スタッフを追加
       <% end %>
     </h4>
 
     <h4>
-      <%#= link_to 'こちら', ranks_path, class: "" %>
-      <%#= link_to(ranks_path, class: "store-button-deco bg-light-orange") do %>
       <%= link_to(new_rank_path, class: "home_button_deco bg-light-orange") do %>
         <i class="fas fa-graduation-cap"></i>役職を追加
       <% end %>
     </h4>
 
     <h4>
-      <%#= link_to 'こちら', bounties_path, class: "" %>
-      <%#= link_to(bounties_path, class: "store-button-deco bg-light-orange") do %>
       <%= link_to(bounties_path, class: "home_button_deco bg-light-orange") do %>
         <i class="fas fa-dollar-sign"></i>インセン表
       <% end %>
     </h4>
 
     <h4 class="cf">
-      <%#= link_to 'こちら', payments_path, class: "" %>
-      <%#= link_to(payments_path, class: "home_button_deco bg-light-orange") do %>
-<!--         <i class="fab fa-amazon-pay"></i>
-          人件費管理表 -->
+      <%= link_to(new_store_path, class: "home_button_deco bg-light-orange") do %>
+        <i class="fas fa-store"></i>催事場所を追加
+      <% end %>
       <%# end %>
     </h4>
+
+    <h4 class="cf">
+      <%= link_to(new_case_path, class: "home_button_deco bg-light-orange") do %>
+        <!-- <i class="fas fa-store"></i> -->★新規獲得★
+      <% end %>
+      <%# end %>
+    </h4>
+
+
+<br><br><br><br><br><br>
+
+    <h2>データ表示</h2>
+    <h4>報告一覧</h4>
+    <h5>
+      <% @reports.each do |r| %>
+        <%= link_to '編集', edit_report_path(r.id), class: "home_button_edit" %>　
+        <%= link_to '削除', report_path(r.id), method: :delete, data: { confirm: "報告を削除すると今まで保存された獲得件数も一緒に削除されます。\nよろしいですか？\n削除する場合は「OK」、やめる場合は「キャンセル」を選択してください。" }, class: "fs12 bg-pink" %>　
+        <%= r.date %>　
+        by <%= User.find(r.user_id).name %><br>
+      <% end %>
+    </h5>
+
   <% end %>
 
 </div>

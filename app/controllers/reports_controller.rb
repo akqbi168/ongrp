@@ -135,6 +135,15 @@ class ReportsController < ApplicationController
     end
   end
 
+  def destroy
+    @report = Report.find(params[:id])
+    if @report.destroy
+      redirect_to about_path, flash: { notice: '報告を削除しました。' }
+    else
+      redirect_to about_path, flash: { notice: '報告を削除できませんでした。' }
+    end
+  end
+
   private
 
   def report_params

@@ -53,9 +53,13 @@ h4 {
 
 // about
 .homes_about {
-  h1, h2, h3, h5, p {
+  h1, h2, h3, p {
     margin: 0 0 25px;
     padding: 0;
+  }
+
+  h5 {
+    margin: 2px 0 25px;
   }
 
   p {
@@ -65,10 +69,6 @@ h4 {
 
   a {
     color: #000000;
-  }
-
-  .fonta {
-    margin: 180px;
   }
 
   .home_button_deco {
@@ -85,6 +85,32 @@ h4 {
     text-align: center;
     padding: 0 4px;
     // margin: 16px auto 8px;
+
+    transition: 0.1s;
+
+    &:hover {
+      // background-color: #ee772f;
+      opacity: 0.7;
+    }
+
+    &:active {
+      box-shadow: inset 0 0 3px rgba(128, 128, 128, 0.1);
+      transform: translateY(3px);
+      transition: 0;
+    }
+  }
+
+  .home_button_edit {
+    display: inline-block;
+    // color: #ffffff;
+    // background-color: #888888;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    // box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+
+    text-align: center;
+    padding: 0 2px;
+    margin: 2px auto;
 
     transition: 0.1s;
 

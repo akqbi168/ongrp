@@ -2,7 +2,7 @@
 
 <%= form_with(model: @case, local: true) do |f| %>
 
-  <div class="field">
+  <div class="field cf">
     <span class="col-common form-new-left">
       <%= f.label :timeframe, '獲得時間', class: "form-new-left40" %>
     </span>
@@ -11,7 +11,7 @@
     </span>
   </div>
 
-  <div class="field">
+  <div class="field cf">
     <%= f.fields_for :scores do |sc| %>
       <%= render 'score_fields', f: sc %>
     <% end %>
@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="field">
+  <div class="field cf">
     <span class="form-new-left">
       <%= f.label :customer_name, '契約者氏名' %>
     </span>
@@ -29,7 +29,7 @@
     </span>
   </div>
 
-  <div class="field">
+  <div class="field cf">
     <span class="form-new-left">
       <%= f.label :memo, '備考' %>
     </span>

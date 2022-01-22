@@ -9,6 +9,7 @@ class HomesController < ApplicationController
   end
 
   def about
+    @reports = Report.order(date: "DESC")
   end
 
   def history
