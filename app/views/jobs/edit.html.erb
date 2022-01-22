@@ -8,7 +8,7 @@
 
   <% if current_user.account_level == 'manager' || current_user.account_level == 'admin' %>
     <br>
-    <%= link_to '(削除)', job_path(@job.id), method: :delete, data: { confirm: "勤務を削除すると保存されている給与情報も一緒に削除されます。\n本当に削除してよろしいですか？\nこのまま削除する場合は「OK」、やめる場合は「キャンセル」を選択してください。" }, class: "fs12 bg-pink" %>
+    <%= link_to '(削除)', job_path(@job.id), method: :delete, data: { confirm: "勤務を削除すると保存されている給与情報も一緒に削除されます。\n本当に削除してよろしいですか？\n　　名前：" + Staff.find(@job.staff_id).name+"\n　　日付：" + @job.date.strftime("%Y/%m/%d") + "\n削除する場合は「OK」、やめる場合は「キャンセル」を選択してください。" }, class: "fs12 bg-pink" %>
   <% end %>
 
 <p class="back-to-top"><%= link_to 'シフト一覧に戻る', jobs_path(@q, :'q[date_gteq' => @job.date - 3) %></p>
